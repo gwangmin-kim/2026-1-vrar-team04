@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -v \"^C:\\\\Users\\\\enggaa\\\\Desktop\\\\26-1\\\\VRAR\\\\project\\\\2026-1-VRAR-Team04\\\\Assets$\")"
+    ]
+  }
+}
