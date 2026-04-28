@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f405ed9a7830e1849b314546741e0aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControllerInputLogger
-  xriActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  _xriActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!4 &794430733
 Transform:
   m_ObjectHideFlags: 0
