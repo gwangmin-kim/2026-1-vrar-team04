@@ -1649,6 +1649,7 @@ GameObject:
   - component: {fileID: 1546097386}
   - component: {fileID: 1546097385}
   - component: {fileID: 1546097384}
+  - component: {fileID: 1546097389}
   m_Layer: 0
   m_Name: Righthand Controller
   m_TagString: Untagged
@@ -2338,6 +2339,18 @@ MonoBehaviour:
     m_InputActionReference: {fileID: 0}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
+--- !u!114 &1546097389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546097382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0893bd15260163b4f8732c77248f1776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandItemTest
 --- !u!1 &1577297394
 GameObject:
   m_ObjectHideFlags: 0
