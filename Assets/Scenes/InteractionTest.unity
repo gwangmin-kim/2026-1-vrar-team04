@@ -2766,7 +2766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4595111112580092183, guid: 513640c25371aa64f8f04905f7521359, type: 3}
       propertyPath: m_Name
-      value: Ghost
+      value: Ghost_Floor3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
