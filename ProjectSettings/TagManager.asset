@@ -12,10 +12,10 @@ TagManager:
   - Water
   - UI
   - Environment
-  - Stain
-  - Mop
-  - 
-  - 
+  - Grabbable
+  - Cleanable
+  - Lightable
+  - Cleaner
   - 
   - 
   - 

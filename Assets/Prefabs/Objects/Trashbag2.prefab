@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 299569248757012074}
   - component: {fileID: 7738828522515735554}
   - component: {fileID: 4655922676587810558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trashbag2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1313936151867004581}
   - component: {fileID: 6835148562605995147}
   - component: {fileID: 4586704469309829254}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8319172736125949376}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Mop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 8044894444310487326}
   - component: {fileID: 3158013242847088419}
   - component: {fileID: 7707626125584576702}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Cleaner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

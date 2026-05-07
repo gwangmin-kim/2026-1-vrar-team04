@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6765848534203557072}
   - component: {fileID: 7748915470368168346}
   - component: {fileID: -2787618463739705535}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: BloodStain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6823833307510941023}
   - component: {fileID: 464431400572053779}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Decal Projector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
