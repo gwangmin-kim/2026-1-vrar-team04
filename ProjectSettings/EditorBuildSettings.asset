@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Ryu/Scenes/base-interaction.unity
+    path: Assets/Scenes/PlayerControl.unity
     guid: 3fc33e8d9c9b2dc41a9d1631219184fa
   - enabled: 1
-    path: Assets/Ryu/Scenes/scene1.unity
+    path: Assets/Scenes/PlayerControl1.unity
     guid: 801a88966378d5c41b8243dcdf5d0a7b
   - enabled: 1
-    path: Assets/Ryu/Scenes/scene2.unity
+    path: Assets/Scenes/PlayerControl2.unity
     guid: c66dfecf3d96837488ec114b522c4f69
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
