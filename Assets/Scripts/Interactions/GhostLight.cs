@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class Ghost : MonoBehaviour, ILightable
+public class GhostLight : MonoBehaviour, ILightable
 {
     private static readonly int _dissolveAmountID = Shader.PropertyToID("_Dissolve");
     private static readonly int _baseMapID = Shader.PropertyToID("_BaseMap");
@@ -13,7 +13,8 @@ public class Ghost : MonoBehaviour, ILightable
 
     [Header("Settings")]
     [SerializeField] private Collider _collider;
-    [SerializeField] private float _disappearTime; // 없애기 위해 비춰야 하는 시간
+    [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
+
     private float _accumulatedTime = 0f;
 
     [Header("Dissolve Effect")]
@@ -78,7 +79,7 @@ public class Ghost : MonoBehaviour, ILightable
     {
         _accumulatedTime += deltaTime;
 
-        if (_accumulatedTime >= _disappearTime)
+        if (_accumulatedTime >= _timeToTrigger)
         {
             Disappear();
         }
