@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.77
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5028fef39ebe54829b4027502b392e24, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1128,7 +1128,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1185,7 +1185,7 @@ MonoBehaviour:
       m_FlipV: 0
       m_SwapUV: 0
       m_Fill: 1
-      m_Scale: {x: 1, y: 1}
+      m_Scale: {x: 0.5, y: 0.5}
       m_Offset: {x: 0, y: 0}
       m_Rotation: 0
       m_Anchor: 0
@@ -1206,17 +1206,17 @@ MonoBehaviour:
   - {x: -5.5, y: 2.5, z: -2}
   - {x: 5.5, y: 2.5, z: -2}
   m_Textures0:
-  - {x: 11, y: 1}
+  - {x: 5.5, y: 1}
   - {x: 0, y: 1}
-  - {x: 11, y: -3}
-  - {x: 0, y: -3}
+  - {x: 5.5, y: -1}
+  - {x: 0, y: -1}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
   m_Colors: []
   m_UnwrapParameters:
     m_HardAngle: 88
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 1031545047}
-  m_VersionIndex: 3726
+  m_VersionIndex: 3851
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6221,8 +6221,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 0, y: 2.5, z: 1.7387667}
-      m_Extent: {x: 1, y: 0, z: 14.761233}
+      m_Center: {x: 0.12049061, y: 2.5, z: 2.1447358}
+      m_Extent: {x: 1.1278157, y: 0, z: 14.355267}
   m_Shapes:
     vertices: []
     shapes: []
@@ -6301,7 +6301,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 192
-    _typelessdata: 000080bf000020400000844100000000000080bf00000000000080bf0000000000000000000080bf000000400000803f0000803f000020400000844100000000000080bf00000000000080bf0000000000000000000080bf000000000000803f000080bf00002040065c50c100000000000080bf00000000000080bf0000000000000000000080bf00000040032ee4c10000803f00002040065c50c100000000000080bf00000000000080bf0000000000000000000080bf00000000032ee4c1
+    _typelessdata: 07f080bf000020400100844100000000000080bf00000000000080bf0000000000000000000080bf06fae63f0000803f80c89f3f000020400100844100000000000080bf00000000000080bf0000000000000000000080bf000000000000803f07f080bf00002040555e43c100000000000080bf00000000000080bf0000000000000000000080bf06fae63f56bf27c180c89f3f00002040555e43c100000000000080bf00000000000080bf0000000000000000000080bf0000000056bf27c1
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -6355,8 +6355,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 2.5, z: 1.7387667}
-    m_Extent: {x: 1, y: 0, z: 14.761233}
+    m_Center: {x: 0.12049061, y: 2.5, z: 2.1447358}
+    m_Extent: {x: 1.1278157, y: 0, z: 14.355267}
   m_MeshUsageFlags: 0
   m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
@@ -8810,7 +8810,7 @@ MonoBehaviour:
       m_FlipV: 0
       m_SwapUV: 0
       m_Fill: 1
-      m_Scale: {x: 1, y: 1}
+      m_Scale: {x: 0.8, y: 0.4}
       m_Offset: {x: 0, y: 0}
       m_Rotation: 0
       m_Anchor: 0
@@ -8826,15 +8826,15 @@ MonoBehaviour:
   - m_Vertices: 02000000
   m_SharedTextures: []
   m_Positions:
-  - {x: -1, y: 2.5, z: 16.5}
-  - {x: 1, y: 2.5, z: 16.5}
-  - {x: -1, y: 2.5, z: -13.022467}
-  - {x: 1, y: 2.5, z: -13.022467}
+  - {x: -1.007325, y: 2.5, z: 16.500002}
+  - {x: 1.2483063, y: 2.5, z: 16.500002}
+  - {x: -1.007325, y: 2.5, z: -12.21053}
+  - {x: 1.2483063, y: 2.5, z: -12.21053}
   m_Textures0:
-  - {x: 2, y: 1}
+  - {x: 1.8045051, y: 1}
   - {x: 0, y: 1}
-  - {x: 2, y: -28.522467}
-  - {x: 0, y: -28.522467}
+  - {x: 1.8045051, y: -10.484213}
+  - {x: 0, y: -10.484213}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -8851,7 +8851,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 561372838}
-  m_VersionIndex: 5053
+  m_VersionIndex: 5914
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10203,7 +10203,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 192
-    _typelessdata: 0000b0c0000020400000004000000000000080bf00000000000080bf0000000000000000000080bf000030410000803f0000b040000020400000004000000000000080bf00000000000080bf0000000000000000000080bf000000000000803f0000b0c000002040000000c000000000000080bf00000000000080bf0000000000000000000080bf00003041000040c00000b04000002040000000c000000000000080bf00000000000080bf0000000000000000000080bf00000000000040c0
+    _typelessdata: 0000b0c0000020400000004000000000000080bf000000000000803f00000000000000000000803f0000b0400000803f0000b040000020400000004000000000000080bf000000000000803f00000000000000000000803f000000000000803f0000b0c000002040000000c000000000000080bf000000000000803f00000000000000000000803f0000b040000080bf0000b04000002040000000c000000000000080bf000000000000803f00000000000000000000803f00000000000080bf
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -11275,133 +11275,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218768998}
   m_Mesh: {fileID: -8235981043639529675, guid: 2765486c375924f6998035f411301a48, type: 3}
---- !u!1 &1227763056
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1227763059}
-  - component: {fileID: 1227763058}
-  - component: {fileID: 1227763057}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1227763057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227763056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_CustomShadowLayers: 0
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
-  m_RenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_ShadowRenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_Version: 4
-  m_LightLayerMask: 1
-  m_ShadowLayerMask: 1
-  m_RenderingLayers: 1
-  m_ShadowRenderingLayers: 1
---- !u!108 &1227763058
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227763056}
-  m_Enabled: 1
-  serializedVersion: 12
-  m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize2D: {x: 0.5, y: 0.5}
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ForceVisible: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_LightUnit: 1
-  m_LuxAtDistance: 1
-  m_EnableSpotReflector: 1
---- !u!4 &1227763059
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227763056}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1238201365
 GameObject:
   m_ObjectHideFlags: 0
@@ -19142,6 +19015,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883317733}
   m_Mesh: {fileID: 1448296162}
+--- !u!1 &1896364931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1896364933}
+  - component: {fileID: 1896364932}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1896364932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896364931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: ed1c2a8e1111148339d82578b412f687, type: 2}
+--- !u!4 &1896364933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896364931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.08331084, y: -0.012128085, z: 58.098312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1931978697
 Mesh:
   m_ObjectHideFlags: 0
@@ -21776,7 +21698,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 3127728407676174907}
-  - {fileID: 1227763059}
+  - {fileID: 1896364933}
   - {fileID: 1848161466}
   - {fileID: 1757366898}
   - {fileID: 2060220864}
