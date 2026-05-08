@@ -17,7 +17,11 @@
     },
     "com.unity.burst": {
       "version": "1.8.28",
+<<<<<<< HEAD
       "depth": 2,
+=======
+      "depth": 1,
+>>>>>>> b7a11e0 (done)
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -25,6 +29,22 @@
       },
       "url": "https://packages.unity.com"
     },
+<<<<<<< HEAD
+=======
+    "com.unity.cloud.gltfast": {
+      "version": "6.18.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.8.24",
+        "com.unity.collections": "1.2.4",
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+>>>>>>> b7a11e0 (done)
     "com.unity.collab-proxy": {
       "version": "2.11.4",
       "depth": 0,
@@ -34,7 +54,11 @@
     },
     "com.unity.collections": {
       "version": "2.6.2",
+<<<<<<< HEAD
       "depth": 2,
+=======
+      "depth": 1,
+>>>>>>> b7a11e0 (done)
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.8.23",
@@ -95,11 +119,40 @@
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
+<<<<<<< HEAD
       "depth": 3,
+=======
+      "depth": 2,
+>>>>>>> b7a11e0 (done)
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+<<<<<<< HEAD
+=======
+    "com.unity.postprocessing": {
+      "version": "3.5.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.probuilder": {
+      "version": "6.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "17.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+>>>>>>> b7a11e0 (done)
     "com.unity.render-pipelines.core": {
       "version": "17.3.0",
       "depth": 1,
@@ -139,6 +192,16 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+<<<<<<< HEAD
+=======
+    "com.unity.settings-manager": {
+      "version": "2.1.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+>>>>>>> b7a11e0 (done)
     "com.unity.shadergraph": {
       "version": "17.3.0",
       "depth": 1,
@@ -160,7 +223,11 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.2.0",
+<<<<<<< HEAD
       "depth": 3,
+=======
+      "depth": 2,
+>>>>>>> b7a11e0 (done)
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
