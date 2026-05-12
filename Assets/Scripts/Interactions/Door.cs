@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Door : MonoBehaviour, IGrabbable
 {
@@ -18,13 +19,14 @@ public class Door : MonoBehaviour, IGrabbable
 
     [Header("Grab Controller")]
     // 플레이어가 잡고 움직이는 부분, 인게임에선 보이지 않으며, 문은 잡혀있는 상태에서 해당 트랜스폼의 위치로 유도되며 열리고 닫힘
-    [SerializeField] private Transform _controller;
+    [SerializeField] private Collider _controller;
     [SerializeField] private bool _isGrabbed = false;
     [SerializeField] private float _maxAngle; // 열리는 최대 각도
     [SerializeField] private float _maxDistance; // 잡고 움직일 수 있는 최대 거리, 너무 멀어지면 놓침
     [SerializeField] private float _smoothTime; // 부드럽게 움직이는 시간
     [SerializeField] private float _closeAngle; // 이 각도 미만으로 떨어지면 닫히는 판정
     [SerializeField] private bool _isClosed = false; // 한 번 닫히면 다시 상호작용 불가능
+    private XRGrabInteractable _grabInteractable;
 
     // 각도는 항상 양수값으로 설정
     // 실제 회전을 반영할 때 방향을 고려해서 부호 결정
@@ -45,7 +47,10 @@ public class Door : MonoBehaviour, IGrabbable
     {
         // 실사용할 에셋의 트랜스폼을 고려해서 방향을 설정해야 함
         _initialLookDirection = -_door.right;
-        _initialForward = -_door.forward;
+        _initialForward = _door.forward;
+
+        _controller.enabled = false;
+        _grabInteractable = _controller.transform.GetComponent<XRGrabInteractable>();
     }
 
     private void Update()
@@ -65,21 +70,17 @@ public class Door : MonoBehaviour, IGrabbable
         }
 
         _currentAngle = Mathf.SmoothDampAngle(_currentAngle, _targetAngle, ref _rotVelocity, _smoothTime);
-        _door.localRotation = Quaternion.Euler(0f, -_currentAngle, 0f);
+        _door.localRotation = Quaternion.Euler(0f, _currentAngle, 0f);
 
         if (_currentAngle < _closeAngle)
         {
-            _targetAngle = 0f;
-            _isClosed = true;
-            Release();
-
-            OnComplete();
+            Close();
         }
     }
 
     private void UpdateTargetAngle()
     {
-        Vector3 targetDirection = _controller.position - _door.position;
+        Vector3 targetDirection = _controller.transform.position - _door.position;
         targetDirection.y = 0;
         targetDirection.Normalize();
 
@@ -89,7 +90,7 @@ public class Door : MonoBehaviour, IGrabbable
 
     private void CheckGrabCondition()
     {
-        Vector3 deltaPosition = _controller.position - _knob.position;
+        Vector3 deltaPosition = _controller.transform.position - _knob.position;
 
         if (deltaPosition.sqrMagnitude > _maxDistance * _maxDistance)
         {
@@ -97,12 +98,23 @@ public class Door : MonoBehaviour, IGrabbable
         }
     }
 
+    private void Close()
+    {
+        _targetAngle = 0f;
+        _isClosed = true;
+        Release();
+
+        _controller.enabled = false;
+
+        OnComplete();
+    }
+
     public void Open()
     {
         if (_isEventTriggered) return;
 
-        Vector3 to = _openAngle * Vector3.down;
-        _door.DORotate(to, _openTime).SetEase(Ease.InOutSine).OnComplete(OpenAnimationCallback);
+        Vector3 to = _openAngle * Vector3.up;
+        _door.DOLocalRotate(to, _openTime).SetEase(Ease.InOutSine).OnComplete(OpenAnimationCallback);
     }
 
     private void OpenAnimationCallback()
@@ -110,20 +122,27 @@ public class Door : MonoBehaviour, IGrabbable
         _isEventTriggered = true;
         _currentAngle = _openAngle;
         _targetAngle = _openAngle;
+
+        _controller.enabled = true;
     }
 
     public void Grab()
     {
         if (_isGrabbed || _isClosed) return;
         _isGrabbed = true;
-        _controller.SetParent(null);
+        _controller.transform.SetParent(null);
     }
 
     public void Release()
     {
+        if (_grabInteractable.isSelected)
+        {
+            _grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)_grabInteractable);
+        }
+
         _isGrabbed = false;
-        _controller.SetParent(_knob);
-        _controller.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        _controller.transform.SetParent(_knob);
+        _controller.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
 #if UNITY_EDITOR
