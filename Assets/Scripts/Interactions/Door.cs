@@ -74,7 +74,7 @@ public class Door : MonoBehaviour, IGrabbable
 
         if (_currentAngle < _closeAngle)
         {
-            Close();
+            LockClosed();
         }
     }
 
@@ -98,7 +98,7 @@ public class Door : MonoBehaviour, IGrabbable
         }
     }
 
-    private void Close()
+    private void LockClosed()
     {
         _targetAngle = 0f;
         _isClosed = true;

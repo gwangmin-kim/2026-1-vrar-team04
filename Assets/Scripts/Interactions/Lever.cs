@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Lever : MonoBehaviour, IGrabbable
 {
@@ -10,12 +11,13 @@ public class Lever : MonoBehaviour, IGrabbable
     private Vector3 _initialForward; // 레버가 돌아갈 방향을 결정하는 벡터 (반대 방향으로 돌아가지 못하도록 하기 위함)
 
     [Header("Grab Controller")]
-    [SerializeField] private Transform _controller;
+    [SerializeField] private Collider _controller;
     [SerializeField] private bool _isGrabbed = false;
     [SerializeField] private float _maxDistance; // 잡고 움직일 수 있는 최대 거리, 너무 멀어지면 놓침
     [SerializeField] private float _smoothTime; // 부드럽게 움직이는 시간
     [SerializeField] private float _thresholdAngle; // 켜지는 판정이 되는 각도
     [SerializeField] private bool _isPowered = false; // 한 번 켜지면 상호작용 불가능
+    private XRGrabInteractable _grabInteractable;
 
     private float _currentAngle = 0f;
     private float _targetAngle = 0f;
@@ -34,6 +36,8 @@ public class Lever : MonoBehaviour, IGrabbable
     {
         _initialLookDirection = _lever.up;
         _initialForward = _lever.forward;
+
+        _grabInteractable = _controller.transform.GetComponent<XRGrabInteractable>();
     }
 
     private void Update()
@@ -55,17 +59,24 @@ public class Lever : MonoBehaviour, IGrabbable
 
         if (_currentAngle >= _thresholdAngle)
         {
-            _targetAngle = 180f;
-            _isPowered = true;
-            Release();
-
-            OnComplete();
+            LockActivated();
         }
+    }
+
+    private void LockActivated()
+    {
+        _targetAngle = 180f;
+        _isPowered = true;
+        Release();
+
+        _controller.enabled = false;
+
+        OnComplete();
     }
 
     private void UpdateTargetAngle()
     {
-        Vector3 targetDirection = _controller.position - _lever.position;
+        Vector3 targetDirection = _controller.transform.position - _lever.position;
 
         _targetAngle = (Vector3.Dot(_initialForward, targetDirection) <= 0f) ? 0f :
                     Vector3.Angle(_initialLookDirection, targetDirection);
@@ -73,7 +84,7 @@ public class Lever : MonoBehaviour, IGrabbable
 
     private void CheckGrabCondition()
     {
-        Vector3 deltaPosition = _controller.position - _knob.position;
+        Vector3 deltaPosition = _controller.transform.position - _knob.position;
 
         if (deltaPosition.sqrMagnitude > _maxDistance * _maxDistance)
         {
@@ -86,14 +97,19 @@ public class Lever : MonoBehaviour, IGrabbable
     {
         if (_isGrabbed || _isPowered) return;
         _isGrabbed = true;
-        _controller.SetParent(null);
+        _controller.transform.SetParent(null);
     }
 
     public void Release()
     {
+        if (_grabInteractable.isSelected)
+        {
+            _grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)_grabInteractable);
+        }
+
         _isGrabbed = false;
-        _controller.SetParent(_knob);
-        _controller.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        _controller.transform.SetParent(_knob);
+        _controller.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
 #if UNITY_EDITOR
