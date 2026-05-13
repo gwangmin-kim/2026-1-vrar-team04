@@ -34,6 +34,3 @@ ScriptedImporter:
     code: 20
     messages:
     - KHR_materials_emissive_strength
-  - type: 3
-    code: 36
-    messages: []
