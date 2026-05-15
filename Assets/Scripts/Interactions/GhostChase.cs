@@ -12,13 +12,21 @@ public class GhostChase : MonoBehaviour, ILightable
     private Renderer _particleRenderer;
     private MaterialPropertyBlock _propBlock;
 
+    [Header("Chase Route")]
+    [SerializeField] private Transform _waypointRoot; // 해당 오브젝트의 자식으로 경로 설정
+    [SerializeField] private Transform[] _waypoints;
+    [SerializeField] private float _turnaroundSmoothTime = 0.5f;
+    private Vector3 _targetDirection = Vector3.zero;
+    private Vector3 _currentVelocity = Vector3.zero;
+
     [Header("Settings")]
-    [SerializeField] private Transform _target;
+    // [SerializeField] private Transform _target;
     [SerializeField] private float _chaseSpeed;
     [SerializeField] private Collider _collider;
     [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
 
     private bool _isChasing = false;
+    private int _currentWaypointIndex = 0;
     private float _accumulatedTime = 0f;
 
     [Header("Texture")]
@@ -30,6 +38,20 @@ public class GhostChase : MonoBehaviour, ILightable
 
     [Header("Particle Effects")]
     [SerializeField] private ParticleSystem _smokeParticle;
+
+    // 추적 경로의 웨이포인트들을 자동으로 할당
+    private void OnValidate()
+    {
+        if (_waypointRoot == null) return;
+
+        int childCount = _waypointRoot.childCount;
+        _waypoints = new Transform[childCount];
+
+        for (int i = 0; i < childCount; i++)
+        {
+            _waypoints[i] = _waypointRoot.GetChild(i);
+        }
+    }
 
     private void Awake()
     {
@@ -46,12 +68,28 @@ public class GhostChase : MonoBehaviour, ILightable
     {
         if (_isChasing)
         {
-            Vector3 targetDirection = _target.position - transform.position;
-            targetDirection.y = 0f;
-            targetDirection.Normalize();
+            // Vector3 targetDirection = _target.position - transform.position;
+            // targetDirection.y = 0f;
+            // targetDirection.Normalize();
 
-            transform.rotation = Quaternion.LookRotation(targetDirection);
-            transform.position += _chaseSpeed * Time.deltaTime * targetDirection;
+            // transform.rotation = Quaternion.LookRotation(targetDirection);
+            // transform.position += _chaseSpeed * Time.deltaTime * targetDirection;
+
+            if (_waypoints == null || _waypoints.Length == 0 || _currentWaypointIndex >= _waypoints.Length) return;
+
+            Transform target = _waypoints[_currentWaypointIndex];
+            Vector3 deltaPosition = target.position - transform.position;
+            deltaPosition.y = 0f;
+            _targetDirection = deltaPosition.normalized;
+            Vector3 direction = Vector3.SmoothDamp(transform.forward, _targetDirection, ref _currentVelocity, _turnaroundSmoothTime);
+
+            transform.rotation = Quaternion.LookRotation(direction);
+            transform.position += _chaseSpeed * Time.deltaTime * direction;
+
+            if (Vector3.SqrMagnitude(deltaPosition) < 0.01f)
+            {
+                _currentWaypointIndex++;
+            }
         }
     }
 
@@ -73,5 +111,23 @@ public class GhostChase : MonoBehaviour, ILightable
         {
             TriggerChase();
         }
+    }
+
+    // 경로 시각화
+    void OnDrawGizmos()
+    {
+        if (_waypoints == null || _waypoints.Length < 2) return;
+
+        Gizmos.color = Color.red;
+        for (int i = 0; i < _waypoints.Length - 1; i++)
+        {
+            if (_waypoints[i] != null && _waypoints[i + 1] != null)
+            {
+                Gizmos.DrawLine(_waypoints[i].position, _waypoints[i + 1].position);
+                Gizmos.DrawSphere(_waypoints[i].position, 0.2f);
+            }
+        }
+        if (_waypoints[_waypoints.Length - 1] != null)
+            Gizmos.DrawSphere(_waypoints[_waypoints.Length - 1].position, 0.2f);
     }
 }

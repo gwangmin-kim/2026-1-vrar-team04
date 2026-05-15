@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 6358713941975582154}
   - component: {fileID: 4190494706148075726}
   - component: {fileID: 291167063617213112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door_B_Knob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 7072618167584388879}
   - component: {fileID: 7246211631387472351}
   - component: {fileID: 7291974202588936001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Doorframe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 1493242379304112163}
   - component: {fileID: 5635757181738841125}
   - component: {fileID: 5008880478584595674}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door_B_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
