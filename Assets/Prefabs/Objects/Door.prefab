@@ -1195,7 +1195,7 @@ MonoBehaviour:
   _openAngle: 30
   _openTime: 1.5
   _isEventTriggered: 0
-  _controller: {fileID: 5489740069508860263}
+  _controller: {fileID: 5856868459356223114}
   _isGrabbed: 0
   _maxAngle: 50
   _maxDistance: 1

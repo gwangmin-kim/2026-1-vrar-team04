@@ -16,6 +16,9 @@ public class EventTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+#if UNITY_EDITOR
+        Debug.Log($"[{name}]: trigger enter detected with {collider.name}");
+#endif
         onTriggerEnterEvent.Invoke(collider);
     }
 
@@ -26,6 +29,9 @@ public class EventTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
+#if UNITY_EDITOR
+        Debug.Log($"[{name}]: trigger exit detected with {collider.name}");
+#endif
         onTriggerExitEvent.Invoke(collider);
     }
 }
