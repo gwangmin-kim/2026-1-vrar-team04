@@ -24,6 +24,9 @@ public class MoppingSound : MonoBehaviour
     [SerializeField, Tooltip("재생할 AudioSource. 비워두면 같은 GameObject 에서 자동 검색. Loop=ON 권장.")]
     private AudioSource _audioSource;
 
+    [SerializeField, Tooltip("대걸레질 중 재생할 루프 사운드.")]
+    private AudioClip _moppingClip;
+
     [Header("Volume Curve")]
     [SerializeField, Tooltip("이 속도 이하면 무음 (m/s).")]
     private float _minSpeed = 0.1f;
@@ -61,7 +64,11 @@ public class MoppingSound : MonoBehaviour
 
         if (_audioSource != null)
         {
+            if (_moppingClip != null)
+                _audioSource.clip = _moppingClip;
+
             _audioSource.loop = true;
+            _audioSource.playOnAwake = false;
             _audioSource.volume = 0f;
         }
     }

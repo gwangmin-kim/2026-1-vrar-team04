@@ -109,3 +109,7 @@ InitTestScene*.unity*
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+
+# C# Language Server Cache
+*.lscache
+*.csproj.lscache

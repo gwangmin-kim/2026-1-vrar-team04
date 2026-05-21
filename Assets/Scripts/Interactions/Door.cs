@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Door : MonoBehaviour, IGrabbable
@@ -16,6 +17,7 @@ public class Door : MonoBehaviour, IGrabbable
     [SerializeField] private float _openAngle; // 이벤트 발동 시 열리는 각도
     [SerializeField] private float _openTime; // 문이 열리는 시간
     [SerializeField] private bool _isEventTriggered = false;
+    [SerializeField] private bool _isOpening = false;
 
     [Header("Grab Controller")]
     // 플레이어가 잡고 움직이는 부분, 인게임에선 보이지 않으며, 문은 잡혀있는 상태에서 해당 트랜스폼의 위치로 유도되며 열리고 닫힘
@@ -27,6 +29,10 @@ public class Door : MonoBehaviour, IGrabbable
     [SerializeField] private float _closeAngle; // 이 각도 미만으로 떨어지면 닫히는 판정
     [SerializeField] private bool _isClosed = false; // 한 번 닫히면 다시 상호작용 불가능
     private XRGrabInteractable _grabInteractable;
+
+    [Header("Events")]
+    public UnityEvent OnOpened;
+    public UnityEvent OnClosed;
 
     // 각도는 항상 양수값으로 설정
     // 실제 회전을 반영할 때 방향을 고려해서 부호 결정
@@ -72,7 +78,7 @@ public class Door : MonoBehaviour, IGrabbable
         _currentAngle = Mathf.SmoothDampAngle(_currentAngle, _targetAngle, ref _rotVelocity, _smoothTime);
         _door.localRotation = Quaternion.Euler(0f, _currentAngle, 0f);
 
-        if (_currentAngle < _closeAngle)
+        if (!_isClosed && _currentAngle < _closeAngle)
         {
             LockClosed();
         }
@@ -100,25 +106,33 @@ public class Door : MonoBehaviour, IGrabbable
 
     private void LockClosed()
     {
+        if (_isClosed) return;
+
         _targetAngle = 0f;
         _isClosed = true;
         Release();
 
         _controller.enabled = false;
 
+        Debug.Log("[Door] Closed SFX event triggered.", this);
+        OnClosed?.Invoke();
         OnComplete();
     }
 
     public void Open()
     {
-        if (_isEventTriggered) return;
+        if (_isEventTriggered || _isOpening || _isClosed) return;
 
         Vector3 to = _openAngle * Vector3.up;
+        _isOpening = true;
+        Debug.Log("[Door] Opened SFX event triggered.", this);
+        OnOpened?.Invoke();
         _door.DOLocalRotate(to, _openTime).SetEase(Ease.InOutSine).OnComplete(OpenAnimationCallback);
     }
 
     private void OpenAnimationCallback()
     {
+        _isOpening = false;
         _isEventTriggered = true;
         _currentAngle = _openAngle;
         _targetAngle = _openAngle;

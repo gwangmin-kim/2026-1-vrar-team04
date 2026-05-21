@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Lever : MonoBehaviour, IGrabbable
@@ -18,6 +19,9 @@ public class Lever : MonoBehaviour, IGrabbable
     [SerializeField] private float _thresholdAngle; // 켜지는 판정이 되는 각도
     [SerializeField] private bool _isPowered = false; // 한 번 켜지면 상호작용 불가능
     private XRGrabInteractable _grabInteractable;
+
+    [Header("Events")]
+    public UnityEvent OnActivated;
 
     private float _currentAngle = 0f;
     private float _targetAngle = 0f;
@@ -65,12 +69,16 @@ public class Lever : MonoBehaviour, IGrabbable
 
     private void LockActivated()
     {
+        if (_isPowered) return;
+
         _targetAngle = 180f;
         _isPowered = true;
         Release();
 
         _controller.enabled = false;
 
+        Debug.Log("[Lever] Activated SFX event triggered.", this);
+        OnActivated?.Invoke();
         OnComplete();
     }
 

@@ -140,7 +140,7 @@ public class BoolStateOneShot : MonoBehaviour
 
     private void PlayFalse()
     {
-        PlayFromArray(_onFalseClips);
+        PlayFromArray(HasClips(_onFalseClips) ? _onFalseClips : _onTrueClips);
         OnBecameFalse?.Invoke();
     }
 
@@ -158,11 +158,23 @@ public class BoolStateOneShot : MonoBehaviour
         _lastPlayTime = Time.time;
     }
 
+    private static bool HasClips(AudioClip[] clips)
+    {
+        if (clips == null || clips.Length == 0) return false;
+
+        for (int i = 0; i < clips.Length; i++)
+        {
+            if (clips[i] != null) return true;
+        }
+
+        return false;
+    }
+
     /// <summary>외부에서 강제로 onTrue 사운드 재생.</summary>
     public void ForcePlayTrue()  => PlayFromArray(_onTrueClips);
 
     /// <summary>외부에서 강제로 onFalse 사운드 재생.</summary>
-    public void ForcePlayFalse() => PlayFromArray(_onFalseClips);
+    public void ForcePlayFalse() => PlayFromArray(HasClips(_onFalseClips) ? _onFalseClips : _onTrueClips);
 
 #if UNITY_EDITOR
     private void OnValidate()
