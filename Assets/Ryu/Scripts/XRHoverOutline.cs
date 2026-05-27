@@ -4,39 +4,45 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(XRBaseInteractable))]
 public sealed class XRHoverOutline : MonoBehaviour
 {
+    [SerializeField] private XRBaseInteractable _interactableSource;
     [SerializeField] private bool _rayInteractorOnly = true;
     [SerializeField] private Color _outlineColor = Color.white;
-    [SerializeField, Min(0f)] private float _outlineWidth = 0.025f;
+    [SerializeField, Min(0f)] private float _outlineWidth = 0.01f;
     [SerializeField] private Behaviour[] _outlineEffects;
 
-    private XRBaseInteractable _interactable;
     private int _rayHoverCount;
     private int _hoverCount;
 
     private void Awake()
     {
-        _interactable = GetComponent<XRBaseInteractable>();
+        ResolveInteractable();
         EnsureOutlineEffects();
         SetOutline(false);
     }
 
     private void OnEnable()
     {
-        _interactable.hoverEntered.AddListener(OnHoverEntered);
-        _interactable.hoverExited.AddListener(OnHoverExited);
-        _interactable.selectEntered.AddListener(OnSelectEntered);
-        _interactable.selectExited.AddListener(OnSelectExited);
+        if (!ResolveInteractable())
+            return;
+
+        _interactableSource.hoverEntered.AddListener(OnHoverEntered);
+        _interactableSource.hoverExited.AddListener(OnHoverExited);
+        _interactableSource.selectEntered.AddListener(OnSelectEntered);
+        _interactableSource.selectExited.AddListener(OnSelectExited);
     }
 
     private void OnDisable()
     {
-        _interactable.hoverEntered.RemoveListener(OnHoverEntered);
-        _interactable.hoverExited.RemoveListener(OnHoverExited);
-        _interactable.selectEntered.RemoveListener(OnSelectEntered);
-        _interactable.selectExited.RemoveListener(OnSelectExited);
+        if (_interactableSource != null)
+        {
+            _interactableSource.hoverEntered.RemoveListener(OnHoverEntered);
+            _interactableSource.hoverExited.RemoveListener(OnHoverExited);
+            _interactableSource.selectEntered.RemoveListener(OnSelectEntered);
+            _interactableSource.selectExited.RemoveListener(OnSelectExited);
+        }
+
         _rayHoverCount = 0;
         _hoverCount = 0;
         SetOutline(false);
@@ -80,7 +86,26 @@ public sealed class XRHoverOutline : MonoBehaviour
     private void RefreshOutline()
     {
         var hasHover = _rayInteractorOnly ? _rayHoverCount > 0 : _hoverCount > 0;
-        SetOutline(hasHover && !_interactable.isSelected);
+        SetOutline(hasHover && (_interactableSource == null || !_interactableSource.isSelected));
+    }
+
+    private bool ResolveInteractable()
+    {
+        if (_interactableSource != null)
+            return true;
+
+        _interactableSource = GetComponent<XRBaseInteractable>();
+        if (_interactableSource == null)
+            _interactableSource = GetComponentInParent<XRBaseInteractable>();
+        if (_interactableSource == null)
+            _interactableSource = GetComponentInChildren<XRBaseInteractable>();
+
+        if (_interactableSource != null)
+            return true;
+
+        Debug.LogWarning("XRHoverOutline requires an XRBaseInteractable, XRGrabInteractable, or another XR interactable on this object, a parent, or a child.", this);
+        enabled = false;
+        return false;
     }
 
     private void EnsureOutlineEffects()

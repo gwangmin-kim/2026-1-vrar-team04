@@ -47,8 +47,10 @@ Shader "Hidden/Ryu/SimpleMeshOutline"
             Varyings vert(Attributes input)
             {
                 Varyings output;
-                float3 positionOS = input.positionOS.xyz + normalize(input.normalOS) * _OutlineWidth;
-                output.positionHCS = TransformObjectToHClip(positionOS);
+                float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
+                positionWS += normalize(normalWS) * _OutlineWidth;
+                output.positionHCS = TransformWorldToHClip(positionWS);
                 return output;
             }
 
