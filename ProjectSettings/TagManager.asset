@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - MopHead
-  - mobHead
+  - Trash
   layers:
   - Default
   - TransparentFX
@@ -46,7 +46,7 @@ TagManager:
   m_RenderingLayers:
   - Default
   - Receive Decals
-  - Light Layer 2
+  - Receive Global Light
   - Light Layer 3
   - Light Layer 4
   - Light Layer 5

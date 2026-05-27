@@ -10,6 +10,10 @@ public class Lever : MonoBehaviour, IGrabbable
     private Vector3 _initialLookDirection; // 처음 레버의 정렬 방향을 나타내는 벡터
     private Vector3 _initialForward; // 레버가 돌아갈 방향을 결정하는 벡터 (반대 방향으로 돌아가지 못하도록 하기 위함)
 
+    [Header("Trigger Event")]
+    // 플레이어가 복도의 특정 구간을 넘어가면(트리거에 닿으면) 불이 꺼지며 레버가 내려가는 방식
+    [SerializeField] private bool _isEventTriggered = false;
+
     [Header("Grab Controller")]
     [SerializeField] private Collider _controller;
     [SerializeField] private bool _isGrabbed = false;
@@ -29,7 +33,7 @@ public class Lever : MonoBehaviour, IGrabbable
     // 올바르게 대처 완료 시 호출할 함수
     private void OnComplete()
     {
-
+        GameManager.Instance.ClearStage();
     }
 
     private void Awake()
@@ -37,11 +41,14 @@ public class Lever : MonoBehaviour, IGrabbable
         _initialLookDirection = _lever.up;
         _initialForward = _lever.forward;
 
+        _controller.enabled = false;
         _grabInteractable = _controller.transform.GetComponent<XRGrabInteractable>();
     }
 
     private void Update()
     {
+        if (!_isEventTriggered) return;
+
         if (_isGrabbed && !_isPowered)
         {
             _checkTimer -= Time.deltaTime;
@@ -57,21 +64,10 @@ public class Lever : MonoBehaviour, IGrabbable
         _currentAngle = Mathf.SmoothDampAngle(_currentAngle, _targetAngle, ref _rotVelocity, _smoothTime);
         _lever.localRotation = Quaternion.Euler(_currentAngle, 0f, 0f);
 
-        if (_currentAngle >= _thresholdAngle)
+        if (_currentAngle <= _thresholdAngle)
         {
             LockActivated();
         }
-    }
-
-    private void LockActivated()
-    {
-        _targetAngle = 180f;
-        _isPowered = true;
-        Release();
-
-        _controller.enabled = false;
-
-        OnComplete();
     }
 
     private void UpdateTargetAngle()
@@ -92,6 +88,29 @@ public class Lever : MonoBehaviour, IGrabbable
         }
     }
 
+    private void LockActivated()
+    {
+        _targetAngle = 0f;
+        _isPowered = true;
+        Release();
+
+        _controller.enabled = false;
+
+        OnComplete();
+    }
+
+    public void Trigger()
+    {
+        if (_isEventTriggered) return;
+
+        _lever.localRotation = Quaternion.Euler(180f, 0f, 0f);
+
+        _isEventTriggered = true;
+        _currentAngle = 180f;
+        _targetAngle = 180f;
+
+        _controller.enabled = true;
+    }
 
     public void Grab()
     {
