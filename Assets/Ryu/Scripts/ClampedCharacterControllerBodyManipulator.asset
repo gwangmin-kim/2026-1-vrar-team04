@@ -17,4 +17,4 @@ MonoBehaviour:
   _lockCenterToOrigin: 0
   _snapBottomToOrigin: 1
   _bottomYOffset: 0
-  _debugLog: 1
+  _debugLog: 0
