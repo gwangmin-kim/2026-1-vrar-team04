@@ -230,7 +230,7 @@ namespace VRARTeam04.Player
             _bobAnchor.localRotation = _baseLocalRotation * Quaternion.Euler(0f, 0f, idleRollDeg + strafeRollDeg);
 
             // ─── 7. 발소리 트리거: sin 이 음→양 교차 ────────
-            if (_currentAmplitude > 0.15f && _previousSinValue <= 0f && walkSinVal > 0f)
+            if (speed >= _minSpeed && _currentAmplitude > 0.15f && _previousSinValue <= 0f && walkSinVal > 0f)
             {
                 OnFootstep?.Invoke(_currentAmplitude);
                 PlayFallbackFootstep();

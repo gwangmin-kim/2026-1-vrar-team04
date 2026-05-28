@@ -5787,7 +5787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5895,33 +5895,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3241370954918772351, guid: bdad44eeaece20a44b828c637c68af42, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1855999516}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdad44eeaece20a44b828c637c68af42, type: 3}
---- !u!1 &1855999515 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3241370954918772351, guid: bdad44eeaece20a44b828c637c68af42, type: 3}
-  m_PrefabInstance: {fileID: 1855999514}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1855999516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855999515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e531146a78d2f014ebb5427d8efa6778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::XRHoverOutline
-  _interactableSource: {fileID: 0}
-  _rayInteractorOnly: 1
-  _outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  _outlineWidth: 0.01
-  _outlineEffects: []
 --- !u!43 &1862592350
 Mesh:
   m_ObjectHideFlags: 0
