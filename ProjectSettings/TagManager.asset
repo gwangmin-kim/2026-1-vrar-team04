@@ -46,7 +46,7 @@ TagManager:
   m_RenderingLayers:
   - Default
   - Receive Decals
-  - Receive Global Light
+  - Elevator
   - Light Layer 3
   - Light Layer 4
   - Light Layer 5
