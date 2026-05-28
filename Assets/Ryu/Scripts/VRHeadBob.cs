@@ -134,6 +134,11 @@ namespace VRARTeam04.Player
             }
         }
 
+        public void AddBaseLocalPositionOffset(Vector3 offset)
+        {
+            _baseLocalPosition += offset;
+        }
+
         private void LateUpdate()
         {
             if (_bobAnchor == null || _xrOriginRoot == null) return;

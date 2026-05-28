@@ -158,6 +158,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1093036403569302387, guid: 08eac7b0e85d35d4b923d8b38ff5866f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9102054005316440449}
+    - targetCorrespondingSourceObject: {fileID: 1093036403569302387, guid: 08eac7b0e85d35d4b923d8b38ff5866f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1286152592525500362}
   m_SourcePrefab: {fileID: 100100000, guid: 08eac7b0e85d35d4b923d8b38ff5866f, type: 3}
 --- !u!1 &1260863842147724545 stripped
 GameObject:
@@ -299,6 +302,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1286152592525500362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260863842147724545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531146a78d2f014ebb5427d8efa6778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::XRHoverOutline
+  _interactableSource: {fileID: 0}
+  _rayInteractorOnly: 1
+  _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  _outlineWidth: 0.01
+  _outlineEffects: []
 --- !u!4 &2312157719246484274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4486197762271331648, guid: 08eac7b0e85d35d4b923d8b38ff5866f, type: 3}
@@ -429,6 +449,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4874350677217763364, guid: be4cd3d7eaa137545a1b7e18cf48eb14, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6321972480534334497}
+    - targetCorrespondingSourceObject: {fileID: 4874350677217763364, guid: be4cd3d7eaa137545a1b7e18cf48eb14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2676183602427134433}
   m_SourcePrefab: {fileID: 100100000, guid: be4cd3d7eaa137545a1b7e18cf48eb14, type: 3}
 --- !u!1 &1195538661188732946 stripped
 GameObject:
@@ -570,6 +593,23 @@ MonoBehaviour:
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
   _allowOverlap: 1
+--- !u!114 &2676183602427134433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195538661188732946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531146a78d2f014ebb5427d8efa6778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::XRHoverOutline
+  _interactableSource: {fileID: 0}
+  _rayInteractorOnly: 1
+  _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  _outlineWidth: 0.01
+  _outlineEffects: []
 --- !u!4 &6276342961094770268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 299569248757012074, guid: be4cd3d7eaa137545a1b7e18cf48eb14, type: 3}
