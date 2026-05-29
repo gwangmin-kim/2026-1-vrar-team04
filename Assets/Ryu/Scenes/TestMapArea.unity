@@ -3256,6 +3256,7 @@ MonoBehaviour:
   _triggerLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  _unlockDelaySeconds: 3
 --- !u!65 &927559500
 BoxCollider:
   m_ObjectHideFlags: 0
