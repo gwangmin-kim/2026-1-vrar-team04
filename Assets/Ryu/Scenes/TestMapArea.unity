@@ -2097,37 +2097,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 0.1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &622391431
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 622391432}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &622391432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622391431}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 1.7, z: 19.334}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &640416715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3233,7 @@ GameObject:
   - component: {fileID: 927559500}
   - component: {fileID: 927559499}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: DeathTestTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5836,7 +5805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6707,63 +6676,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &1925022352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-  m_PrefabInstance: {fileID: 2008376451}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1925022353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925022352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2650ed51b480f4baa76584427ac3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.PlayerControlLock
-  _lockedOnStart: 0
-  _autoCollectOnAwake: 1
-  _disableLocomotion: 1
-  _disableInteractors: 1
-  _disableInteractorVisuals: 1
-  _disableInputActionManagers: 1
-  _disableTrackedPoseDrivers: 1
-  _disableHeadBob: 1
-  _extraComponentsToDisable: []
---- !u!114 &1925022360 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9037371850633803660, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-  m_PrefabInstance: {fileID: 2008376451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925022352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.CoreUtils::Unity.XR.CoreUtils.XROrigin
---- !u!114 &1925022362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925022352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e29d404d7d874094aae9d9f191f2662c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.XREyeHeightFallback
-  _xrOrigin: {fileID: 1925022360}
-  _fallbackEyeHeight: 1.7
-  _minimumValidEyeHeight: 1.2
-  _maximumValidEyeHeight: 2.1
-  _startupDelay: 0.5
-  _applyOnceOnStart: 1
-  _keepApplyingWhileOutsideRange: 1
-  _debugLog: 1
 --- !u!43 &1929260632
 Mesh:
   m_ObjectHideFlags: 0
@@ -6994,24 +6906,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4303216888358848244, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9037371850633803660, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_RequestedTrackingOriginMode
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1925022353}
-    - targetCorrespondingSourceObject: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1925022362}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
 --- !u!43 &2053964922
 Mesh:
@@ -8636,6 +8534,5 @@ SceneRoots:
   - {fileID: 7690697776691402145}
   - {fileID: 3012976103527251719}
   - {fileID: 2008376451}
-  - {fileID: 622391432}
   - {fileID: 1855999514}
   - {fileID: 927559501}

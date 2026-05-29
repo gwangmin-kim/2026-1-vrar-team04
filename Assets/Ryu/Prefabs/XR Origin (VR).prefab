@@ -976,6 +976,8 @@ GameObject:
   - component: {fileID: 9002251215248766731}
   - component: {fileID: 7969015890358969661}
   - component: {fileID: 393431200333087581}
+  - component: {fileID: 6210343803649800309}
+  - component: {fileID: 4625338736706229679}
   m_Layer: 3
   m_Name: XR Origin (VR)
   m_TagString: Untagged
@@ -1015,7 +1017,7 @@ MonoBehaviour:
   m_Camera: {fileID: 7429541371339342559}
   m_OriginBaseGameObject: {fileID: 2896574143029950454}
   m_CameraFloorOffsetObject: {fileID: 5197492559757808646}
-  m_RequestedTrackingOriginMode: 1
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.7
 --- !u!114 &2958207883131714049
 MonoBehaviour:
@@ -1185,6 +1187,47 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &6210343803649800309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896574143029950454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2650ed51b480f4baa76584427ac3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.PlayerControlLock
+  _lockedOnStart: 0
+  _autoCollectOnAwake: 1
+  _disableLocomotion: 1
+  _disableInteractors: 1
+  _disableInteractorVisuals: 1
+  _disableInputActionManagers: 1
+  _disableTrackedPoseDrivers: 1
+  _disableHeadBob: 1
+  _extraComponentsToDisable: []
+--- !u!114 &4625338736706229679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896574143029950454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e29d404d7d874094aae9d9f191f2662c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.XREyeHeightFallback
+  _xrOrigin: {fileID: 9037371850633803660}
+  _fallbackEyeHeight: 1.7
+  _minimumValidEyeHeight: 1.2
+  _maximumValidEyeHeight: 2.1
+  _startupDelay: 0.5
+  _applyOnceOnStart: 1
+  _keepApplyingWhileOutsideRange: 1
+  _debugLog: 1
 --- !u!1 &5197492559757808646
 GameObject:
   m_ObjectHideFlags: 0
