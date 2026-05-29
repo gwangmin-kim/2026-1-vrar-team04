@@ -69,7 +69,7 @@ MonoBehaviour:
   onTriggerEnterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5969843387415890250}
         m_TargetAssemblyTypeName: Elevator, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
@@ -156,7 +156,7 @@ MonoBehaviour:
   onTriggerEnterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5969843387415890250}
         m_TargetAssemblyTypeName: Elevator, Assembly-CSharp
         m_MethodName: Open
         m_Mode: 1
@@ -250,3 +250,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4882829976475541127, guid: c4982f64944c78349ac9474027be5ff2, type: 3}
   m_PrefabInstance: {fileID: 7187232644493565683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5969843387415890250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3559826042720016313, guid: c4982f64944c78349ac9474027be5ff2, type: 3}
+  m_PrefabInstance: {fileID: 7187232644493565683}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ece536e2a13185439e34a842591f3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Elevator

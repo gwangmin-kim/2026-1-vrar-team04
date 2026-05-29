@@ -146,7 +146,7 @@ public class Door : MonoBehaviour, IGrabbable
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_knob.position, _maxDistance);
