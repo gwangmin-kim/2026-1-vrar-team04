@@ -1685,7 +1685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 929434610796589596, guid: 6756d69fdbbb24c4aaf5eb7827420811, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 929434610796589596, guid: 6756d69fdbbb24c4aaf5eb7827420811, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1727,8 +1727,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin_MainMenu
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4289185713320721194, guid: 6756d69fdbbb24c4aaf5eb7827420811, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

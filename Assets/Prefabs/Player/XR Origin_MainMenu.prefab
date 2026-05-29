@@ -1197,7 +1197,6 @@ GameObject:
   - component: {fileID: 916517138708457213}
   - component: {fileID: 7853111755583255909}
   - component: {fileID: 8139242879830034219}
-  - component: {fileID: 2517557429546496194}
   m_Layer: 3
   m_Name: Righthand Controller
   m_TagString: Untagged
@@ -1217,8 +1216,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.1176, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1820101882292990355}
+  m_Children: []
   m_Father: {fileID: 4861253429335385939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5108931794871748553
@@ -2013,41 +2011,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2517557429546496194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8680593188306003430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bcd427fb3f8274d93afe321f8286d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Flashlight_completed
-  _flashlightBody: {fileID: 3605068992942955079}
-  _light: {fileID: 1963235768531657715}
-  _toggleSound: {fileID: 7853111755583255909}
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _detectDistance: 5
-  _detectRadius: 0.3
-  _checkInterval: 0.05
-  _startsActive: 0
-  _startsLightOn: 0
-  OnActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLightOn:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLightOff:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8913384636932288834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,80 +2349,4 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8429981633443581382, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
   m_PrefabInstance: {fileID: 4492855770496436298}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4993516386851648294
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3636538310527551543}
-    m_Modifications:
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8596051812874824033, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_Name
-      value: Flashlight
-      objectReference: {fileID: 0}
-    - target: {fileID: 8596051812874824033, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
---- !u!4 &1820101882292990355 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6633456689715970741, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-  m_PrefabInstance: {fileID: 4993516386851648294}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &1963235768531657715 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 6805598975119970517, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-  m_PrefabInstance: {fileID: 4993516386851648294}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3605068992942955079 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8596051812874824033, guid: 6212d8f796a64184d88ea09cf1f22039, type: 3}
-  m_PrefabInstance: {fileID: 4993516386851648294}
   m_PrefabAsset: {fileID: 0}
