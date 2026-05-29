@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Ryu/Scenes/MainMenu.unity.meta
-guid: c7eec3ad55ad6475f842310cf83d59ac
-========
 guid: 46b0d9a8d04a64d38b98f5c73689e235
->>>>>>>> feat/gameflow:Assets/Scenes/Modules.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
