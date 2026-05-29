@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRARTeam04.Player;
 
 public class StainSpawner : MonoBehaviour
 {
     [Header("Object Pool")]
     [SerializeField] private Transform _stainPoolRoot;
     [SerializeField] private List<BloodStain> _stainPool;
+
+    [Header("Spawn SFX")]
+    [SerializeField] private OneShotPlayer _spawnSfx;
 
     [Header("Raycast Setting")]
     [SerializeField] private Vector2 _spreadAngles; // 비산 각도 범위 (각각 수평, 수직 방향, +- 대칭 범위로 사용)
@@ -21,6 +25,9 @@ public class StainSpawner : MonoBehaviour
 
     private void Awake()
     {
+        if (_spawnSfx == null)
+            _spawnSfx = GetComponent<OneShotPlayer>();
+
         // foreach (var stain in _stainPool)
         // {
         //     stain.gameObject.SetActive(false);
@@ -29,7 +36,7 @@ public class StainSpawner : MonoBehaviour
         // 자동 할당 로직
         _stainPool = new List<BloodStain>();
 
-        foreach (var stain in _stainPoolRoot.GetComponentsInChildren<BloodStain>())
+        foreach (var stain in _stainPoolRoot.GetComponentsInChildren<BloodStain>(true))
         {
             _stainPool.Add(stain);
             stain.gameObject.SetActive(false);
@@ -71,6 +78,9 @@ public class StainSpawner : MonoBehaviour
                 stain.decalProjector.size = new Vector3(randomScale, randomScale, 2f);
 
                 stain.gameObject.SetActive(true);
+                stain.MarkSpawned();
+                if (_spawnSfx != null)
+                    _spawnSfx.PlayAt(position);
 
                 yield return new WaitForSeconds(_spawnInterval);
             }

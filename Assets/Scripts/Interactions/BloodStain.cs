@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Events;
 
 public class BloodStain : MonoBehaviour, ICleanable
 {
@@ -17,6 +18,9 @@ public class BloodStain : MonoBehaviour, ICleanable
 
     [SerializeField] private Cleaner _cleaner = null;
     [SerializeField] private float _accumulatedDistance = 0f;
+
+    [Header("Events")]
+    public UnityEvent OnSpawned;
 
     private bool IsBeingCleaned => _cleaner != null;
 
@@ -42,6 +46,21 @@ public class BloodStain : MonoBehaviour, ICleanable
     public void Untouch()
     {
         _cleaner = null;
+    }
+
+    public void MarkSpawned()
+    {
+        _isCleaned = false;
+        _cleaner = null;
+        _accumulatedDistance = 0f;
+
+        if (_collider != null)
+            _collider.enabled = true;
+
+        if (decalProjector != null)
+            decalProjector.fadeFactor = _initialFade;
+
+        OnSpawned?.Invoke();
     }
 
     public void Clean()

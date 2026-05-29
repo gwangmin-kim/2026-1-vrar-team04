@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using VRARTeam04.Player;
 
 public class GhostLight : MonoBehaviour, ILightable
 {
@@ -16,6 +17,7 @@ public class GhostLight : MonoBehaviour, ILightable
     [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
 
     private float _accumulatedTime = 0f;
+    private bool _isDisappearing;
 
     [Header("Dissolve Effect")]
     [SerializeField] private Transform _mesh;
@@ -24,6 +26,10 @@ public class GhostLight : MonoBehaviour, ILightable
 
     [Header("Particle Effects")]
     [SerializeField] private ParticleSystem _smokeParticle;
+
+    [Header("Ambient SFX")]
+    [SerializeField] private OneShotPlayer _ambientSfx;
+    [SerializeField] private bool _playAmbientOnEnable = true;
 
     // 올바르게 대처 완료 시 호출할 함수
     private void OnComplete()
@@ -40,10 +46,34 @@ public class GhostLight : MonoBehaviour, ILightable
         _dissolveRenderer.GetPropertyBlock(_propBlock);
         _propBlock.SetTexture(_baseMapID, _baseMap);
         _dissolveRenderer.SetPropertyBlock(_propBlock);
+
+        if (_ambientSfx == null)
+            _ambientSfx = GetComponent<OneShotPlayer>();
+    }
+
+    private void OnEnable()
+    {
+        if (_ambientSfx == null)
+            _ambientSfx = GetComponent<OneShotPlayer>();
+
+        if (_playAmbientOnEnable && _ambientSfx != null)
+            _ambientSfx.PlayLoop();
+    }
+
+    private void OnDisable()
+    {
+        if (_ambientSfx != null)
+            _ambientSfx.StopLoop();
     }
 
     private void Disappear()
     {
+        if (_isDisappearing) return;
+        _isDisappearing = true;
+
+        if (_ambientSfx != null)
+            _ambientSfx.StopLoop();
+
         // 콜라이더 해제(더 이상 감지되지 않도록)
         _collider.enabled = false;
 
