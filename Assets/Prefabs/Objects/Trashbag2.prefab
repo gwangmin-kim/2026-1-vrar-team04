@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7038563913419600528}
   m_Layer: 7
   m_Name: Trashbag2
-  m_TagString: Untagged
+  m_TagString: Trash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8487414788591393117, guid: 910ed4cc391527042aaf44e129ad14f0, type: 3}
+  - {fileID: 2100000, guid: 1ef507fd95b0e8d4fa1ed782d85234aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ghost
   _collider: {fileID: 8412771401161477474}
-  _disappearTime: 1
+  _timeToTrigger: 0
   _mesh: {fileID: 2033862064048019266}
   _baseMap: {fileID: 2800000, guid: 7450d2cf9504eb3428d494e7d56ecdf8, type: 3}
   _dissolveDuration: 2

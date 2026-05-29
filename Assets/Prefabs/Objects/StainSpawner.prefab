@@ -77,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 6247644278393144938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.12, y: 1.08, z: 17.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -97,7 +97,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StainSpawner
   _stainPoolRoot: {fileID: 1379303693607161096}
-  _stainPool: []
+  _stainPool:
+  - {fileID: 3033826564302812045}
+  - {fileID: 7398669976873062015}
+  - {fileID: 5551684618764521259}
+  - {fileID: 8840680176755987387}
+  - {fileID: 2709488600074544554}
+  - {fileID: 1415185824437835685}
+  - {fileID: 4744287112702184888}
+  - {fileID: 8935239748179279436}
+  - {fileID: 7782583601710045147}
+  - {fileID: 7547967779240504274}
+  - {fileID: 3410451847656206080}
+  - {fileID: 8040970047417094442}
+  - {fileID: 8419571439105185483}
+  - {fileID: 980298373027744773}
+  - {fileID: 8456355592405228327}
+  - {fileID: 1090203171833189610}
+  - {fileID: 8071605365923896221}
+  - {fileID: 3548623416505307868}
+  - {fileID: 6854792420259399557}
+  - {fileID: 3727939378310537894}
   _spreadAngles: {x: 45, y: 30}
   _rayDistance: 10
   _wallLayer:
@@ -169,6 +189,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 464291485909745860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6854792420259399557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 464291485909745860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &1467021714139121770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,6 +262,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 1467021714139121770}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5551684618764521259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 1467021714139121770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &1767509166700251897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,6 +330,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &4744287112702184888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 1767509166700251897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &4999676587388874281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -350,6 +403,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &8840680176755987387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 2585070589376550138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &9080694340549193770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -417,6 +481,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 2688713793266301197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8935239748179279436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 2688713793266301197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &2978138940772343004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,6 +549,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &8071605365923896221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 2978138940772343004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &8408615174972553228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -541,6 +627,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 3173737415962139750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8456355592405228327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 3173737415962139750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &3280925498751455626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -603,6 +700,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 3280925498751455626}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8419571439105185483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 3280925498751455626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &3598278737554107539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,6 +768,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &7547967779240504274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 3598278737554107539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &7785237317329619011 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -727,6 +846,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 3841897361736241306}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7782583601710045147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 3841897361736241306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &3947159201253660267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -789,6 +919,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 3947159201253660267}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8040970047417094442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 3947159201253660267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &4610904137727756606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,6 +992,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 4610904137727756606}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7398669976873062015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 4610904137727756606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &5400840443438076132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,6 +1060,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &1415185824437835685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 5400840443438076132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &1663724514770187316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -975,6 +1138,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 6109937651028052804}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &980298373027744773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 6109937651028052804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &6228845267687740331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1037,6 +1211,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 6228845267687740331}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1090203171833189610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 6228845267687740331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &7525336809024722333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1094,6 +1279,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &3548623416505307868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 7525336809024722333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &3857969225098064205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -1156,6 +1352,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &3727939378310537894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 7704584577017865703}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &3965755644129476919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -1218,6 +1425,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+--- !u!114 &3033826564302812045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 8307508440558744780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!4 &3363957527956738076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
@@ -1285,6 +1503,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 8503983723726170177}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3410451847656206080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 8503983723726170177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain
 --- !u!1001 &8992116430871749355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1347,3 +1576,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765848534203557072, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
   m_PrefabInstance: {fileID: 8992116430871749355}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2709488600074544554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2787618463739705535, guid: bfd32bc4943ac504eb740057dedd7733, type: 3}
+  m_PrefabInstance: {fileID: 8992116430871749355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c90a3805a267714a97729f61d9171a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodStain

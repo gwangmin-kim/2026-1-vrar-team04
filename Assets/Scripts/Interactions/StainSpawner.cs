@@ -23,22 +23,24 @@ public class StainSpawner : MonoBehaviour
     [SerializeField] private float _minScale; // 최소 크기 (배율)
     [SerializeField] private float _maxScale; // 최대 크기 (배율)
 
-    private void Awake()
+    private void OnValidate()
     {
-        if (_spawnSfx == null)
-            _spawnSfx = GetComponent<OneShotPlayer>();
-
-        // foreach (var stain in _stainPool)
-        // {
-        //     stain.gameObject.SetActive(false);
-        // }
-
         // 자동 할당 로직
         _stainPool = new List<BloodStain>();
 
         foreach (var stain in _stainPoolRoot.GetComponentsInChildren<BloodStain>(true))
         {
             _stainPool.Add(stain);
+        }
+    }
+
+    private void Awake()
+    {
+        if (_spawnSfx == null)
+            _spawnSfx = GetComponent<OneShotPlayer>();
+
+        foreach (var stain in _stainPool)
+        {
             stain.gameObject.SetActive(false);
         }
     }

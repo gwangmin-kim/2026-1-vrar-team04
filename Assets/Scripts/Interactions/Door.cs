@@ -46,7 +46,7 @@ public class Door : MonoBehaviour, IGrabbable
     // 올바르게 대처 완료 시 호출할 함수
     private void OnComplete()
     {
-
+        GameManager.Instance.ClearStage();
     }
 
     private void Awake()
@@ -160,7 +160,7 @@ public class Door : MonoBehaviour, IGrabbable
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_knob.position, _maxDistance);

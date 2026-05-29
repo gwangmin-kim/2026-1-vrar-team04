@@ -19,6 +19,10 @@ public class GhostLight : MonoBehaviour, ILightable
     private float _accumulatedTime = 0f;
     private bool _isDisappearing;
 
+    [Header("Animation")]
+    [SerializeField] private Animator _animator;
+    [SerializeField] private string _lightTrigger = "Light";
+
     [Header("Dissolve Effect")]
     [SerializeField] private Transform _mesh;
     [SerializeField] private Texture2D _baseMap;
@@ -76,6 +80,7 @@ public class GhostLight : MonoBehaviour, ILightable
 
         // 콜라이더 해제(더 이상 감지되지 않도록)
         _collider.enabled = false;
+        _animator.SetTrigger(_lightTrigger);
 
         // 완료 로직 호출 (게임 매니저에게 알림)
         OnComplete();

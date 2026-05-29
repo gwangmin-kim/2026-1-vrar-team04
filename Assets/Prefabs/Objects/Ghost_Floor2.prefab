@@ -70,7 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5962a045d8f4e51b5a648270ca8806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostChase
-  _target: {fileID: 0}
+  _chaseTrigger: Chase
+  _waypointRoot: {fileID: 0}
+  _waypoints: []
+  _turnaroundSmoothTime: 0.5
+  _deathCutsceneManager: {fileID: 0}
   _chaseSpeed: 1
   _collider: {fileID: 7785834627289720919}
   _timeToTrigger: 1
