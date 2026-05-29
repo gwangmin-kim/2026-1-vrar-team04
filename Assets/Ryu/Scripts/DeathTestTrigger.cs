@@ -6,9 +6,12 @@ namespace VRARTeam04.Player
     [RequireComponent(typeof(Collider))]
     public sealed class DeathTestTrigger : MonoBehaviour
     {
+        private static readonly Vector3 RespawnPosition = new Vector3(-0.05f, 0f, 19.334f);
+
         [SerializeField] private PlayerControlLock _targetPlayerControlLock;
         [SerializeField] private bool _triggerOnce = true;
         [SerializeField] private LayerMask _triggerLayers = ~0;
+        [SerializeField] private float _unlockDelaySeconds = 3f;
 
         private bool _hasTriggered;
 
@@ -34,6 +37,7 @@ namespace VRARTeam04.Player
 
             _hasTriggered = true;
             playerControlLock.Lock();
+            StartCoroutine(UnlockAfterDelay(playerControlLock));
         }
 
         [ContextMenu("Trigger Death")]
@@ -51,6 +55,18 @@ namespace VRARTeam04.Player
 
             _hasTriggered = true;
             playerControlLock.Lock();
+            StartCoroutine(UnlockAfterDelay(playerControlLock));
+        }
+
+        private System.Collections.IEnumerator UnlockAfterDelay(PlayerControlLock playerControlLock)
+        {
+            yield return new WaitForSeconds(_unlockDelaySeconds);
+
+            if (playerControlLock == null)
+                yield break;
+
+            playerControlLock.transform.position = RespawnPosition;
+            playerControlLock.Unlock();
         }
 
         private bool IsValidTarget(Collider other, out PlayerControlLock playerControlLock)

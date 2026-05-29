@@ -57,6 +57,9 @@ namespace VRARTeam04.Player
 
             _isLocked = locked;
 
+            if (locked)
+                CaptureOriginalStates();
+
             foreach (var component in _controlledComponents)
             {
                 if (component == null)
@@ -64,9 +67,6 @@ namespace VRARTeam04.Player
 
                 if (locked)
                 {
-                    if (!_originalEnabledStates.ContainsKey(component))
-                        _originalEnabledStates.Add(component, component.enabled);
-
                     component.enabled = false;
                 }
                 else if (_originalEnabledStates.TryGetValue(component, out var wasEnabled))
@@ -74,6 +74,9 @@ namespace VRARTeam04.Player
                     component.enabled = wasEnabled;
                 }
             }
+
+            if (!locked)
+                _originalEnabledStates.Clear();
         }
 
         [ContextMenu("Collect Controlled Components")]
