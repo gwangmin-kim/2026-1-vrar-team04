@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: _deathCutsceneManager
       value: 
       objectReference: {fileID: 3677722501501005366}
+    - target: {fileID: 8490216737971396623, guid: 606a0f69410694bb9b03a8bfcccb0beb, type: 3}
+      propertyPath: _waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

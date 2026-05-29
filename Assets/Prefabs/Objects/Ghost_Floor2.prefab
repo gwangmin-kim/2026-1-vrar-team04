@@ -70,17 +70,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5962a045d8f4e51b5a648270ca8806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostChase
-  _chaseTrigger: Chase
   _waypointRoot: {fileID: 0}
   _waypoints: []
-  _turnaroundSmoothTime: 0.5
+  _turnaroundSmoothTime: 0.25
+  _thresholdDistance: 1.5
   _deathCutsceneManager: {fileID: 0}
+  _baseTransform: {fileID: 0}
   _chaseSpeed: 1
   _collider: {fileID: 7785834627289720919}
   _timeToTrigger: 1
   _mesh: {fileID: 7772691608500795521}
   _baseMap: {fileID: 2800000, guid: 7450d2cf9504eb3428d494e7d56ecdf8, type: 3}
   _animator: {fileID: 7727127527743844932}
+  _chaseTrigger: Chase
   _smokeParticle: {fileID: 4009152970976130854}
 --- !u!1001 &4203776147090100181
 PrefabInstance:

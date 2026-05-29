@@ -16562,7 +16562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1117339215}
   m_Layer: 0
-  m_Name: Point (0)
+  m_Name: Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16577,7 +16577,7 @@ Transform:
   m_GameObject: {fileID: 1117339214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.73, y: 0, z: 17.12}
+  m_LocalPosition: {x: -5.45, y: 0, z: 8.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18485,8 +18485,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5922796146514760750, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: _waypointRoot
+      value: 
+      objectReference: {fileID: 1243053888}
+    - target: {fileID: 5922796146514760750, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _waypoints.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5922796146514760750, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: '_waypoints.Array.data[0]'
@@ -18500,6 +18504,10 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[2]'
       value: 
       objectReference: {fileID: 1367796743}
+    - target: {fileID: 5922796146514760750, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: '_waypoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1932671515}
     - target: {fileID: 6064364094005122498, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -18584,6 +18592,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4460928288537508726, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1367796743}
+    - targetCorrespondingSourceObject: {fileID: 4460928288537508726, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1932671515}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d75a81807f64fa445b97575b5230f873, type: 3}
 --- !u!4 &1243053888 stripped
@@ -21285,7 +21296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1367796743}
   m_Layer: 0
-  m_Name: Point (2)
+  m_Name: Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21300,7 +21311,7 @@ Transform:
   m_GameObject: {fileID: 1367796742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 49.69}
+  m_LocalPosition: {x: 0.45, y: 0, z: 9.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27454,6 +27465,37 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1932671514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1932671515}
+  m_Layer: 0
+  m_Name: Point 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1932671515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932671514}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45, y: 0, z: 30.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1243053888}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944644167
 GameObject:
   m_ObjectHideFlags: 0
@@ -27678,7 +27720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956465948}
   m_Layer: 0
-  m_Name: Point (1)
+  m_Name: Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27693,7 +27735,7 @@ Transform:
   m_GameObject: {fileID: 1956465947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.33}
+  m_LocalPosition: {x: -0.5, y: 0, z: 8.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

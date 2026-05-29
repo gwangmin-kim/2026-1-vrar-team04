@@ -17,7 +17,7 @@ public class GhostChase : MonoBehaviour, ILightable
     [Header("Chase Setting")]
     [SerializeField] private Transform _waypointRoot; // 해당 오브젝트의 자식으로 경로 설정
     [SerializeField] private Transform[] _waypoints;
-    [SerializeField] private float _turnaroundSmoothTime = 0.5f;
+    [SerializeField] private float _turnaroundSmoothTime;
     [SerializeField] private float _thresholdDistance = 1.5f; // 붙잡히는 판정이 되는 임계 거리
     private Vector3 _targetDirection = Vector3.zero;
     private Vector3 _currentVelocity = Vector3.zero;
