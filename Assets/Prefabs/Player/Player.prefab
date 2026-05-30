@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219144130137577503}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 19421815578959099}
   - {fileID: 4662302311198568596}
   m_Father: {fileID: 4303216888358848244}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7429541371339342559
 Camera:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_AllowHoverHapticsWhileSelecting: 1
   m_LineType: 0
   m_BlendVisualLinePoints: 1
-  m_MaxRaycastDistance: 30
+  m_MaxRaycastDistance: 1.5
   m_RayOriginTransform: {fileID: 0}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
@@ -980,7 +980,7 @@ GameObject:
   - component: {fileID: 6210343803649800309}
   - component: {fileID: 4625338736706229679}
   m_Layer: 3
-  m_Name: XR Origin (VR)
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   m_AllowHoverHapticsWhileSelecting: 1
   m_LineType: 0
   m_BlendVisualLinePoints: 1
-  m_MaxRaycastDistance: 30
+  m_MaxRaycastDistance: 1.5
   m_RayOriginTransform: {fileID: 0}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
@@ -2389,15 +2389,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.32882
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -40.8824
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4206295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalRotation.w

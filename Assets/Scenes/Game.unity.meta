@@ -1,11 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Ryu/Scenes/Map.unity.meta
-guid: eb86c5118dd4040b58292366e7ddeb7e
-========
 guid: 06581afd827494ad08c70a759efa10df
->>>>>>>> feat/gameflow:Assets/Gwangmin/Scenes/Game.unity.meta
 DefaultImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+    externalObjects: {}
+    userData:
+    assetBundleName:
+    assetBundleVariant:

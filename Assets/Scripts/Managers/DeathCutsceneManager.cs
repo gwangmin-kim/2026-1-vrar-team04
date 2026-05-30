@@ -22,6 +22,19 @@ public class DeathCutsceneManager : MonoBehaviour
 
     private bool _isDying = false;
 
+    private void Start()
+    {
+        // 자동 할당
+        if (_xrOrigin == null)
+        {
+            _xrOrigin = GameManager.Instance.player;
+        }
+        if (_cameraOffset == null)
+        {
+            _cameraOffset = _xrOrigin.Find("CameraOffset");
+        }
+    }
+
     public void StartDeathCutscene()
     {
         if (_isDying) return;

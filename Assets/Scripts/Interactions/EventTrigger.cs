@@ -17,7 +17,7 @@ public class EventTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
 #if UNITY_EDITOR
-        Debug.Log($"[{name}]: trigger enter detected with {collider.name}");
+        Debug.Log($"[{transform.root.name}/{name}]: trigger enter detected with {collider.name}");
 #endif
         onTriggerEnterEvent.Invoke(collider);
     }

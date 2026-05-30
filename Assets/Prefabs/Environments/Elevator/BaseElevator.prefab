@@ -4098,6 +4098,12 @@ MonoBehaviour:
   _isExitElevator: 0
   openTrigger: {fileID: 0}
   closeTrigger: {fileID: 0}
+  OnOpenTriggered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCloseTriggered:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8457275839176350893
 GameObject:
   m_ObjectHideFlags: 0

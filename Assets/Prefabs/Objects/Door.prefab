@@ -467,9 +467,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   _door: {fileID: 1493242379304112163}
   _knob: {fileID: 754024557976712567}
-  _openAngle: 30
+  _openAngle: 45
   _openTime: 1.5
   _isEventTriggered: 0
+  _isOpening: 0
   _controller: {fileID: 3686449226175031564}
   _isGrabbed: 0
   _maxAngle: 70
@@ -477,6 +478,12 @@ MonoBehaviour:
   _smoothTime: 0.5
   _closeAngle: 10
   _isClosed: 0
+  OnOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &7186307619867828620
 BoxCollider:
   m_ObjectHideFlags: 0

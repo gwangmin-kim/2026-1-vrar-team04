@@ -64,6 +64,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // 자동 할당
+        if (player == null)
+        {
+            player = GameObject.Find("Player").transform;
+        }
+        if (_fadeRenderer == null)
+        {
+            _fadeRenderer = player.Find("Fading").GetComponent<MeshRenderer>();
+        }
+
         // StartGame();
         RestartStage();
     }
@@ -107,15 +117,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GoToNextStage()
     {
-        currentStage++;
-        if (currentStage >= _stages.Length)
+        // 다음 스테이지가 없다면
+        // stages의 마지막에 2층 프리팹이 할당되어 있어야 함
+        if (currentStage + 1 >= _stages.Length)
         {
             // 1층으로 이동
         }
         else
         {
             // 다음 스테이지 로드
-            LoadStage(currentStage);
+            LoadStage(currentStage + 1);
             TeleportPlayer();
             InitStage();
         }
