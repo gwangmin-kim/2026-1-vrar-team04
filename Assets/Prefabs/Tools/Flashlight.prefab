@@ -1040,7 +1040,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0.87438035, b: 0.5896226, a: 1}
-  m_Intensity: 30
+  m_Intensity: 50
   m_Range: 10
   m_SpotAngle: 50
   m_InnerSpotAngle: 30
@@ -1078,7 +1078,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_SoftShadowQuality: 0
   m_RenderingLayersMask:
     serializedVersion: 0
-    m_Bits: 1
+    m_Bits: 7
   m_ShadowRenderingLayersMask:
     serializedVersion: 0
     m_Bits: 1
@@ -1492,7 +1492,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6633456689715970741}
-  - component: {fileID: 2512206713838526513}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -1510,8 +1509,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5.635, y: 0.687, z: -3}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4942911338103176608}
   - {fileID: 7584415827587098778}
@@ -1529,22 +1528,3 @@ Transform:
   - {fileID: 4609073287083115903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2512206713838526513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8596051812874824033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f27e27e1688e6f4589c438fe301c202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Flashlight
-  _light: {fileID: 6805598975119970517}
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  _detectDistance: 8
-  _detectRadius: 0.5
-  _checkInterval: 0.05

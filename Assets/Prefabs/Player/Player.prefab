@@ -1415,7 +1415,7 @@ GameObject:
   - component: {fileID: 3835220384760532653}
   - component: {fileID: 5336689325269230116}
   - component: {fileID: 7682513166877659894}
-  - component: {fileID: 3597305686653402605}
+  - component: {fileID: 3676840920769927794}
   m_Layer: 3
   m_Name: Righthand Controller
   m_TagString: Untagged
@@ -2231,7 +2231,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3597305686653402605
+--- !u!114 &3676840920769927794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2248,8 +2248,8 @@ MonoBehaviour:
   _toggleSound: {fileID: 5336689325269230116}
   _targetLayer:
     serializedVersion: 2
-    m_Bits: 0
-  _detectDistance: 5
+    m_Bits: 512
+  _detectDistance: 8
   _detectRadius: 0.3
   _checkInterval: 0.05
   _startsActive: 0
@@ -2393,7 +2393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 6633456689715970741, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_LocalPosition.z

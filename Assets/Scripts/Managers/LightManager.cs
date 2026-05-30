@@ -34,6 +34,8 @@ public class LightManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        TurnOn();
     }
 
     public void TurnOff()
