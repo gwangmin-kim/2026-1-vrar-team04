@@ -84,6 +84,8 @@ public class Lever : MonoBehaviour, IGrabbable
 
         _controller.enabled = false;
 
+        if (LightManager.Instance != null) LightManager.Instance.TurnOn();
+
         Debug.Log("[Lever] Activated SFX event triggered.", this);
         OnActivated?.Invoke();
         OnComplete();
