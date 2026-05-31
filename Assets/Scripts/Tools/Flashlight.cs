@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
+using VRARTeam04.Player;
 
 /// <summary>
 /// Flashlight 의 완성형 — 두 버튼으로 분리 제어.
@@ -53,6 +56,16 @@ public class Flashlight : MonoBehaviour
     [SerializeField, Tooltip("ON 이면 시작 시 light 가 켜진 상태 (활성화돼있을 때만 의미).")]
     private bool _startsLightOn = false;
 
+    [Header("Right Hand Interaction Lock")]
+    [SerializeField, Tooltip("Flashlight가 활성화되어 있을 때 끌 오른손 Interactor. 비워두면 이 오브젝트/자식에서 자동으로 찾습니다.")]
+    private XRBaseInteractor[] _rightHandInteractors;
+
+    [SerializeField, Tooltip("Flashlight가 활성화되어 있을 때 끌 오른손 ray visual. 비워두면 이 오브젝트/자식에서 자동으로 찾습니다.")]
+    private XRInteractorLineVisual[] _rightHandInteractorVisuals;
+
+    [SerializeField, Tooltip("죽음 등으로 PlayerControlLock이 걸려 있으면 flashlight가 컨트롤러를 다시 켜지 않게 막습니다. 비워두면 부모에서 자동으로 찾습니다.")]
+    private PlayerControlLock _playerControlLock;
+
     [Header("Events")]
     [Tooltip("flashlight 가 활성화 (A 버튼) 되었을 때.")]
     public UnityEvent OnActivated;
@@ -77,10 +90,14 @@ public class Flashlight : MonoBehaviour
     private InputAction _lightToggleAction;
 
     private float _checkTimer = 0f;
+    private bool[] _rightHandInteractorOriginalStates;
+    private bool[] _rightHandVisualOriginalStates;
 
     private void Awake()
     {
         if (_toggleSound == null) _toggleSound = GetComponent<OneShotPlayer>();
+        if (_playerControlLock == null) _playerControlLock = GetComponentInParent<PlayerControlLock>();
+        AutoCollectRightHandInteractionReferences();
 
         // 셋업 실수 경고: 토글 대상이 자기 자신이면 OFF 시 스크립트가 같이 꺼짐
         if (_flashlightBody == gameObject)
@@ -111,6 +128,8 @@ public class Flashlight : MonoBehaviour
         IsLightOn = _startsActive && _startsLightOn;
         ApplyVisibility();
         ApplyLight();
+        if (IsActive)
+            ApplyRightHandInteractionLock();
     }
 
     private void OnEnable()
@@ -134,6 +153,8 @@ public class Flashlight : MonoBehaviour
             _lightToggleAction.performed -= OnLightTogglePressed;
             _lightToggleAction.Disable();
         }
+
+        RestoreRightHandInteractions();
     }
 
     private void OnDestroy()
@@ -168,10 +189,13 @@ public class Flashlight : MonoBehaviour
     public void Activate()
     {
         if (IsActive) return;
+        if (IsRightHandSelecting()) return;
+
         IsActive = true;
         _toggleSound?.Play();
         ApplyVisibility();
         ApplyLight();   // 직전 light 상태 복원
+        ApplyRightHandInteractionLock();
         OnActivated?.Invoke();
     }
 
@@ -182,6 +206,7 @@ public class Flashlight : MonoBehaviour
         _toggleSound?.Play();
         ApplyVisibility();
         ApplyLight();   // 비활성 → light 도 같이 시각적으로 꺼지지만 IsLightOn 값은 유지
+        RestoreRightHandInteractions();
         OnDeactivated?.Invoke();
     }
 
@@ -249,5 +274,88 @@ public class Flashlight : MonoBehaviour
     {
         // 실제 Light 컴포넌트는 *활성 + light on* 일 때만 켜짐
         if (_light != null) _light.enabled = IsActive && IsLightOn;
+    }
+
+    private void AutoCollectRightHandInteractionReferences()
+    {
+        if (_rightHandInteractors == null || _rightHandInteractors.Length == 0)
+            _rightHandInteractors = GetComponentsInChildren<XRBaseInteractor>(true);
+
+        if (_rightHandInteractorVisuals == null || _rightHandInteractorVisuals.Length == 0)
+            _rightHandInteractorVisuals = GetComponentsInChildren<XRInteractorLineVisual>(true);
+    }
+
+    private bool IsRightHandSelecting()
+    {
+        if (_rightHandInteractors == null)
+            return false;
+
+        foreach (var interactor in _rightHandInteractors)
+        {
+            if (interactor != null && interactor.hasSelection)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void ApplyRightHandInteractionLock()
+    {
+        StoreRightHandInteractionStates();
+
+        if (_rightHandInteractors != null)
+        {
+            foreach (var interactor in _rightHandInteractors)
+            {
+                if (interactor != null)
+                    interactor.enabled = false;
+            }
+        }
+
+        if (_rightHandInteractorVisuals != null)
+        {
+            foreach (var visual in _rightHandInteractorVisuals)
+            {
+                if (visual != null)
+                    visual.enabled = false;
+            }
+        }
+    }
+
+    private void StoreRightHandInteractionStates()
+    {
+        _rightHandInteractorOriginalStates = new bool[_rightHandInteractors != null ? _rightHandInteractors.Length : 0];
+        for (int i = 0; i < _rightHandInteractorOriginalStates.Length; i++)
+            _rightHandInteractorOriginalStates[i] = _rightHandInteractors[i] != null && _rightHandInteractors[i].enabled;
+
+        _rightHandVisualOriginalStates = new bool[_rightHandInteractorVisuals != null ? _rightHandInteractorVisuals.Length : 0];
+        for (int i = 0; i < _rightHandVisualOriginalStates.Length; i++)
+            _rightHandVisualOriginalStates[i] = _rightHandInteractorVisuals[i] != null && _rightHandInteractorVisuals[i].enabled;
+    }
+
+    private void RestoreRightHandInteractions()
+    {
+        if (_playerControlLock != null && _playerControlLock.IsLocked)
+            return;
+
+        if (_rightHandInteractorOriginalStates != null && _rightHandInteractors != null)
+        {
+            int count = Mathf.Min(_rightHandInteractorOriginalStates.Length, _rightHandInteractors.Length);
+            for (int i = 0; i < count; i++)
+            {
+                if (_rightHandInteractors[i] != null)
+                    _rightHandInteractors[i].enabled = _rightHandInteractorOriginalStates[i];
+            }
+        }
+
+        if (_rightHandVisualOriginalStates != null && _rightHandInteractorVisuals != null)
+        {
+            int count = Mathf.Min(_rightHandVisualOriginalStates.Length, _rightHandInteractorVisuals.Length);
+            for (int i = 0; i < count; i++)
+            {
+                if (_rightHandInteractorVisuals[i] != null)
+                    _rightHandInteractorVisuals[i].enabled = _rightHandVisualOriginalStates[i];
+            }
+        }
     }
 }
