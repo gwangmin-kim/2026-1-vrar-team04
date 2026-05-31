@@ -30,7 +30,7 @@ public class EventTrigger : MonoBehaviour
     private void OnTriggerExit(Collider collider)
     {
 #if UNITY_EDITOR
-        Debug.Log($"[{name}]: trigger exit detected with {collider.name}");
+        Debug.Log($"[{transform.root.name}/{name}]: trigger exit detected with {collider.name}");
 #endif
         onTriggerExitEvent.Invoke(collider);
     }

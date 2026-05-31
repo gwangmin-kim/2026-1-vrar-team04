@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isCleared = false;
 
     [Header("Stage Transition")]
+    [SerializeField] private GameObject _baseCorridor; // 기본 복도 (맵 변형이 일어나는 경우 비활성화 되어있을 수 있음. 초기화 마다 활성화 상태 확인)
     [SerializeField] private Transform _stageRoot;
     [SerializeField] private GameObject[] _stages; // 8층부터 2층까지의 기믹을 위한 오브젝트들이 담겨 있음
     [SerializeField] private Elevator _elevatorIn; // 스테이지 입장용 엘리베이터
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
 
         _isCleared = true;
         _elevatorOut.openTrigger.enabled = true;
-        _elevatorOut.closeTrigger.enabled = true;
+        // _elevatorOut.closeTrigger.enabled = true;
     }
 
     /// <summary>
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 스테이지 클리어 후 다음 스테이지 초기화
     /// </summary>
-    public void GoToNextStage()
+    public void GoToNextStage(Transform elevatorOut = null)
     {
         // 다음 스테이지가 없다면
         // stages의 마지막에 2층 프리팹이 할당되어 있어야 함
@@ -127,7 +128,7 @@ public class GameManager : MonoBehaviour
         {
             // 다음 스테이지 로드
             LoadStage(currentStage + 1);
-            TeleportPlayer();
+            TeleportPlayer(elevatorOut);
             InitStage();
         }
     }
@@ -147,6 +148,11 @@ public class GameManager : MonoBehaviour
     /// <param name="index"></param>
     private void LoadStage(int index)
     {
+        if (!_baseCorridor.activeSelf)
+        {
+            _baseCorridor.SetActive(true);
+        }
+
         _stages[currentStage].SetActive(false);
         _stages[index].SetActive(true);
         currentStage = index;
@@ -155,12 +161,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 엘리베이터 내에서의 오프셋을 유지한 채로 퇴장용 엘리베이터에서 입장용 엘리베이터로 위치 이동
     /// </summary>
-    private void TeleportPlayer()
+    private void TeleportPlayer(Transform elevatorOut)
     {
-        Vector3 positionOffset = _elevatorOut.transform.InverseTransformPoint(player.position);
+        if (elevatorOut == null) elevatorOut = _elevatorOut.transform;
+
+        Vector3 positionOffset = elevatorOut.transform.InverseTransformPoint(player.position);
         Vector3 newPosition = _elevatorIn.transform.TransformPoint(positionOffset);
         Quaternion newRotation = _elevatorIn.transform.rotation
-                                * Quaternion.Inverse(_elevatorOut.transform.rotation)
+                                * Quaternion.Inverse(elevatorOut.transform.rotation)
                                 * player.rotation;
 
         player.SetPositionAndRotation(newPosition, newRotation);

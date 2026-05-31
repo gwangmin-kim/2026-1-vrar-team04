@@ -100,6 +100,6 @@ public class Elevator : MonoBehaviour
     {
         if (!_isExitElevator) return;
 
-        GameManager.Instance.GoToNextStage();
+        GameManager.Instance.GoToNextStage(transform);
     }
 }
