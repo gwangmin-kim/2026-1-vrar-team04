@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 3440314999611001836}
   - component: {fileID: 5318895076648597329}
   - component: {fileID: 7307753183463245283}
+  - component: {fileID: -7446464016208024905}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -499,7 +500,7 @@ MonoBehaviour:
   OnClosed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5318895076648597329}
+      - m_Target: {fileID: -7446464016208024905}
         m_TargetAssemblyTypeName: OneShotPlayer, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
@@ -563,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 7307753183463245283}
   _clips:
-  - {fileID: 8300000, guid: dea2bd8ccb63cfd468b42da1643d01e2, type: 3}
+  - {fileID: 8300000, guid: 858bb97a551069c438e384cc8424f5f2, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
@@ -665,6 +666,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7446464016208024905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629396390655926399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
+  _audioSource: {fileID: 7307753183463245283}
+  _clips:
+  - {fileID: 8300000, guid: 64706701dc3fb9144afa49fa86dfdbc9, type: 3}
+  _volumeRange: {x: 0.85, y: 1}
+  _pitchRange: {x: 0.95, y: 1.05}
+  _cooldown: 0.05
+  _allowOverlap: 1
 --- !u!1 &5915428484754672201
 GameObject:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ MonoBehaviour:
       m_Calls: []
   _footstepSource: {fileID: 7828252138066669295}
   _footstepClips:
-  - {fileID: 8300000, guid: 8e1d629a473df764fb4f22893cc070fb, type: 3}
+  - {fileID: 8300000, guid: 3085b24ed8b93f944aa2974b276c3f33, type: 3}
   _footstepVolumeRange: {x: 0.7, y: 1}
   _footstepPitchRange: {x: 0.92, y: 1.08}
 --- !u!82 &7828252138066669295

@@ -12335,6 +12335,17 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!114 &607759999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840749223188981805, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+  m_PrefabInstance: {fileID: 1243053887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
 --- !u!43 &643458238
 Mesh:
   m_ObjectHideFlags: 0
@@ -27582,7 +27593,7 @@ PrefabInstance:
       objectReference: {fileID: 1084100102}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -27590,6 +27601,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
@@ -27601,7 +27616,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1783978601}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 607759999}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
@@ -27613,6 +27636,10 @@ PrefabInstance:
       value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LightManager, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -27621,11 +27648,19 @@ PrefabInstance:
       value: Lever, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: OneShotPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7051864730520654283, guid: d75a81807f64fa445b97575b5230f873, type: 3}
@@ -27778,7 +27813,7 @@ PrefabInstance:
       objectReference: {fileID: 2048978748}
     - target: {fileID: 8081240534879644011, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: m_VersionIndex
-      value: 1270
+      value: 1315
       objectReference: {fileID: 0}
     - target: {fileID: 8081759068644876067, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: m_Mesh
@@ -39620,7 +39655,7 @@ PrefabInstance:
       objectReference: {fileID: 1991803487}
     - target: {fileID: 7291974202588936001, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 121
+      value: 133
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39921,7 +39956,7 @@ PrefabInstance:
       objectReference: {fileID: 1314056838}
     - target: {fileID: 7291974202588936001, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 121
+      value: 133
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

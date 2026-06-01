@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: -1166804074685761146}
   _clips:
-  - {fileID: 8300000, guid: 3cdc81fd3e05b1644be5caeecc0831e8, type: 3}
+  - {fileID: 8300000, guid: 63a4194a8ed04a545b78f991f257f2ea, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05

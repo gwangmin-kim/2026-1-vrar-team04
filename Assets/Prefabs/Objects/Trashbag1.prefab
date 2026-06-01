@@ -370,7 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 6582691650019827812}
   _clips:
-  - {fileID: 8300000, guid: 7caedfe04a0a8e04c80fb4b00501109a, type: 3}
+  - {fileID: 8300000, guid: 3f054440d84edfc458e723de67ada6e8, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 6582691650019827812}
   _clips:
-  - {fileID: 8300000, guid: 7caedfe04a0a8e04c80fb4b00501109a, type: 3}
+  - {fileID: 8300000, guid: 3f054440d84edfc458e723de67ada6e8, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05

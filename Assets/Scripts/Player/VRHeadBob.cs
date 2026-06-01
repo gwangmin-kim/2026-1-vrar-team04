@@ -99,6 +99,12 @@ namespace VRARTeam04.Player
         [SerializeField, Tooltip("발소리 피치 랜덤 범위 (1 이 기본).")]
         private Vector2 _footstepPitchRange = new Vector2(0.92f, 1.08f);
 
+        [SerializeField, Tooltip("Fallback footstep overlap guard in seconds.")]
+        private float _footstepCooldown = 0.06f;
+
+        [SerializeField, Tooltip("Stop fallback footstep audio immediately when movement stops.")]
+        private bool _stopFallbackFootstepWhenIdle = true;
+
         // 내부 상태
         private Vector3 _baseLocalPosition;
         private Quaternion _baseLocalRotation;
@@ -107,6 +113,8 @@ namespace VRARTeam04.Player
         private float _idlePhase;         // 라디안
         private float _currentAmplitude;  // 0..1 (걸음)
         private float _previousSinValue;
+        private float _lastFootstepTime = -999f;
+        private bool _wasMoving;
         private float _currentLeanRatio;  // -1..+1 (-=왼쪽, +=오른쪽)
 
         private void Awake()
@@ -127,6 +135,9 @@ namespace VRARTeam04.Player
 
         private void OnDisable()
         {
+            _wasMoving = false;
+            StopFallbackFootstepIfIdle();
+
             if (_bobAnchor != null)
             {
                 _bobAnchor.localPosition = _baseLocalPosition;
@@ -156,6 +167,11 @@ namespace VRARTeam04.Player
             float targetAmp = speed < _minSpeed
                 ? 0f
                 : Mathf.Clamp01((speed - _minSpeed) / Mathf.Max(_fullAmplitudeSpeed - _minSpeed, 1e-3f));
+            bool isMoving = targetAmp > 0f;
+            bool startedMoving = isMoving && !_wasMoving;
+
+            if (!isMoving)
+                StopFallbackFootstepIfIdle();
 
             _currentAmplitude = Mathf.Lerp(_currentAmplitude, targetAmp, dt * _amplitudeLerpSpeed);
 
@@ -235,16 +251,22 @@ namespace VRARTeam04.Player
             _bobAnchor.localRotation = _baseLocalRotation * Quaternion.Euler(0f, 0f, idleRollDeg + strafeRollDeg);
 
             // ─── 7. 발소리 트리거: sin 이 음→양 교차 ────────
-            if (speed >= _minSpeed && _currentAmplitude > 0.15f && _previousSinValue <= 0f && walkSinVal > 0f)
+            bool reachedFootstepPhase = _previousSinValue <= 0f && walkSinVal > 0f;
+            if (isMoving
+                && (startedMoving || reachedFootstepPhase)
+                && Time.time >= _lastFootstepTime + _footstepCooldown)
             {
-                OnFootstep?.Invoke(_currentAmplitude);
-                PlayFallbackFootstep();
+                float footstepAmplitude = startedMoving ? Mathf.Max(_currentAmplitude, 0.35f) : _currentAmplitude;
+                _lastFootstepTime = Time.time;
+                OnFootstep?.Invoke(footstepAmplitude);
+                PlayFallbackFootstep(footstepAmplitude);
             }
             _previousSinValue = walkSinVal;
+            _wasMoving = isMoving;
         }
 
         /// <summary>Fallback 발소리. SurfaceFootstepPlayer 가 따로 있다면 보통은 비워둠.</summary>
-        private void PlayFallbackFootstep()
+        private void PlayFallbackFootstep(float amplitude)
         {
             if (_footstepSource == null || _footstepClips == null || _footstepClips.Length == 0) return;
 
@@ -254,7 +276,16 @@ namespace VRARTeam04.Player
 
             _footstepSource.pitch = Random.Range(_footstepPitchRange.x, _footstepPitchRange.y);
             float volume = Random.Range(_footstepVolumeRange.x, _footstepVolumeRange.y);
-            _footstepSource.PlayOneShot(clip, volume * _currentAmplitude);
+            _footstepSource.Stop();
+            _footstepSource.PlayOneShot(clip, volume * amplitude);
+        }
+
+        private void StopFallbackFootstepIfIdle()
+        {
+            if (!_stopFallbackFootstepWhenIdle || _footstepSource == null || !_footstepSource.isPlaying)
+                return;
+
+            _footstepSource.Stop();
         }
     }
 }
