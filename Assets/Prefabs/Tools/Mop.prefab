@@ -783,7 +783,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 10
+    positionSpring: 5
     positionDamper: 3
     maximumForce: 3.4028233e+38
     useAcceleration: 0

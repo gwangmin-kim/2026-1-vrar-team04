@@ -78,7 +78,7 @@ public class Lever : MonoBehaviour, IGrabbable
     {
         if (_isPowered) return;
 
-        _targetAngle = 180f;
+        _targetAngle = 0f;
         _isPowered = true;
         Release();
 

@@ -118,15 +118,18 @@ MonoBehaviour:
   - {fileID: 3548623416505307868}
   - {fileID: 6854792420259399557}
   - {fileID: 3727939378310537894}
-  _spreadAngles: {x: 45, y: 30}
+  _spawnSfx: {fileID: 0}
+  _spreadAngles: {x: 60, y: 45}
   _rayDistance: 10
   _wallLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   _hitOffset: 0.5
   _spawnInterval: 0.05
   _minScale: 0.5
   _maxScale: 2
+  _totalCount: 0
+  _cleanCount: 0
 --- !u!1001 &464291485909745860
 PrefabInstance:
   m_ObjectHideFlags: 0

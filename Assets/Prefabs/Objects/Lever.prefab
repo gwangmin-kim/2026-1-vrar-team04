@@ -215,7 +215,7 @@ MonoBehaviour:
   _isGrabbed: 0
   _maxDistance: 0.5
   _smoothTime: 0.1
-  _thresholdAngle: 120
+  _thresholdAngle: 45
   _isPowered: 0
   OnActivated:
     m_PersistentCalls:

@@ -23,6 +23,10 @@ public class StainSpawner : MonoBehaviour
     [SerializeField] private float _minScale; // 최소 크기 (배율)
     [SerializeField] private float _maxScale; // 최대 크기 (배율)
 
+    [Header("Clear Condition")]
+    [SerializeField] private int _totalCount = 0;
+    [SerializeField] private int _cleanCount = 0;
+
     private void OnValidate()
     {
         // 자동 할당 로직
@@ -50,11 +54,22 @@ public class StainSpawner : MonoBehaviour
         StartCoroutine(SpawnSequence());
     }
 
+    public void CleanStain()
+    {
+        _cleanCount++;
+        if (_cleanCount >= _totalCount)
+        {
+            GameManager.Instance.ClearStage();
+        }
+    }
+
     private IEnumerator SpawnSequence()
     {
         Vector3 origin = transform.position;
         Vector3 baseDirection = transform.forward;
 
+        _totalCount = 0;
+        _cleanCount = 0;
         foreach (var stain in _stainPool)
         {
             Quaternion spreadRotation = Quaternion.Euler(
@@ -78,6 +93,9 @@ public class StainSpawner : MonoBehaviour
                 float randomScale = Random.Range(_minScale, _maxScale);
                 stain.transform.localScale = randomScale * Vector3.one;
                 stain.decalProjector.size = new Vector3(randomScale, randomScale, 2f);
+
+                stain.spawner = this;
+                _totalCount++;
 
                 stain.gameObject.SetActive(true);
                 stain.MarkSpawned();
