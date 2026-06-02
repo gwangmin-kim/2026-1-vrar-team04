@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
     // 싱글톤 오브젝트
     public static GameManager Instance { get; private set; }
 
+    private static bool s_hasQueuedEntrancePose;
+    private static Vector3 s_queuedEntranceLocalPosition;
+    private static Quaternion s_queuedEntranceLocalRotation;
+
     [Header("Player")]
     public Transform player;
     [SerializeField] private Transform _baseTransform; // 플레이어가 맨 처음 스폰되는 위치
@@ -21,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] _stages; // 8층부터 2층까지의 기믹을 위한 오브젝트들이 담겨 있음
     [SerializeField] private Elevator _elevatorIn; // 스테이지 입장용 엘리베이터
     [SerializeField] private Elevator _elevatorOut; // 스테이지 퇴장용 엘리베이터
+
+    [SerializeField] private string _lobbySceneName = "LobbyMap";
 
     [Header("VR Fade Setup")]
     [SerializeField] private MeshRenderer _fadeRenderer; // 카메라 앞 반구형 가리개의 MeshRenderer
@@ -76,13 +82,35 @@ public class GameManager : MonoBehaviour
         }
 
         // StartGame();
-        RestartStage();
+        if (s_hasQueuedEntrancePose)
+            StartGameFromQueuedEntrance();
+        else
+            RestartStage();
     }
 
     public void StartGame()
     {
         currentStage = 0;
         RestartStage();
+    }
+
+    public static void QueueInitialEntrancePose(Transform sourceElevator, Transform playerTransform)
+    {
+        if (sourceElevator == null || playerTransform == null)
+            return;
+
+        s_queuedEntranceLocalPosition = sourceElevator.InverseTransformPoint(playerTransform.position);
+        s_queuedEntranceLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerTransform.rotation;
+        s_hasQueuedEntrancePose = true;
+    }
+
+    private void StartGameFromQueuedEntrance()
+    {
+        currentStage = 0;
+        LoadStage(currentStage);
+        TeleportPlayerFromLobbyEntranceOffset(s_queuedEntranceLocalPosition, s_queuedEntranceLocalRotation);
+        s_hasQueuedEntrancePose = false;
+        InitStage();
     }
 
     /// <summary>
@@ -122,15 +150,14 @@ public class GameManager : MonoBehaviour
         // stages의 마지막에 2층 프리팹이 할당되어 있어야 함
         if (currentStage + 1 >= _stages.Length)
         {
-            // 1층으로 이동
+            LobbyModeController.LoadAsGameplayFloor(_lobbySceneName);
+            return;
         }
-        else
-        {
-            // 다음 스테이지 로드
-            LoadStage(currentStage + 1);
-            TeleportPlayer(elevatorOut);
-            InitStage();
-        }
+
+        // 다음 스테이지 로드
+        LoadStage(currentStage + 1);
+        TeleportPlayer(elevatorOut);
+        InitStage();
     }
 
     private void InitStage()
@@ -166,12 +193,25 @@ public class GameManager : MonoBehaviour
         if (elevatorOut == null) elevatorOut = _elevatorOut.transform;
 
         Vector3 positionOffset = elevatorOut.transform.InverseTransformPoint(player.position);
-        Vector3 newPosition = _elevatorIn.transform.TransformPoint(positionOffset);
-        Quaternion newRotation = _elevatorIn.transform.rotation
-                                * Quaternion.Inverse(elevatorOut.transform.rotation)
-                                * player.rotation;
+        Quaternion rotationOffset = Quaternion.Inverse(elevatorOut.transform.rotation) * player.rotation;
+
+        TeleportPlayerFromEntranceOffset(positionOffset, rotationOffset);
+    }
+
+    private void TeleportPlayerFromEntranceOffset(Vector3 localPosition, Quaternion localRotation)
+    {
+        Vector3 newPosition = _elevatorIn.transform.TransformPoint(localPosition);
+        Quaternion newRotation = _elevatorIn.transform.rotation * localRotation;
 
         player.SetPositionAndRotation(newPosition, newRotation);
+    }
+
+    private void TeleportPlayerFromLobbyEntranceOffset(Vector3 localPosition, Quaternion localRotation)
+    {
+        if (_baseTransform != null)
+            localPosition.y = _elevatorIn.transform.InverseTransformPoint(_baseTransform.position).y;
+
+        TeleportPlayerFromEntranceOffset(localPosition, localRotation);
     }
 
     /// <summary>

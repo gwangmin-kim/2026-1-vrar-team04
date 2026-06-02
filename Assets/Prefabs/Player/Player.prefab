@@ -447,7 +447,7 @@ MonoBehaviour:
   m_HoverTimeToSelect: 0.5
   m_AutoDeselect: 0
   m_TimeToAutoDeselect: 3
-  m_EnableUIInteraction: 1
+  m_EnableUIInteraction: 0
   m_BlockInteractionsWithScreenSpaceUI: 0
   m_BlockUIOnInteractableSelection: 1
   m_ManipulateAttachTransform: 1
@@ -979,6 +979,7 @@ GameObject:
   - component: {fileID: 393431200333087581}
   - component: {fileID: 6210343803649800309}
   - component: {fileID: 4625338736706229679}
+  - component: {fileID: 6336943675496261323}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1229,6 +1230,21 @@ MonoBehaviour:
   _applyOnceOnStart: 1
   _keepApplyingWhileOutsideRange: 1
   _debugLog: 1
+--- !u!114 &6336943675496261323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896574143029950454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3b4d0b92164a1ba5e7d5b8501cd887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.XRUIInteractionToggle
+  _autoCollectOnAwake: 1
+  _useSelectInputAsUIPress: 1
+  _rayInteractors: []
 --- !u!1 &5197492559757808646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,6 +1318,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3085b24ed8b93f944aa2974b276c3f33, type: 3}
   _footstepVolumeRange: {x: 0.7, y: 1}
   _footstepPitchRange: {x: 0.92, y: 1.08}
+  _footstepCooldown: 0.06
+  _stopFallbackFootstepWhenIdle: 1
 --- !u!82 &1326759568131911228
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1601,7 +1619,7 @@ MonoBehaviour:
   m_HoverTimeToSelect: 0.5
   m_AutoDeselect: 0
   m_TimeToAutoDeselect: 3
-  m_EnableUIInteraction: 1
+  m_EnableUIInteraction: 0
   m_BlockInteractionsWithScreenSpaceUI: 0
   m_BlockUIOnInteractableSelection: 1
   m_ManipulateAttachTransform: 1
@@ -2433,6 +2451,10 @@ PrefabInstance:
     - target: {fileID: 8596051812874824033, guid: 048b8df32b496da4584cf098915739af, type: 3}
       propertyPath: m_Name
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596051812874824033, guid: 048b8df32b496da4584cf098915739af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

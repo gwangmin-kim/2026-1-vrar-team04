@@ -17,12 +17,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlayerControl2.unity
     guid: c66dfecf3d96837488ec114b522c4f69
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ryu/Scenes/MainMenu.unity
     guid: 64b26d31ab8ec1949941f184a6f6a98d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ryu/Scenes/TestMapArea.unity
     guid: 0f7c8e61819755e498828c132eb535c0
+  - enabled: 1
+    path: Assets/Scenes/LobbyMap.unity
+    guid: 334c8514e0cd7475cb9f4b6853ecaa68
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 06581afd827494ad08c70a759efa10df
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 585481d9519c6a346b15ceda70a811c4, type: 2}
