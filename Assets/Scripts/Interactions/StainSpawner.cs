@@ -54,7 +54,7 @@ public class StainSpawner : MonoBehaviour
         StartCoroutine(SpawnSequence());
     }
 
-    public void CleanStain()
+    public void OnStainCleaned()
     {
         _cleanCount++;
         if (_cleanCount >= _totalCount)

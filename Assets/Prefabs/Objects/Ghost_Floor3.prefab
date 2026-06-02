@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2681493656035899120}
-  - component: {fileID: 8412771401161477474}
+  - component: {fileID: 8925985779061456047}
   - component: {fileID: 3444869171773197693}
   - component: {fileID: -1166804074685761146}
   - component: {fileID: 381316911301759686}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4595111112580092183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.521, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37,8 +37,8 @@ Transform:
   - {fileID: 5349139789730629629}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!136 &8412771401161477474
-CapsuleCollider:
+--- !u!65 &8925985779061456047
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -55,11 +55,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.4869728, z: 0.4112625}
+  m_Center: {x: 0, y: 1.7126487, z: 1.0239995}
 --- !u!114 &3444869171773197693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,9 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bcc0294cd244c2780b5c1eeeb81a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ghost
-  _collider: {fileID: 8412771401161477474}
-  _timeToTrigger: 0
-  _animator: {fileID: 0}
+  _collider: {fileID: 8925985779061456047}
+  _timeToTrigger: 1
+  _blockCollider: {fileID: 0}
+  _animator: {fileID: 2079496002446859655}
   _lightTrigger: Light
   _mesh: {fileID: 2033862064048019266}
   _baseMap: {fileID: 2800000, guid: 7450d2cf9504eb3428d494e7d56ecdf8, type: 3}
@@ -353,6 +352,11 @@ PrefabInstance:
 --- !u!4 &2033862064048019266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3348155893626063020, guid: 323954a12ba935f4d8a2e6880a0bac6b, type: 3}
+  m_PrefabInstance: {fileID: 5598342884784873494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2079496002446859655 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 323954a12ba935f4d8a2e6880a0bac6b, type: 3}
   m_PrefabInstance: {fileID: 5598342884784873494}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5349139789730629629 stripped

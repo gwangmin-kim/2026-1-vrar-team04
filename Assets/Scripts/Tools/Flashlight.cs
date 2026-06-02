@@ -256,12 +256,22 @@ public class Flashlight : MonoBehaviour
         Transform lightTransform = _light.transform;
         if (Physics.SphereCast(lightTransform.position, _detectRadius, lightTransform.forward, out var hit, _detectDistance, _targetLayer))
         {
+            Debug.Log($"{hit.collider.name} detected by the flashlight.");
             if (hit.transform.TryGetComponent<ILightable>(out var lightable))
             {
                 lightable.Light(deltaTime);
             }
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!IsLightOn) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(_light.transform.position, _light.transform.position + _light.transform.forward * _detectDistance);
+    }
+#endif
 
     // ─── 상태 → 실제 GameObject/Light 반영 ─────────────
 

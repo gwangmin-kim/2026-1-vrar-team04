@@ -15,6 +15,7 @@ public class GhostLight : MonoBehaviour, ILightable
     [Header("Settings")]
     [SerializeField] private Collider _collider;
     [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
+    [SerializeField] private Collider _blockCollider; // distortion plane의 콜라이더 (완료 전까지 통과 불가능하도록 막는 역할)
 
     private float _accumulatedTime = 0f;
     private bool _isDisappearing;
@@ -38,7 +39,8 @@ public class GhostLight : MonoBehaviour, ILightable
     // 올바르게 대처 완료 시 호출할 함수
     private void OnComplete()
     {
-
+        if (GameManager.Instance == null) return;
+        GameManager.Instance.ClearStage();
     }
 
     private void Awake()
@@ -107,6 +109,7 @@ public class GhostLight : MonoBehaviour, ILightable
         {
             // 연출 종료 후 GO 비활성화
             gameObject.SetActive(false);
+            _blockCollider.enabled = false;
         });
     }
 

@@ -19,8 +19,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _baseCorridor; // 기본 복도 (맵 변형이 일어나는 경우 비활성화 되어있을 수 있음. 초기화 마다 활성화 상태 확인)
     [SerializeField] private Transform _stageRoot;
     [SerializeField] private GameObject[] _stages; // 8층부터 2층까지의 기믹을 위한 오브젝트들이 담겨 있음
+
     [SerializeField] private Elevator _elevatorIn; // 스테이지 입장용 엘리베이터
     [SerializeField] private Elevator _elevatorOut; // 스테이지 퇴장용 엘리베이터
+
+    [SerializeField] private Transform _mop; // 대걸레 (이동 가능한 오브젝트라 매 스테이지 전환 시 위치 초기화 필요)
+    [SerializeField] private Vector3 _mopInitPosition;
+    [SerializeField] private Quaternion _mopInitRotation;
 
     [Header("VR Fade Setup")]
     [SerializeField] private MeshRenderer _fadeRenderer; // 카메라 앞 반구형 가리개의 MeshRenderer
@@ -29,12 +34,20 @@ public class GameManager : MonoBehaviour
 
     private void OnValidate()
     {
-        int childCount = _stageRoot.childCount;
-        _stages = new GameObject[childCount];
-
-        for (int i = 0; i < childCount; i++)
+        if (_stageRoot != null)
         {
-            _stages[i] = _stageRoot.GetChild(i).gameObject;
+            int childCount = _stageRoot.childCount;
+            _stages = new GameObject[childCount];
+
+            for (int i = 0; i < childCount; i++)
+            {
+                _stages[i] = _stageRoot.GetChild(i).gameObject;
+            }
+        }
+        if (_mop != null)
+        {
+            _mopInitPosition = _mop.position;
+            _mopInitRotation = _mop.rotation;
         }
     }
 
