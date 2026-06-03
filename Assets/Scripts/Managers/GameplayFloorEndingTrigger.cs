@@ -21,12 +21,14 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
     [SerializeField] private Light[] _blastLights;
     [SerializeField] private float _targetIntensity = 120f;
     [SerializeField] private float _targetRange = 35f;
-    [SerializeField] private float _blastRampDuration = 0.15f;
+    [SerializeField] private float _blastRampDuration = 3f;
 
     [Header("White Overlay")]
     [SerializeField] private CanvasGroup _whiteOverlay;
     [SerializeField] private MeshRenderer _whiteFadeRenderer;
     [SerializeField] private float _targetOverlayAlpha = 1f;
+    [SerializeField] private float _whiteFadeBrightness = 2.5f;
+    [SerializeField] private float _whiteFadeRampPower = 1f;
 
     [Header("End")]
     [SerializeField] private float _endDelay = 1.25f;
@@ -43,6 +45,8 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
     private float[] _initialRanges;
     private Material _whiteFadeMaterial;
     private int _whiteFadeColorProperty;
+    private int _whiteFadeEmissionProperty;
+    private bool _whiteFadeHasEmission;
     private bool _triggered;
 
     private void Reset()
@@ -109,7 +113,7 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
+            float t = SmoothStep(Mathf.Clamp01(elapsed / duration));
             ApplyLightBlast(t);
             yield return null;
         }
@@ -140,9 +144,17 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
 
         if (_whiteFadeMaterial != null)
         {
-            Color color = Color.white;
-            color.a = Mathf.Lerp(0f, _targetOverlayAlpha, t);
+            float flashT = Mathf.Pow(Mathf.Clamp01(t), Mathf.Max(0.01f, _whiteFadeRampPower));
+            Color color = Color.white * Mathf.Lerp(1f, _whiteFadeBrightness, flashT);
+            color.a = Mathf.Lerp(0f, _targetOverlayAlpha, flashT);
             _whiteFadeMaterial.SetColor(_whiteFadeColorProperty, color);
+
+            if (_whiteFadeHasEmission)
+            {
+                _whiteFadeMaterial.EnableKeyword("_EMISSION");
+                _whiteFadeMaterial.SetColor(_whiteFadeEmissionProperty, Color.white * _whiteFadeBrightness * flashT);
+            }
+
             if (_whiteFadeRenderer != null)
                 _whiteFadeRenderer.gameObject.SetActive(color.a > 0f);
         }
@@ -197,10 +209,15 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
         _whiteFadeColorProperty = _whiteFadeMaterial.HasProperty("_BaseColor")
             ? Shader.PropertyToID("_BaseColor")
             : Shader.PropertyToID("_Color");
+        _whiteFadeEmissionProperty = Shader.PropertyToID("_EmissionColor");
+        _whiteFadeHasEmission = _whiteFadeMaterial.HasProperty(_whiteFadeEmissionProperty);
 
         Color color = Color.white;
         color.a = 0f;
         _whiteFadeMaterial.SetColor(_whiteFadeColorProperty, color);
+        if (_whiteFadeHasEmission)
+            _whiteFadeMaterial.SetColor(_whiteFadeEmissionProperty, Color.black);
+
         _whiteFadeRenderer.gameObject.SetActive(false);
     }
 
@@ -234,5 +251,10 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
             if (root != null)
                 root.SetActive(active);
         }
+    }
+
+    private static float SmoothStep(float t)
+    {
+        return t * t * (3f - 2f * t);
     }
 }

@@ -29,6 +29,12 @@ public class LobbyModeController : MonoBehaviour
     [Header("Gameplay Floor Roots")]
     [SerializeField] private GameObject[] _gameplayRoots;
 
+    [Header("Player Spawn")]
+    [SerializeField] private Transform _playerRoot;
+    [SerializeField] private Transform _menuSpawnPoint;
+    [SerializeField] private Transform _gameplayFloorSpawnPoint;
+    [SerializeField] private bool _teleportPlayerOnModeEnter = true;
+
     [Header("Player UI Interaction")]
     [SerializeField] private XRUIInteractionToggle[] _uiInteractionToggles;
 
@@ -190,6 +196,9 @@ public class LobbyModeController : MonoBehaviour
         SetUIInteraction(menuMode);
         IsStartCorridorUnlocked = !menuMode;
 
+        if (_teleportPlayerOnModeEnter)
+            TeleportPlayerToModeSpawn(mode);
+
         if (menuMode)
             OnEnterMenuMode?.Invoke();
         else
@@ -235,5 +244,30 @@ public class LobbyModeController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void TeleportPlayerToModeSpawn(LobbyMode mode)
+    {
+        Transform spawnPoint = mode == LobbyMode.MainMenu
+            ? _menuSpawnPoint
+            : _gameplayFloorSpawnPoint;
+
+        if (spawnPoint == null)
+            return;
+
+        if (_playerRoot == null)
+        {
+            var playerLock = FindObjectOfType<PlayerControlLock>();
+            if (playerLock != null)
+                _playerRoot = playerLock.transform;
+        }
+
+        if (_playerRoot == null)
+        {
+            Debug.LogWarning("[LobbyModeController] Player root is not assigned, so spawn teleport was skipped.", this);
+            return;
+        }
+
+        _playerRoot.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
 }

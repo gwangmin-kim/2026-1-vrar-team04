@@ -13,6 +13,13 @@ public class Elevator : MonoBehaviour
     [SerializeField] private Collider _doorCollider;
     [SerializeField] private bool _isExitElevator = false;
 
+    [Header("Floor Announcement")]
+    [SerializeField] private bool _playFloorAnnouncementOnOpen = true;
+    [SerializeField] private AudioSource _floorAnnouncementAudioSource;
+    [SerializeField] private AudioClip[] _floorAnnouncementClips;
+    [SerializeField, Range(0f, 1f)] private float _floorAnnouncementVolume = 1f;
+    [SerializeField] private bool _stopPreviousAnnouncement = true;
+
     [Header("Triggers")]
     public Collider openTrigger;
     public Collider closeTrigger;
@@ -33,7 +40,12 @@ public class Elevator : MonoBehaviour
     {
         if (_animator == null)
         {
-            GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
+        }
+
+        if (_floorAnnouncementAudioSource == null)
+        {
+            _floorAnnouncementAudioSource = GetComponent<AudioSource>();
         }
     }
 
@@ -42,6 +54,7 @@ public class Elevator : MonoBehaviour
         openTrigger.enabled = false;
         closeTrigger.enabled = true;
         _doorCollider.enabled = false;
+        PlayFloorAnnouncement();
 
         // 최초 호출 — 초기 일시정지 상태를 풀기만 (Animator 가 Open 프레임에서 멈춰있다가 재생 시작)
         if (!HasOpened)
@@ -70,6 +83,7 @@ public class Elevator : MonoBehaviour
         // if (stateInfo.IsName("Open") && stateInfo.normalizedTime < 1.0f) return;
 
         _animator.SetTrigger(_closeAnimationTrigger);
+        OnCloseTriggered?.Invoke();
         // _animator.speed = 1f;
 
         openTrigger.enabled = true;
@@ -101,5 +115,25 @@ public class Elevator : MonoBehaviour
         if (!_isExitElevator) return;
 
         GameManager.Instance.GoToNextStage(transform);
+    }
+
+    private void PlayFloorAnnouncement()
+    {
+        if (!_playFloorAnnouncementOnOpen || _isExitElevator) return;
+        if (_floorAnnouncementAudioSource == null || _floorAnnouncementClips == null) return;
+        if (GameManager.Instance == null) return;
+
+        int clipIndex = GameManager.Instance.currentStage;
+        if (clipIndex < 0 || clipIndex >= _floorAnnouncementClips.Length) return;
+
+        AudioClip clip = _floorAnnouncementClips[clipIndex];
+        if (clip == null) return;
+
+        if (_stopPreviousAnnouncement)
+        {
+            _floorAnnouncementAudioSource.Stop();
+        }
+
+        _floorAnnouncementAudioSource.PlayOneShot(clip, _floorAnnouncementVolume);
     }
 }
