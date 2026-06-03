@@ -104,7 +104,7 @@ public class Door : MonoBehaviour, IGrabbable
         }
     }
 
-    private void LockClosed()
+    public void LockClosed()
     {
         if (_isClosed) return;
 
