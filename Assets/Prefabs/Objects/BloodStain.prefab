@@ -56,7 +56,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-2787618463739705535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BloodStain
   spawner: {fileID: 0}
   decalProjector: {fileID: 464431400572053779}
-  _collider: {fileID: 7748915470368168346}
+  collider: {fileID: 7748915470368168346}
   _initialFade: 1
   _cleanAmount: 0.1
   _rubDistance: 0.5
