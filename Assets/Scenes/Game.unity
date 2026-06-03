@@ -46421,18 +46421,6 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 34
       objectReference: {fileID: 0}
-    - target: {fileID: 304795094720117284, guid: d75a81807f64fa445b97575b5230f873, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 304795094720117284, guid: d75a81807f64fa445b97575b5230f873, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 304795094720117284, guid: d75a81807f64fa445b97575b5230f873, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.93
-      objectReference: {fileID: 0}
     - target: {fileID: 314492217828561947, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -51801,10 +51789,6 @@ PrefabInstance:
       propertyPath: _elevatorOut
       value: 
       objectReference: {fileID: 365795895}
-    - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
-      propertyPath: currentStage
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _baseCorridor
       value: 
@@ -76820,7 +76804,7 @@ PrefabInstance:
       objectReference: {fileID: 1991803487}
     - target: {fileID: 7291974202588936001, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 136
+      value: 139
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -77861,7 +77845,7 @@ PrefabInstance:
       objectReference: {fileID: 1314056838}
     - target: {fileID: 7291974202588936001, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 136
+      value: 139
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
