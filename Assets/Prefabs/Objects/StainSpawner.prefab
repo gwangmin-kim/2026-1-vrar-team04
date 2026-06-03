@@ -77,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 6247644278393144938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 1.08, z: 17.48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -119,15 +119,15 @@ MonoBehaviour:
   - {fileID: 6854792420259399557}
   - {fileID: 3727939378310537894}
   _spawnSfx: {fileID: 0}
-  _spreadAngles: {x: 60, y: 45}
+  _spreadAngles: {x: 50, y: 45}
   _rayDistance: 10
   _wallLayer:
     serializedVersion: 2
     m_Bits: 65
-  _hitOffset: 0.5
+  _hitOffset: 1.5
   _spawnInterval: 0.05
-  _minScale: 0.5
-  _maxScale: 2
+  _minScale: 0.8
+  _maxScale: 1.6
   _totalCount: 0
   _cleanCount: 0
 --- !u!1001 &464291485909745860

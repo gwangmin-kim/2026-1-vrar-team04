@@ -47,6 +47,7 @@ public class Elevator : MonoBehaviour
         {
             _floorAnnouncementAudioSource = GetComponent<AudioSource>();
         }
+        Initialize();
     }
 
     public void Open()

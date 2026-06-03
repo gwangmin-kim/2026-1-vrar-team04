@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1962561144858051368}
-  - component: {fileID: 7785834627289720919}
+  - component: {fileID: 3408164882185538211}
   - component: {fileID: 8490216737971396623}
   m_Layer: 9
   m_Name: Ghost_Floor2
@@ -35,8 +35,8 @@ Transform:
   - {fileID: 4457553589613471806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!136 &7785834627289720919
-CapsuleCollider:
+--- !u!65 &3408164882185538211
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53,11 +53,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.8365722, y: 1.7076335, z: 0.47443032}
+  m_Center: {x: 0, y: 1.5940669, z: 0.6090163}
 --- !u!114 &8490216737971396623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,19 +68,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5962a045d8f4e51b5a648270ca8806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostChase
+  _screamDelay: 2.5
   _waypointRoot: {fileID: 0}
   _waypoints: []
   _turnaroundSmoothTime: 0.25
   _thresholdDistance: 1.5
   _deathCutsceneManager: {fileID: 0}
+  _modelRoot: {fileID: 4457553589613471806}
   _baseTransform: {fileID: 0}
   _chaseSpeed: 1
-  _collider: {fileID: 7785834627289720919}
+  _collider: {fileID: 3408164882185538211}
   _timeToTrigger: 1
+  _mapSwitcher: {fileID: 0}
+  _isChasing: 0
+  _currentWaypointIndex: 0
   _mesh: {fileID: 7772691608500795521}
   _baseMap: {fileID: 2800000, guid: 7450d2cf9504eb3428d494e7d56ecdf8, type: 3}
   _animator: {fileID: 7727127527743844932}
-  _chaseTrigger: Chase
   _smokeParticle: {fileID: 4009152970976130854}
 --- !u!1001 &4203776147090100181
 PrefabInstance:

@@ -35,6 +35,11 @@ public class DeathCutsceneManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _isDying = false;
+    }
+
     public void StartDeathCutscene()
     {
         if (_isDying) return;
