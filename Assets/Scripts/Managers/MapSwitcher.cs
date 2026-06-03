@@ -5,7 +5,7 @@ public class MapSwitcher : MonoBehaviour
     [SerializeField] private GameObject _baseMap; // 기본 복도 구조
     [SerializeField] private GameObject _switchMap; // 바꿀 복도 구조
 
-    private void Start()
+    private void OnEnable()
     {
         SwitchMap();
     }

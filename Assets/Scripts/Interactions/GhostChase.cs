@@ -1,7 +1,10 @@
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class GhostChase : MonoBehaviour, ILightable
 {
+    private static readonly int _screamHash = Animator.StringToHash("Scream");
     private static readonly int _chaseHash = Animator.StringToHash("Chase");
     private static readonly int _attackStartHash = Animator.StringToHash("AttackStart");
     private static readonly int _attackHash = Animator.StringToHash("Attack");
@@ -15,6 +18,7 @@ public class GhostChase : MonoBehaviour, ILightable
     private MaterialPropertyBlock _propBlock;
 
     [Header("Chase Setting")]
+    [SerializeField] private float _screamDelay; // 트리거 발동 시 모션으로 인한 딜레이 시간
     [SerializeField] private Transform _waypointRoot; // 해당 오브젝트의 자식으로 경로 설정
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _turnaroundSmoothTime;
@@ -27,15 +31,15 @@ public class GhostChase : MonoBehaviour, ILightable
     [SerializeField] private DeathCutsceneManager _deathCutsceneManager;
 
     [Header("Settings")]
-    // [SerializeField] private Transform _target;
+    [SerializeField] private Transform _modelRoot; // 모델의 루트 트랜스폼 회전이 틀어지는 걸 초기화
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private float _chaseSpeed;
     [SerializeField] private Collider _collider;
     [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
+    [SerializeField] private MapSwitcher _mapSwitcher; // 쫓는 트리거 발동 시 맵 스위칭
 
-    private bool _isChasing = false;
-    private int _currentWaypointIndex = 0;
-    private Transform _currentTarget;
+    [SerializeField] private bool _isChasing = false;
+    [SerializeField] private int _currentWaypointIndex = 0;
     private float _accumulatedTime = 0f;
 
     [Header("Texture")]
@@ -44,7 +48,6 @@ public class GhostChase : MonoBehaviour, ILightable
 
     [Header("Animation")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private string _chaseTrigger = "Chase";
 
     [Header("Particle Effects")]
     [SerializeField] private ParticleSystem _smokeParticle;
@@ -78,9 +81,10 @@ public class GhostChase : MonoBehaviour, ILightable
     {
         transform.SetPositionAndRotation(_baseTransform.position, _baseTransform.rotation);
         _isChasing = false;
+        _collider.enabled = true;
         _currentWaypointIndex = 0;
-        _currentTarget = null;
         _accumulatedTime = 0f;
+        _modelRoot.localRotation = Quaternion.identity;
 
         _animator.Play("Idle", 0, 0f);
         _animator.Update(0f);
@@ -103,18 +107,26 @@ public class GhostChase : MonoBehaviour, ILightable
 
             if (_waypoints == null || _waypoints.Length == 0 || _currentWaypointIndex >= _waypoints.Length) return;
 
-            Vector3 deltaPosition = _currentTarget.position - transform.position;
+            Transform currentTarget = _waypoints[_currentWaypointIndex];
+
+            Vector3 deltaPosition = currentTarget.position - transform.position;
             deltaPosition.y = 0f;
             _targetDirection = deltaPosition.normalized;
             Vector3 direction = Vector3.SmoothDamp(transform.forward, _targetDirection, ref _currentVelocity, _turnaroundSmoothTime);
 
-            transform.rotation = Quaternion.LookRotation(direction);
-            transform.position += _chaseSpeed * Time.deltaTime * direction;
+            Vector3 newPosition = transform.position + _chaseSpeed * Time.deltaTime * direction;
+            Quaternion newRotation = Quaternion.LookRotation(direction);
+            transform.SetPositionAndRotation(newPosition, newRotation);
 
             if (Vector3.SqrMagnitude(deltaPosition) < 0.01f)
             {
                 _currentWaypointIndex++;
-                _currentTarget = _waypoints[_currentWaypointIndex];
+
+                if (_currentWaypointIndex >= _waypoints.Length)
+                {
+                    _isChasing = false;
+                    return;
+                }
             }
 
             Vector3 playerDelta = _player.position - transform.position;
@@ -127,15 +139,28 @@ public class GhostChase : MonoBehaviour, ILightable
         }
     }
 
+    public void SetTargetIndex(int index)
+    {
+        _currentWaypointIndex = index;
+    }
+
     private void TriggerChase()
     {
-        // 콜라이더 해제(더 이상 감지되지 않도록)
-        _collider.enabled = false;
+        _collider.enabled = false; // 콜라이더 해제(더 이상 감지되지 않도록)
         _player = GameManager.Instance.player;
         _currentWaypointIndex = 0;
-        _currentTarget = _waypoints[0];
+        _animator.SetTrigger(_screamHash);
+        _mapSwitcher.gameObject.SetActive(true);
+
+        StartCoroutine(ReserveChase());
+    }
+
+    private IEnumerator ReserveChase()
+    {
+        yield return new WaitForSeconds(_screamDelay);
+
+        _animator.SetTrigger(_chaseHash);
         _isChasing = true;
-        _animator.SetTrigger(_chaseTrigger);
     }
 
     public void Light(float deltaTime)

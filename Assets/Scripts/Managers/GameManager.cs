@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour
         _elevatorIn.Initialize();
         _elevatorOut.Initialize();
 
+        _mop.SetPositionAndRotation(_mopInitPosition, _mopInitRotation);
+
         _isCleared = false;
         _elevatorOut.openTrigger.enabled = false;
     }

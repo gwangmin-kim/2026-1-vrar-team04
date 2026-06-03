@@ -35,6 +35,7 @@ public class Elevator : MonoBehaviour
         {
             GetComponent<Animator>();
         }
+        Initialize();
     }
 
     public void Open()
