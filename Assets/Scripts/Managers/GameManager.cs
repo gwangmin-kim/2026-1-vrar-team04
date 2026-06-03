@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
         // stages의 마지막에 2층 프리팹이 할당되어 있어야 함
         if (currentStage + 1 >= _stages.Length)
         {
+            _stages[currentStage].SetActive(false);
             LobbyModeController.LoadAsGameplayFloor(_lobbySceneName);
             return;
         }
