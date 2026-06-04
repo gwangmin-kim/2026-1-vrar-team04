@@ -148,7 +148,7 @@ public class LobbyModeController : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene(_gameplaySceneName);
+        SceneManager.LoadSceneAsync(_gameplaySceneName);
     }
 
     public void LoadGameplayScene(Collider other)
@@ -162,13 +162,13 @@ public class LobbyModeController : MonoBehaviour
     public static void LoadAsMenu(string sceneName = "LobbyMap")
     {
         s_nextMode = LobbyMode.MainMenu;
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
     public static void LoadAsGameplayFloor(string sceneName = "LobbyMap")
     {
         s_nextMode = LobbyMode.GameplayFloor;
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
     private void LoadLobby(LobbyMode mode)
@@ -180,7 +180,7 @@ public class LobbyModeController : MonoBehaviour
         }
 
         s_nextMode = mode;
-        SceneManager.LoadScene(_lobbySceneName);
+        SceneManager.LoadSceneAsync(_lobbySceneName);
     }
 
     private void SetMode(LobbyMode mode)

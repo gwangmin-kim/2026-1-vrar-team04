@@ -17,6 +17,9 @@ namespace VRARTeam04.Player
         [SerializeField] private bool _keepApplyingWhileOutsideRange = true;
         [SerializeField] private bool _debugLog = true;
 
+        private static bool s_hasCachedCameraOffsetY;
+        private static float s_cachedCameraOffsetY;
+
         private Coroutine _startupRoutine;
         private bool _startupDelayFinished;
 
@@ -28,6 +31,8 @@ namespace VRARTeam04.Player
 
         private void OnEnable()
         {
+            ApplyCachedCameraOffsetY();
+
             if (_applyOnceOnStart)
                 _startupRoutine = StartCoroutine(ApplyAfterStartupDelay());
         }
@@ -64,6 +69,8 @@ namespace VRARTeam04.Player
             float currentEyeHeight = _xrOrigin.CameraInOriginSpaceHeight;
             if (currentEyeHeight >= _minimumValidEyeHeight && currentEyeHeight <= _maximumValidEyeHeight)
             {
+                CacheCameraOffsetY();
+
                 if (_debugLog && logWhenValid)
                     Debug.Log($"[XREyeHeightFallback] Eye height is valid: {currentEyeHeight:F3}m", this);
                 return;
@@ -81,6 +88,7 @@ namespace VRARTeam04.Player
             float correctionY = _fallbackEyeHeight - currentEyeHeight;
             localPosition.y += correctionY;
             offsetTransform.localPosition = localPosition;
+            CacheCameraOffsetY(localPosition.y);
 
             foreach (var headBob in offsetObject.GetComponents<VRHeadBob>())
                 headBob.AddBaseLocalPositionOffset(Vector3.up * correctionY);
@@ -104,6 +112,42 @@ namespace VRARTeam04.Player
             ApplyIfNeeded();
             _startupDelayFinished = true;
             _startupRoutine = null;
+        }
+
+        private void ApplyCachedCameraOffsetY()
+        {
+            if (!s_hasCachedCameraOffsetY || _xrOrigin == null)
+                return;
+
+            var offsetObject = _xrOrigin.CameraFloorOffsetObject;
+            if (offsetObject == null)
+                return;
+
+            var offsetTransform = offsetObject.transform;
+            var localPosition = offsetTransform.localPosition;
+            float correctionY = s_cachedCameraOffsetY - localPosition.y;
+            if (Mathf.Approximately(correctionY, 0f))
+                return;
+
+            localPosition.y = s_cachedCameraOffsetY;
+            offsetTransform.localPosition = localPosition;
+
+            foreach (var headBob in offsetObject.GetComponents<VRHeadBob>())
+                headBob.AddBaseLocalPositionOffset(Vector3.up * correctionY);
+        }
+
+        private void CacheCameraOffsetY()
+        {
+            if (_xrOrigin == null || _xrOrigin.CameraFloorOffsetObject == null)
+                return;
+
+            CacheCameraOffsetY(_xrOrigin.CameraFloorOffsetObject.transform.localPosition.y);
+        }
+
+        private static void CacheCameraOffsetY(float cameraOffsetY)
+        {
+            s_cachedCameraOffsetY = cameraOffsetY;
+            s_hasCachedCameraOffsetY = true;
         }
     }
 }
