@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1930338780991682407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7824685927461577114}
+  - component: {fileID: 7369502488933065054}
+  m_Layer: 9
+  m_Name: Scream
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7824685927461577114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930338780991682407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5050614826079781425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7369502488933065054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930338780991682407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
+  _audioSource: {fileID: -1166804074685761146}
+  _clips:
+  - {fileID: 8300000, guid: ea2e0aebf3ca6854aaf4c22b111ba9e2, type: 3}
+  _volumeRange: {x: 0.85, y: 1}
+  _pitchRange: {x: 0.95, y: 1.05}
+  _cooldown: 0.05
+  _allowOverlap: 1
 --- !u!1 &4595111112580092183
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +63,6 @@ GameObject:
   - component: {fileID: 8925985779061456047}
   - component: {fileID: 3444869171773197693}
   - component: {fileID: -1166804074685761146}
-  - component: {fileID: 381316911301759686}
   m_Layer: 9
   m_Name: Ghost_Floor3
   m_TagString: Untagged
@@ -35,6 +85,7 @@ Transform:
   m_Children:
   - {fileID: 4050961942156293227}
   - {fileID: 5349139789730629629}
+  - {fileID: 5050614826079781425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &8925985779061456047
@@ -79,8 +130,48 @@ MonoBehaviour:
   _baseMap: {fileID: 2800000, guid: 7450d2cf9504eb3428d494e7d56ecdf8, type: 3}
   _dissolveDuration: 3
   _smokeParticle: {fileID: 2516471913838121353}
-  _ambientSfx: {fileID: 381316911301759686}
-  _playAmbientOnEnable: 1
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8415944271509548391}
+        m_TargetAssemblyTypeName: OneShotPlayer, Assembly-CSharp
+        m_MethodName: PlayLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLighted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8415944271509548391}
+        m_TargetAssemblyTypeName: OneShotPlayer, Assembly-CSharp
+        m_MethodName: StopLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7369502488933065054}
+        m_TargetAssemblyTypeName: OneShotPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &-1166804074685761146
 AudioSource:
   m_ObjectHideFlags: 0
@@ -178,13 +269,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &381316911301759686
+--- !u!1 &5150694746964430374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512369698764826073}
+  - component: {fileID: 8415944271509548391}
+  m_Layer: 9
+  m_Name: Breath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512369698764826073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150694746964430374}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5050614826079781425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8415944271509548391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4595111112580092183}
+  m_GameObject: {fileID: 5150694746964430374}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
@@ -192,11 +315,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: -1166804074685761146}
   _clips:
-  - {fileID: 8300000, guid: 63a4194a8ed04a545b78f991f257f2ea, type: 3}
+  - {fileID: 8300000, guid: b9d9e862f5d0f524da609209d2a4c9c2, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
   _allowOverlap: 1
+--- !u!1 &7079853717805273550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5050614826079781425}
+  m_Layer: 9
+  m_Name: SFXs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5050614826079781425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079853717805273550}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 512369698764826073}
+  - {fileID: 7824685927461577114}
+  m_Father: {fileID: 2681493656035899120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4934388882411972353
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using VRARTeam04.Player;
 
 public class GhostLight : MonoBehaviour, ILightable
@@ -32,6 +33,10 @@ public class GhostLight : MonoBehaviour, ILightable
     [Header("Particle Effects")]
     [SerializeField] private ParticleSystem _smokeParticle;
 
+    [Header("Events")]
+    public UnityEvent OnEnabled;
+    public UnityEvent OnLighted;
+
     // 올바르게 대처 완료 시 호출할 함수
     private void OnComplete()
     {
@@ -50,6 +55,11 @@ public class GhostLight : MonoBehaviour, ILightable
         _dissolveRenderer.SetPropertyBlock(_propBlock);
     }
 
+    private void OnEnable()
+    {
+        OnEnabled?.Invoke();
+    }
+
     private void Disappear()
     {
         if (_isDisappearing) return;
@@ -58,6 +68,7 @@ public class GhostLight : MonoBehaviour, ILightable
         // 콜라이더 해제(더 이상 감지되지 않도록)
         _collider.enabled = false;
         _animator.SetTrigger(_lightTrigger);
+        OnLighted?.Invoke();
 
         // 완료 로직 호출 (게임 매니저에게 알림)
         OnComplete();

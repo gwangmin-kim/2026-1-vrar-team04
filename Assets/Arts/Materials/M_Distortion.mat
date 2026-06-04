@@ -43,7 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Intensity: 0.005
-    - _NoiseScale: 5
+    - _NoiseScale: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 1000
