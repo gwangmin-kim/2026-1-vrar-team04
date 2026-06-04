@@ -94,7 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StainSpawnSfx
   _audioSource: {fileID: -7337243800623324035}
-  _spawnClips: []
+  _spawnClips:
+  - {fileID: 8300000, guid: 97a4bcf0e82295e48884fce6faadda1c, type: 3}
   _bloodStain: {fileID: 0}
   _autoSubscribeToBloodStain: 1
   _volumeRange: {x: 0.85, y: 1}
