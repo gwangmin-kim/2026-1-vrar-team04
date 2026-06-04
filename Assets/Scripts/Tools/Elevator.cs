@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] private AudioClip[] _floorAnnouncementClips;
     [SerializeField, Range(0f, 1f)] private float _floorAnnouncementVolume = 1f;
     [SerializeField] private bool _stopPreviousAnnouncement = true;
+    [SerializeField] private TextMeshProUGUI _floorText;
 
     [Header("Triggers")]
     public Collider openTrigger;
@@ -116,6 +118,11 @@ public class Elevator : MonoBehaviour
         if (!_isExitElevator) return;
 
         GameManager.Instance.GoToNextStage(transform);
+    }
+
+    public void SetFloorText(int floor)
+    {
+        _floorText.text = floor.ToString();
     }
 
     private void PlayFloorAnnouncement()

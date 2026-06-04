@@ -198,6 +198,10 @@ public class GameManager : MonoBehaviour
         _stages[currentStage].SetActive(false);
         _stages[index].SetActive(true);
         currentStage = index;
+
+        int floor = 8 - index;
+        _elevatorIn.SetFloorText(floor);
+        _elevatorOut.SetFloorText(floor);
     }
 
     /// <summary>
