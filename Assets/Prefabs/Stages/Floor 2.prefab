@@ -29418,6 +29418,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 257047969086563905}
     m_Modifications:
+    - target: {fileID: 5363013799495889321, guid: 462e981961a88aa49ac2f7697d4e916e, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5446182534270402613, guid: 462e981961a88aa49ac2f7697d4e916e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.1
@@ -29820,15 +29824,7 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
-      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2811610167513699235}
-    - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2811610167513699235}
-    - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
-      propertyPath: OnOpened.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2811610167513699235}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
@@ -29836,15 +29832,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 967920828884108670}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
-      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
-      propertyPath: OnOpened.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
@@ -29853,10 +29841,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
-      propertyPath: OnOpened.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 875809427506178917, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
@@ -29953,7 +29937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291974202588936001, guid: 32b4c65b39dfc9b4290f5c382fd7d0c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 136
+      value: 166
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
