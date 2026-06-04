@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
     // 싱글톤 오브젝트
     public static GameManager Instance { get; private set; }
 
-    private static bool s_hasQueuedEntrancePose;
-    private static Vector3 s_queuedEntranceLocalPosition;
-    private static Quaternion s_queuedEntranceLocalRotation;
-    private static Quaternion s_queuedEntranceLocalCameraRotation;
+    private static bool _hasQueuedEntrancePose;
+    private static Vector3 _queuedEntranceLocalPosition;
+    private static Quaternion _queuedEntranceLocalRotation;
+    private static Quaternion _queuedEntranceLocalCameraRotation;
 
     [Header("Player")]
     public Transform player;
+    [SerializeField] private VRARTeam04.Player.PlayerControlLock _playerControlLock;
     [SerializeField] private Transform _baseTransform; // 플레이어가 맨 처음 스폰되는 위치
 
     [Header("Stage States")]
@@ -56,6 +57,10 @@ public class GameManager : MonoBehaviour
             _mopInitPosition = _mop.position;
             _mopInitRotation = _mop.rotation;
         }
+        if (player != null)
+        {
+            _playerControlLock = player.GetComponent<VRARTeam04.Player.PlayerControlLock>();
+        }
     }
 
     private void Awake()
@@ -96,7 +101,7 @@ public class GameManager : MonoBehaviour
         }
 
         // StartGame();
-        if (s_hasQueuedEntrancePose)
+        if (_hasQueuedEntrancePose)
             StartCoroutine(StartGameFromQueuedEntranceRoutine());
         else
             RestartStage();
@@ -113,10 +118,10 @@ public class GameManager : MonoBehaviour
         if (sourceElevator == null || playerTransform == null)
             return;
 
-        s_queuedEntranceLocalPosition = sourceElevator.InverseTransformPoint(playerTransform.position);
-        s_queuedEntranceLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerTransform.rotation;
-        s_queuedEntranceLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerTransform);
-        s_hasQueuedEntrancePose = true;
+        _queuedEntranceLocalPosition = sourceElevator.InverseTransformPoint(playerTransform.position);
+        _queuedEntranceLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerTransform.rotation;
+        _queuedEntranceLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerTransform);
+        _hasQueuedEntrancePose = true;
     }
 
     private IEnumerator StartGameFromQueuedEntranceRoutine()
@@ -127,10 +132,10 @@ public class GameManager : MonoBehaviour
         yield return null;
 
         TeleportPlayerFromLobbyEntranceOffset(
-            s_queuedEntranceLocalPosition,
-            s_queuedEntranceLocalRotation,
-            s_queuedEntranceLocalCameraRotation);
-        s_hasQueuedEntrancePose = false;
+            _queuedEntranceLocalPosition,
+            _queuedEntranceLocalRotation,
+            _queuedEntranceLocalCameraRotation);
+        _hasQueuedEntrancePose = false;
         InitStage();
     }
 
@@ -140,7 +145,8 @@ public class GameManager : MonoBehaviour
     /// <param name="enabled"></param>
     public void SetPlayerControllable(bool enabled)
     {
-
+        if (enabled) _playerControlLock.Unlock();
+        else _playerControlLock.Lock();
     }
 
     public void ClearStage()

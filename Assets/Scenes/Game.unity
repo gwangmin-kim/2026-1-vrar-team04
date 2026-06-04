@@ -52004,6 +52004,10 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: _playerControlLock
+      value: 
+      objectReference: {fileID: 1276822916}
+    - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _stages.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -62251,6 +62255,17 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!114 &1276822916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6210343803649800309, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+  m_PrefabInstance: {fileID: 1155289656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2650ed51b480f4baa76584427ac3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.PlayerControlLock
 --- !u!43 &1285190981
 Mesh:
   m_ObjectHideFlags: 0
