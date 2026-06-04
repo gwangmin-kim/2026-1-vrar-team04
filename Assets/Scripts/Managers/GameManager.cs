@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using DG.Tweening;
+using VRARTeam04.Player;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class GameManager : MonoBehaviour
     private static bool s_hasQueuedEntrancePose;
     private static Vector3 s_queuedEntranceLocalPosition;
     private static Quaternion s_queuedEntranceLocalRotation;
+    private static Quaternion s_queuedEntranceLocalCameraRotation;
+    private static Pose[] s_queuedControllerRayLocalPoses;
+    private static Transform s_queuedPlayerRoot;
 
     [Header("Player")]
     public Transform player;
@@ -84,7 +89,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 자동 할당
-        if (player == null)
+        if (s_queuedPlayerRoot != null)
+        {
+            player = s_queuedPlayerRoot;
+            DestroyDuplicatePlayers(player);
+        }
+        else if (player == null)
         {
             player = GameObject.Find("Player").transform;
         }
@@ -95,7 +105,7 @@ public class GameManager : MonoBehaviour
 
         // StartGame();
         if (s_hasQueuedEntrancePose)
-            StartGameFromQueuedEntrance();
+            StartCoroutine(StartGameFromQueuedEntranceRoutine());
         else
             RestartStage();
     }
@@ -113,16 +123,42 @@ public class GameManager : MonoBehaviour
 
         s_queuedEntranceLocalPosition = sourceElevator.InverseTransformPoint(playerTransform.position);
         s_queuedEntranceLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerTransform.rotation;
+        s_queuedEntranceLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerTransform);
+        s_queuedControllerRayLocalPoses = GetControllerRayPosesRelativeTo(sourceElevator, playerTransform);
+        s_queuedPlayerRoot = playerTransform;
+        DontDestroyOnLoad(playerTransform.gameObject);
         s_hasQueuedEntrancePose = true;
     }
 
-    private void StartGameFromQueuedEntrance()
+    private IEnumerator StartGameFromQueuedEntranceRoutine()
     {
         currentStage = 0;
         LoadStage(currentStage);
-        TeleportPlayerFromLobbyEntranceOffset(s_queuedEntranceLocalPosition, s_queuedEntranceLocalRotation);
+
+        yield return null;
+
+        TeleportPlayerFromLobbyEntranceOffset(
+            s_queuedEntranceLocalPosition,
+            s_queuedEntranceLocalRotation,
+            s_queuedEntranceLocalCameraRotation,
+            s_queuedControllerRayLocalPoses);
         s_hasQueuedEntrancePose = false;
         InitStage();
+    }
+
+    private static void DestroyDuplicatePlayers(Transform preservedPlayer)
+    {
+        if (preservedPlayer == null)
+            return;
+
+        var playerLocks = FindObjectsOfType<PlayerControlLock>(true);
+        foreach (var playerLock in playerLocks)
+        {
+            if (playerLock == null || playerLock.transform == preservedPlayer)
+                continue;
+
+            Destroy(playerLock.gameObject);
+        }
     }
 
     /// <summary>
@@ -213,24 +249,90 @@ public class GameManager : MonoBehaviour
 
         Vector3 positionOffset = elevatorOut.transform.InverseTransformPoint(player.position);
         Quaternion rotationOffset = Quaternion.Inverse(elevatorOut.transform.rotation) * player.rotation;
+        Quaternion cameraRotationOffset = GetCameraRotationRelativeTo(elevatorOut, player);
+        Pose[] controllerRayPoseOffsets = GetControllerRayPosesRelativeTo(elevatorOut, player);
 
-        TeleportPlayerFromEntranceOffset(positionOffset, rotationOffset);
+        TeleportPlayerFromEntranceOffset(positionOffset, rotationOffset, cameraRotationOffset, controllerRayPoseOffsets);
     }
 
-    private void TeleportPlayerFromEntranceOffset(Vector3 localPosition, Quaternion localRotation)
+    private void TeleportPlayerFromEntranceOffset(Vector3 localPosition, Quaternion localRotation, Quaternion localCameraRotation, Pose[] localControllerRayPoses)
     {
         Vector3 newPosition = _elevatorIn.transform.TransformPoint(localPosition);
         Quaternion newRotation = _elevatorIn.transform.rotation * localRotation;
 
         player.SetPositionAndRotation(newPosition, newRotation);
+        ApplyCameraRotationToCamera(localCameraRotation);
+        ApplyControllerRayPoses(localControllerRayPoses);
     }
 
-    private void TeleportPlayerFromLobbyEntranceOffset(Vector3 localPosition, Quaternion localRotation)
+    private void TeleportPlayerFromLobbyEntranceOffset(Vector3 localPosition, Quaternion localRotation, Quaternion localCameraRotation, Pose[] localControllerRayPoses)
     {
         if (_baseTransform != null)
             localPosition.y = _elevatorIn.transform.InverseTransformPoint(_baseTransform.position).y;
 
-        TeleportPlayerFromEntranceOffset(localPosition, localRotation);
+        TeleportPlayerFromEntranceOffset(localPosition, localRotation, localCameraRotation, localControllerRayPoses);
+    }
+
+    private void ApplyCameraRotationToCamera(Quaternion localCameraRotation)
+    {
+        Transform cameraTransform = GetPlayerCameraTransform(player);
+        if (cameraTransform == null)
+            return;
+
+        Quaternion targetCameraRotation = _elevatorIn.transform.rotation * localCameraRotation;
+        cameraTransform.rotation = targetCameraRotation;
+    }
+
+    private void ApplyControllerRayPoses(Pose[] localControllerRayPoses)
+    {
+        var rays = player.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>(true);
+        int count = Mathf.Min(rays.Length, localControllerRayPoses.Length);
+        for (int i = 0; i < count; i++)
+        {
+            if (rays[i] == null)
+                continue;
+
+            Transform rayTransform = rays[i].transform;
+            Pose localPose = localControllerRayPoses[i];
+            Vector3 targetPosition = _elevatorIn.transform.TransformPoint(localPose.position);
+            Quaternion targetRotation = _elevatorIn.transform.rotation * localPose.rotation;
+
+            rayTransform.SetPositionAndRotation(targetPosition, targetRotation);
+        }
+    }
+
+    private static Pose[] GetControllerRayPosesRelativeTo(Transform reference, Transform playerTransform)
+    {
+        if (reference == null || playerTransform == null)
+            return Array.Empty<Pose>();
+
+        var rays = playerTransform.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>(true);
+        var poses = new Pose[rays.Length];
+        for (int i = 0; i < rays.Length; i++)
+        {
+            Transform rayTransform = rays[i].transform;
+            poses[i] = new Pose(
+                reference.InverseTransformPoint(rayTransform.position),
+                Quaternion.Inverse(reference.rotation) * rayTransform.rotation);
+        }
+
+        return poses;
+    }
+
+    private static Quaternion GetCameraRotationRelativeTo(Transform reference, Transform playerTransform)
+    {
+        Transform cameraTransform = GetPlayerCameraTransform(playerTransform);
+        Quaternion cameraRotation = cameraTransform != null ? cameraTransform.rotation : playerTransform.rotation;
+        return Quaternion.Inverse(reference.rotation) * cameraRotation;
+    }
+
+    private static Transform GetPlayerCameraTransform(Transform playerTransform)
+    {
+        if (playerTransform == null)
+            return null;
+
+        Camera playerCamera = playerTransform.GetComponentInChildren<Camera>(true);
+        return playerCamera != null ? playerCamera.transform : null;
     }
 
     /// <summary>

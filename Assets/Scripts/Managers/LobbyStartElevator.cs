@@ -117,7 +117,7 @@ public class LobbyStartElevator : MonoBehaviour
         }
 
         OnBeforeLoadGameplay?.Invoke();
-        SceneManager.LoadScene(_gameplaySceneName);
+        SceneManager.LoadSceneAsync(_gameplaySceneName);
     }
 
     public void LoadGameplay(Collider other)

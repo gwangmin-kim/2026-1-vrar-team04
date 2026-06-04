@@ -21,12 +21,12 @@ public class SceneTransitionTrigger : MonoBehaviour, IConditionReceiver
         if (_conditionMet)
         {
             Debug.Log($"[SceneTransition] 조건 만족 → {_nextSceneName} 로드");
-            SceneManager.LoadScene(_nextSceneName);
+            SceneManager.LoadSceneAsync(_nextSceneName);
         }
         else
         {
             Debug.Log($"[SceneTransition] 조건 불만족 → {_failSceneName} 로드");
-            SceneManager.LoadScene(_failSceneName);
+            SceneManager.LoadSceneAsync(_failSceneName);
         }
     }
 
