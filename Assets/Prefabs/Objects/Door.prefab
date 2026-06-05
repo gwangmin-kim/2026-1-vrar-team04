@@ -482,6 +482,7 @@ MonoBehaviour:
   _smoothTime: 0.5
   _closeAngle: 10
   _isClosed: 0
+  _isReusable: 0
   OnOpened:
     m_PersistentCalls:
       m_Calls:
@@ -565,7 +566,7 @@ MonoBehaviour:
   _audioSource: {fileID: 7307753183463245283}
   _clips:
   - {fileID: 8300000, guid: 858bb97a551069c438e384cc8424f5f2, type: 3}
-  _volumeRange: {x: 0.85, y: 1}
+  _volumeRange: {x: 1, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
   _allowOverlap: 1
@@ -590,10 +591,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.2
+  MinDistance: 1
   MaxDistance: 8
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
