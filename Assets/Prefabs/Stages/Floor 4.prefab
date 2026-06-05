@@ -670,7 +670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &366512184576170221
 Transform:
   m_ObjectHideFlags: 0
@@ -1152,6 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354cca3b65744db4ead9ab97711d844f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeFloorManager
+  _mapSwitcher: {fileID: 2793512980185057641}
   _countNeedToClear: 5
   _currentCount: 0
   _teleportTriggers: {fileID: 7787547661535957490}

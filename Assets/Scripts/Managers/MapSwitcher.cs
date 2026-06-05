@@ -14,5 +14,7 @@ public class MapSwitcher : MonoBehaviour
     {
         _baseMap.SetActive(false);
         _switchMap.SetActive(true);
+
+        gameObject.SetActive(false);
     }
 }

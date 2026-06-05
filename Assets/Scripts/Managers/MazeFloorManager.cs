@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class MazeFloorManager : MonoBehaviour
 {
+    [SerializeField] private MapSwitcher _mapSwitcher;
     [SerializeField] private int _countNeedToClear; // 클리어까지 코너를 돌아야 하는 횟수
     [SerializeField] private int _currentCount = 0;
 
     [Header("On Complete")]
     [SerializeField] private GameObject _teleportTriggers; // 완료 시 플레이어 순간이동 비활성화
     [SerializeField] private Elevator[] _exitElevatorList; // 완료 시 출구 엘리베이터 활성화
+
+    private void OnEnable()
+    {
+        if (!_mapSwitcher.gameObject.activeSelf)
+        {
+            _mapSwitcher.gameObject.SetActive(true);
+        }
+    }
 
     public void EncountCorner()
     {
