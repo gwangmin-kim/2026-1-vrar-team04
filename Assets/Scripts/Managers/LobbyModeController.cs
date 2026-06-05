@@ -13,6 +13,10 @@ public class LobbyModeController : MonoBehaviour
     }
 
     private static LobbyMode? s_nextMode;
+    private static bool s_hasQueuedGameplayFloorPose;
+    private static Vector3 s_queuedGameplayFloorLocalPosition;
+    private static Quaternion s_queuedGameplayFloorLocalRotation;
+    private static Quaternion s_queuedGameplayFloorLocalCameraRotation;
 
     [Header("Scene Mode")]
     [SerializeField] private LobbyMode _initialMode = LobbyMode.MainMenu;
@@ -33,6 +37,7 @@ public class LobbyModeController : MonoBehaviour
     [SerializeField] private Transform _playerRoot;
     [SerializeField] private Transform _menuSpawnPoint;
     [SerializeField] private Transform _gameplayFloorSpawnPoint;
+    [SerializeField] private Transform _gameplayFloorEntranceReference;
     [SerializeField] private bool _teleportPlayerOnModeEnter = true;
 
     [Header("Player UI Interaction")]
@@ -171,6 +176,23 @@ public class LobbyModeController : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneName);
     }
 
+    public static void LoadAsGameplayFloor(string sceneName, Transform sourceElevator, Transform playerRoot)
+    {
+        QueueGameplayFloorPose(sourceElevator, playerRoot);
+        LoadAsGameplayFloor(sceneName);
+    }
+
+    public static void QueueGameplayFloorPose(Transform sourceElevator, Transform playerRoot)
+    {
+        if (sourceElevator == null || playerRoot == null)
+            return;
+
+        s_queuedGameplayFloorLocalPosition = sourceElevator.InverseTransformPoint(playerRoot.position);
+        s_queuedGameplayFloorLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerRoot.rotation;
+        s_queuedGameplayFloorLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerRoot);
+        s_hasQueuedGameplayFloorPose = true;
+    }
+
     private void LoadLobby(LobbyMode mode)
     {
         if (string.IsNullOrEmpty(_lobbySceneName))
@@ -197,7 +219,7 @@ public class LobbyModeController : MonoBehaviour
         IsStartCorridorUnlocked = !menuMode;
 
         if (_teleportPlayerOnModeEnter)
-            TeleportPlayerToModeSpawn(mode);
+            TeleportPlayerOnModeEnter(mode);
 
         if (menuMode)
             OnEnterMenuMode?.Invoke();
@@ -246,6 +268,29 @@ public class LobbyModeController : MonoBehaviour
         return false;
     }
 
+    private void TeleportPlayerOnModeEnter(LobbyMode mode)
+    {
+        EnsurePlayerRoot();
+
+        if (_playerRoot == null)
+        {
+            Debug.LogWarning("[LobbyModeController] Player root is not assigned, so spawn teleport was skipped.", this);
+            return;
+        }
+
+        if (mode == LobbyMode.GameplayFloor && s_hasQueuedGameplayFloorPose)
+        {
+            TeleportPlayerFromGameplayFloorOffset(
+                s_queuedGameplayFloorLocalPosition,
+                s_queuedGameplayFloorLocalRotation,
+                s_queuedGameplayFloorLocalCameraRotation);
+            s_hasQueuedGameplayFloorPose = false;
+            return;
+        }
+
+        TeleportPlayerToModeSpawn(mode);
+    }
+
     private void TeleportPlayerToModeSpawn(LobbyMode mode)
     {
         Transform spawnPoint = mode == LobbyMode.MainMenu
@@ -255,19 +300,60 @@ public class LobbyModeController : MonoBehaviour
         if (spawnPoint == null)
             return;
 
+        _playerRoot.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    }
+
+    private void TeleportPlayerFromGameplayFloorOffset(Vector3 localPosition, Quaternion localRotation, Quaternion localCameraRotation)
+    {
+        Transform reference = _gameplayFloorEntranceReference != null
+            ? _gameplayFloorEntranceReference
+            : _gameplayFloorSpawnPoint;
+
+        if (reference == null)
+        {
+            Debug.LogWarning("[LobbyModeController] Gameplay floor entrance reference is not assigned, so queued teleport was skipped.", this);
+            return;
+        }
+
+        Vector3 newPosition = reference.TransformPoint(localPosition);
+        Quaternion newRotation = reference.rotation * localRotation;
+
+        _playerRoot.SetPositionAndRotation(newPosition, newRotation);
+        ApplyCameraRotationToCamera(reference, localCameraRotation);
+    }
+
+    private void ApplyCameraRotationToCamera(Transform reference, Quaternion localCameraRotation)
+    {
+        Transform cameraTransform = GetPlayerCameraTransform(_playerRoot);
+        if (cameraTransform == null)
+            return;
+
+        cameraTransform.rotation = reference.rotation * localCameraRotation;
+    }
+
+    private void EnsurePlayerRoot()
+    {
         if (_playerRoot == null)
         {
             var playerLock = FindObjectOfType<PlayerControlLock>();
             if (playerLock != null)
                 _playerRoot = playerLock.transform;
         }
+    }
 
-        if (_playerRoot == null)
-        {
-            Debug.LogWarning("[LobbyModeController] Player root is not assigned, so spawn teleport was skipped.", this);
-            return;
-        }
+    private static Quaternion GetCameraRotationRelativeTo(Transform reference, Transform playerRoot)
+    {
+        Transform cameraTransform = GetPlayerCameraTransform(playerRoot);
+        Quaternion cameraRotation = cameraTransform != null ? cameraTransform.rotation : playerRoot.rotation;
+        return Quaternion.Inverse(reference.rotation) * cameraRotation;
+    }
 
-        _playerRoot.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    private static Transform GetPlayerCameraTransform(Transform playerRoot)
+    {
+        if (playerRoot == null)
+            return null;
+
+        Camera playerCamera = playerRoot.GetComponentInChildren<Camera>(true);
+        return playerCamera != null ? playerCamera.transform : null;
     }
 }

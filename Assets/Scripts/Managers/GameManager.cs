@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         if (currentStage + 1 >= _stages.Length)
         {
             _stages[currentStage].SetActive(false);
-            LobbyModeController.LoadAsGameplayFloor(_lobbySceneName);
+            LobbyModeController.LoadAsGameplayFloor(_lobbySceneName, elevatorOut ?? _elevatorOut.transform, player);
             return;
         }
 

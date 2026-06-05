@@ -1753,6 +1753,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4001674980315745823, guid: 9569efb318ecca847bf3826fd62c5033, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7735121193864647440, guid: 9569efb318ecca847bf3826fd62c5033, type: 3}
       propertyPath: _handTransform
       value: 
@@ -11528,6 +11532,7 @@ MonoBehaviour:
   _playerRoot: {fileID: 764208644}
   _menuSpawnPoint: {fileID: 1233250203}
   _gameplayFloorSpawnPoint: {fileID: 1692495215}
+  _gameplayFloorEntranceReference: {fileID: 920576422}
   _teleportPlayerOnModeEnter: 1
   _uiInteractionToggles:
   - {fileID: 764208640}

@@ -11545,6 +11545,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757366898}
     m_Modifications:
+    - target: {fileID: -8505078733485919308, guid: 462e981961a88aa49ac2f7697d4e916e, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1345546166791220687, guid: 462e981961a88aa49ac2f7697d4e916e, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13591,6 +13595,10 @@ PrefabInstance:
     - target: {fileID: 8319172736125949376, guid: bdad44eeaece20a44b828c637c68af42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879739719828709479, guid: bdad44eeaece20a44b828c637c68af42, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17479,6 +17487,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4872712985959122675, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: _floorAnnouncementClips.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 72d739160e8121c45b7d1684fcb24386, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: fe29e8877e24fa54a936ce2c99409026, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 097a21ab843df624c8b0ce73876ce5e1, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6aeefadf24e04504f8ae3d7a51015c4e, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: dbf4f1f5a0c8a2c418b87ade2debb4e9, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f2ef6e0148ea93248b3013eb7931748c, type: 3}
+    - target: {fileID: 5969843387415890250, guid: 65fac4da9ba39134b823075e6c7857a7, type: 3}
+      propertyPath: '_floorAnnouncementClips.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8300000, guid: de16911d82c757f44b127faac14ceeff, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52104,6 +52148,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 599145149}
     - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: _isCleared
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _elevatorIn
       value: 
       objectReference: {fileID: 494853843}
@@ -52111,6 +52159,10 @@ PrefabInstance:
       propertyPath: _elevatorOut
       value: 
       objectReference: {fileID: 365795895}
+    - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: currentStage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3012467428104334453, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _baseCorridor
       value: 
