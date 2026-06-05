@@ -29,5 +29,6 @@ public class ChaseFloorManager : MonoBehaviour
     {
         _ghost.transform.SetPositionAndRotation(_teleportPoint.position, _teleportPoint.rotation);
         _ghost.SetTargetIndex(_targetIndexAfterTeleport);
+        _ghost.StartRun();
     }
 }

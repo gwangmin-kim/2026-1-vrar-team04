@@ -1,9 +1,11 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GhostChase : MonoBehaviour, ILightable
 {
+    private static readonly int _runHash = Animator.StringToHash("Run");
     private static readonly int _screamHash = Animator.StringToHash("Scream");
     private static readonly int _chaseHash = Animator.StringToHash("Chase");
     private static readonly int _attackStartHash = Animator.StringToHash("AttackStart");
@@ -23,6 +25,7 @@ public class GhostChase : MonoBehaviour, ILightable
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _turnaroundSmoothTime;
     [SerializeField] private float _thresholdDistance = 1.5f; // 붙잡히는 판정이 되는 임계 거리
+    public UnityEvent onChaseEvent; // 추격 시작 시 발생하는 이벤트
     private Vector3 _targetDirection = Vector3.zero;
     private Vector3 _currentVelocity = Vector3.zero;
     private Transform _player;
@@ -34,9 +37,9 @@ public class GhostChase : MonoBehaviour, ILightable
     [SerializeField] private Transform _modelRoot; // 모델의 루트 트랜스폼 회전이 틀어지는 걸 초기화
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private float _chaseSpeed;
+    [SerializeField] private float _runSpeed;
     [SerializeField] private Collider _collider;
     [SerializeField] private float _timeToTrigger; // 없애기 위해 비춰야 하는 시간
-    [SerializeField] private MapSwitcher _mapSwitcher; // 쫓는 트리거 발동 시 맵 스위칭
 
     [SerializeField] private bool _isChasing = false;
     [SerializeField] private int _currentWaypointIndex = 0;
@@ -135,6 +138,7 @@ public class GhostChase : MonoBehaviour, ILightable
             {
                 _isChasing = false;
                 _deathCutsceneManager.StartDeathCutscene();
+                _animator.SetTrigger(_attackStartHash);
             }
         }
     }
@@ -150,9 +154,15 @@ public class GhostChase : MonoBehaviour, ILightable
         _player = GameManager.Instance.player;
         _currentWaypointIndex = 0;
         _animator.SetTrigger(_screamHash);
-        _mapSwitcher.gameObject.SetActive(true);
+        onChaseEvent?.Invoke();
 
         StartCoroutine(ReserveChase());
+    }
+
+    public void StartRun()
+    {
+        _animator.SetTrigger(_runHash);
+        _chaseSpeed = _runSpeed;
     }
 
     private IEnumerator ReserveChase()

@@ -45,9 +45,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 3680389280658781779}
-  _clips: []
+  _clips:
+  - {fileID: 8300000, guid: e74f7285a7184cb4bbc1080b55d88f2d, type: 3}
+  - {fileID: 8300000, guid: 8908e3fecedcec94c8f36153951ca016, type: 3}
+  - {fileID: 8300000, guid: d7d3726b3c7bae142815ef8ed6854a89, type: 3}
+  - {fileID: 8300000, guid: 8d605fae800e2374290972afa7eb3067, type: 3}
+  - {fileID: 8300000, guid: e7456e69014a7a24a9b0821fcc68ab57, type: 3}
   _volumeRange: {x: 1, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
+  _cooldown: 0.05
+  _allowOverlap: 1
+--- !u!1 &1017131838518075959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6458440814936669449}
+  - component: {fileID: 1400666335070404447}
+  m_Layer: 9
+  m_Name: Scream-Short
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6458440814936669449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017131838518075959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4186937337850570979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400666335070404447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017131838518075959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
+  _audioSource: {fileID: 3680389280658781779}
+  _clips:
+  - {fileID: 8300000, guid: 70c45f71c6bd04a4abd9895159ae93dc, type: 3}
+  _volumeRange: {x: 1, y: 1}
+  _pitchRange: {x: 1, y: 1}
   _cooldown: 0.05
   _allowOverlap: 1
 --- !u!1 &4108182887965941339
@@ -95,7 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 3680389280658781779}
-  _clips: []
+  _clips:
+  - {fileID: 8300000, guid: f8bf178e671bd0048b59d70db3e48a4a, type: 3}
   _volumeRange: {x: 0.85, y: 1}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
@@ -174,13 +231,16 @@ MonoBehaviour:
   _waypoints: []
   _turnaroundSmoothTime: 0.25
   _thresholdDistance: 1.5
+  onChaseEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _deathCutsceneManager: {fileID: 0}
   _modelRoot: {fileID: 4457553589613471806}
   _baseTransform: {fileID: 0}
   _chaseSpeed: 1
+  _runSpeed: 1.7
   _collider: {fileID: 3408164882185538211}
   _timeToTrigger: 1
-  _mapSwitcher: {fileID: 0}
   _isChasing: 0
   _currentWaypointIndex: 0
   _mesh: {fileID: 7772691608500795521}
@@ -232,9 +292,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
   _audioSource: {fileID: 3680389280658781779}
-  _clips: []
-  _volumeRange: {x: 0.85, y: 1}
-  _pitchRange: {x: 0.95, y: 1.05}
+  _clips:
+  - {fileID: 8300000, guid: 9d5a5e30a9db86444aa94cafc09a6c90, type: 3}
+  _volumeRange: {x: 1, y: 1}
+  _pitchRange: {x: 1, y: 1}
   _cooldown: 0.05
   _allowOverlap: 1
 --- !u!1 &6204145060388568654
@@ -267,7 +328,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7714077105064738798}
   - {fileID: 6161458643760344035}
+  - {fileID: 6458440814936669449}
   - {fileID: 7788088897638311134}
   - {fileID: 3890664138070527057}
   m_Father: {fileID: 1962561144858051368}
@@ -329,7 +392,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -369,6 +432,57 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8461657985112159861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7714077105064738798}
+  - component: {fileID: 749226875561676920}
+  m_Layer: 9
+  m_Name: Breath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7714077105064738798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461657985112159861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4186937337850570979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &749226875561676920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461657985112159861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
+  _audioSource: {fileID: 3680389280658781779}
+  _clips:
+  - {fileID: 8300000, guid: b9d9e862f5d0f524da609209d2a4c9c2, type: 3}
+  _volumeRange: {x: 0.85, y: 1}
+  _pitchRange: {x: 0.95, y: 1.05}
+  _cooldown: 0.05
+  _allowOverlap: 1
 --- !u!1001 &4203776147090100181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,6 +555,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0ddcdc4db48fe441e82c44f31f99cb23, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 323954a12ba935f4d8a2e6880a0bac6b, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -466,7 +584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652af7d4921c74af1a71a5ed9525bc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostChaseSfx
+  _breath: {fileID: 749226875561676920}
   _scream: {fileID: 4405097935424312834}
+  _shortScream: {fileID: 1400666335070404447}
   _footstep: {fileID: 1011248303477418135}
   _attack: {fileID: 2503061451265885610}
 --- !u!4 &4457553589613471806 stripped
