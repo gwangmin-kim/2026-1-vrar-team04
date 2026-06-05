@@ -59331,6 +59331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+      propertyPath: m_LocomotionVignetteProviders.Array.data[1].m_LocomotionProvider
+      value: 
+      objectReference: {fileID: 1155289659}
     - target: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_Name
       value: Player
@@ -59390,6 +59394,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4303216888358848244, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
   m_PrefabInstance: {fileID: 1155289656}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1155289659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7969015890358969661, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+  m_PrefabInstance: {fileID: 1155289656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59566f77197747a4fb97911a2530b360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.SmoothDynamicMoveProvider
 --- !u!43 &1158025919
 Mesh:
   m_ObjectHideFlags: 0
