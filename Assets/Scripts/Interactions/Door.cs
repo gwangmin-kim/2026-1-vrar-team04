@@ -162,7 +162,7 @@ public class Door : MonoBehaviour, IGrabbable
 
     public void Release()
     {
-        if (_grabInteractable.isSelected)
+        if (_grabInteractable != null && _grabInteractable.isSelected)
         {
             _grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)_grabInteractable);
         }

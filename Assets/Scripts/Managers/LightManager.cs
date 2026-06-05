@@ -18,7 +18,7 @@ public class LightManager : MonoBehaviour
     [SerializeField] private float _maxEmissionIntensity = 33.89676f; // 켜졌을 때 에미션 강도
     [SerializeField] private Material _lightMaterial; // 천장 머터리얼 (emission 제어용)
 
-    private bool _isLightOn = true;
+    // private bool _isLightOn = true;
 
     // URP/HDRP의 표준 에미션 컬러 속성 이름 키워드
     private static readonly int _emissionColorProperty = Shader.PropertyToID("_EmissionColor");
@@ -40,7 +40,7 @@ public class LightManager : MonoBehaviour
 
     public void TurnOff()
     {
-        _isLightOn = false;
+        // _isLightOn = false;
 
         if (_corridorLightsRoot != null) _corridorLightsRoot.SetActive(false);
 
@@ -52,7 +52,7 @@ public class LightManager : MonoBehaviour
 
     public void TurnOn()
     {
-        _isLightOn = true;
+        // _isLightOn = true;
 
         if (_corridorLightsRoot != null) _corridorLightsRoot.SetActive(true);
 

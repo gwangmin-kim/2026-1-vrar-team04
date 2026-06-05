@@ -93,7 +93,7 @@ public class StainSpawner : MonoBehaviour
                 float randomScale = Random.Range(_minScale, _maxScale);
                 stain.transform.localScale = randomScale * Vector3.one;
                 stain.decalProjector.size = new Vector3(randomScale, randomScale, 2f);
-                stain.collider.center = new Vector3(0f, 0f, 1.5f / randomScale); // 센터 위치가 스케일에 영향을 받지 않도록 역수를 곱해줌
+                stain.cleanTrigger.center = new Vector3(0f, 0f, 1.5f / randomScale); // 센터 위치가 스케일에 영향을 받지 않도록 역수를 곱해줌
 
                 stain.spawner = this;
                 _totalCount++;

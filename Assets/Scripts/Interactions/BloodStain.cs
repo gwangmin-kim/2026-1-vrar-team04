@@ -10,7 +10,7 @@ public class BloodStain : MonoBehaviour, ICleanable
     public DecalProjector decalProjector;
 
     [Header("Collider")]
-    public SphereCollider collider;
+    public SphereCollider cleanTrigger;
 
     [Header("Clean Setting")]
     [SerializeField] private float _initialFade; // 최초 투명도
@@ -56,8 +56,8 @@ public class BloodStain : MonoBehaviour, ICleanable
         _cleaner = null;
         _accumulatedDistance = 0f;
 
-        if (collider != null)
-            collider.enabled = true;
+        if (cleanTrigger != null)
+            cleanTrigger.enabled = true;
 
         if (decalProjector != null)
             decalProjector.fadeFactor = _initialFade;
@@ -74,7 +74,7 @@ public class BloodStain : MonoBehaviour, ICleanable
         if (decalProjector.fadeFactor <= 0f)
         {
             _isCleaned = true;
-            collider.enabled = false;
+            cleanTrigger.enabled = false;
             spawner.OnStainCleaned();
         }
     }
