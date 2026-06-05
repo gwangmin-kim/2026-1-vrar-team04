@@ -1001,7 +1001,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4303216888358848244}
-  - {fileID: 9057583805428787258}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9037371850633803660
@@ -2287,57 +2286,6 @@ MonoBehaviour:
   OnLightOff:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &7532569702213210404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9057583805428787258}
-  - component: {fileID: 9025525139611923766}
-  m_Layer: 3
-  m_Name: Vignette Toggle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9057583805428787258
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532569702213210404}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3805018600003243802}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9025525139611923766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532569702213210404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374f9b4768869bd47b83d1fb39815918, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VRARTeam04.Player.VignetteToggle
-  _vignetteRoot: {fileID: 19421815578959100}
-  _toggleAction: {fileID: 0}
-  _defaultOn: 1
-  _playerPrefsKey: vrar.team04.vignette.enabled
-  OnStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1700830880447145693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2540,10 +2488,5 @@ PrefabInstance:
 --- !u!4 &19421815578959099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8429981633443581382, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
-  m_PrefabInstance: {fileID: 8410559888798961981}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &19421815578959100 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
   m_PrefabInstance: {fileID: 8410559888798961981}
   m_PrefabAsset: {fileID: 0}
