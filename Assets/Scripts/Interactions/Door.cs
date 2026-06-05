@@ -28,7 +28,6 @@ public class Door : MonoBehaviour, IGrabbable
     [SerializeField] private float _smoothTime; // 부드럽게 움직이는 시간
     [SerializeField] private float _closeAngle; // 이 각도 미만으로 떨어지면 닫히는 판정
     [SerializeField] private bool _isClosed = false; // 한 번 닫히면 다시 상호작용 불가능
-    [SerializeField] private bool _isReusable = false; // 재사용 가능 여부
     private XRGrabInteractable _grabInteractable;
 
     [Header("Events")]
@@ -58,6 +57,19 @@ public class Door : MonoBehaviour, IGrabbable
 
         _controller.enabled = false;
         _grabInteractable = _controller.transform.GetComponent<XRGrabInteractable>();
+    }
+
+    public void Initialize()
+    {
+        Release();
+
+        _controller.enabled = false;
+        _isEventTriggered = false;
+        _isOpening = false;
+        _isGrabbed = false;
+        _isClosed = false;
+
+        _door.localRotation = Quaternion.identity;
     }
 
     private void Update()
@@ -110,7 +122,7 @@ public class Door : MonoBehaviour, IGrabbable
         if (_isClosed) return;
 
         _targetAngle = 0f;
-        if (!_isReusable) _isClosed = true;
+        _isClosed = true;
         Release();
 
         _controller.enabled = false;

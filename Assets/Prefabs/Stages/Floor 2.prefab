@@ -12109,6 +12109,7 @@ MonoBehaviour:
   - {fileID: 4043783818873898398}
   - {fileID: 7031343305404278843}
   - {fileID: 6347237975256240072}
+  _door: {fileID: 7130282747381206935}
   _ghost: {fileID: 3930483665713085675}
   _teleportPoint: {fileID: 1917249264237068971}
   _targetIndexAfterTeleport: 3
