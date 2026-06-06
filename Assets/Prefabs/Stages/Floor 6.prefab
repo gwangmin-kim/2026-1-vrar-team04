@@ -143,9 +143,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -163,7 +163,7 @@ AudioSource:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
+      value: 1.002533
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -178,7 +178,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   _audioSource: {fileID: 684158785017884523}
   _clips:
   - {fileID: 8300000, guid: ae9e38a5a07e29d4891f306a28f1dee1, type: 3}
-  _volumeRange: {x: 0.85, y: 1}
+  _volumeRange: {x: 0.3, y: 0.3}
   _pitchRange: {x: 0.95, y: 1.05}
   _cooldown: 0.05
   _allowOverlap: 1

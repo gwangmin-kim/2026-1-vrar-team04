@@ -46,6 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LightManager
   _corridorLightsRoot: {fileID: 0}
   _lightList: []
+  _maxIntensity: 1
+  _lightOnVolume: {fileID: 0}
+  _lightOffVolume: {fileID: 0}
   _emissionColor: {r: 1, g: 0.69803923, b: 0.4117647, a: 1}
   _maxEmissionIntensity: 33.89676
   _lightMaterial: {fileID: 2100000, guid: fd0c35487b8cd449bb5fc418159b51bd, type: 2}
+  _flickerIntervalRange: {x: 0.05, y: 0.2}
+  _flickerIntensityRange: {x: 0, y: 0.5}

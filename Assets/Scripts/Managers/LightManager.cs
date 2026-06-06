@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -7,7 +8,8 @@ public class LightManager : MonoBehaviour
 
     [Header("Control Lights")]
     [SerializeField] private GameObject _corridorLightsRoot; // 모든 복도 조명을 담고 있는 루트 오브젝트
-    [SerializeField] private Light[] _lightList;
+    [SerializeField] private Light[] _lightList; // 실제 제어할 빛 컴포넌트 리스트
+    [SerializeField] private float _maxIntensity = 1f; // 밝기 최댓값
 
     [Header("Control Light Volumes")]
     [SerializeField] private Volume _lightOnVolume;
@@ -18,7 +20,12 @@ public class LightManager : MonoBehaviour
     [SerializeField] private float _maxEmissionIntensity = 33.89676f; // 켜졌을 때 에미션 강도
     [SerializeField] private Material _lightMaterial; // 천장 머터리얼 (emission 제어용)
 
-    // private bool _isLightOn = true;
+    [Header("Flicker Settings")]
+    [Tooltip("X: 최소 간격, Y: 최대 간격 (초 단위)")]
+    [SerializeField] private Vector2 _flickerIntervalRange;
+    [Tooltip("X: 최소 밝기, Y: 최대 밝기 (소등 중 깜빡일 비주얼 범위)")]
+    [SerializeField] private Vector2 _flickerIntensityRange;
+    private Coroutine _flickerCoroutine;
 
     // URP/HDRP의 표준 에미션 컬러 속성 이름 키워드
     private static readonly int _emissionColorProperty = Shader.PropertyToID("_EmissionColor");
@@ -40,77 +47,84 @@ public class LightManager : MonoBehaviour
 
     public void TurnOff()
     {
-        // _isLightOn = false;
-
-        if (_corridorLightsRoot != null) _corridorLightsRoot.SetActive(false);
+        foreach (var light in _lightList)
+        {
+            light.intensity = 0f;
+        }
 
         if (_lightOffVolume != null) _lightOffVolume.enabled = true;
         if (_lightOnVolume != null) _lightOnVolume.enabled = false;
 
-        UpdateEmission(false);
+        UpdateEmission(0f);
+
+        _flickerCoroutine = StartCoroutine(FlickerRoutine());
     }
 
     public void TurnOn()
     {
-        // _isLightOn = true;
+        if (_flickerCoroutine != null)
+        {
+            StopCoroutine(_flickerCoroutine);
+            _flickerCoroutine = null;
+        }
 
-        if (_corridorLightsRoot != null) _corridorLightsRoot.SetActive(true);
+        foreach (var light in _lightList)
+        {
+            light.intensity = _maxIntensity;
+        }
 
         if (_lightOffVolume != null) _lightOffVolume.enabled = false;
         if (_lightOnVolume != null) _lightOnVolume.enabled = true;
 
-        UpdateEmission(true);
+        UpdateEmission(_maxIntensity);
     }
 
-    // private void ExtractInitialEmissionSettings()
-    // {
-    //     if (_lightMaterial == null)
-    //     {
-    //         Debug.LogWarning("LightManager: 형광등 머터리얼(_lampMaterial)이 할당되지 않아 에미션 값을 추출할 수 없습니다.");
-    //         return;
-    //     }
-
-    //     // 셰이더의 '_EmissionColor'로부터 HDR 컬러 값을 가져옵니다.
-    //     // 유니티 내부에서 HDR 강도가 적용된 컬러는 [RGB * (2^Intensity)] 형태로 저장되어 있습니다.
-    //     Color rawHdrColor = _lightMaterial.GetColor(_emissionColorProperty);
-
-    //     // RGB 채널 중 가장 큰 값을 찾아 현재의 대략적인 밝기 스케일(강도)을 계산합니다.
-    //     float maxChannel = Mathf.Max(rawHdrColor.r, rawHdrColor.g, rawHdrColor.b);
-
-    //     if (maxChannel > 1f)
-    //     {
-    //         // 색상 값이 1을 초과하는 HDR 상태라면, 최대 채널 값을 Intensity(강도)로 규정합니다.
-    //         _maxEmissionIntensity = maxChannel;
-
-    //         // 강도로 나누어주어 순수한 0~1 사이의 원본 LDR 컬러(색상 톤)만 추출합니다.
-    //         _emissionColor = new Color(rawHdrColor.r / maxChannel, rawHdrColor.g / maxChannel, rawHdrColor.b / maxChannel, rawHdrColor.a);
-    //     }
-    //     else
-    //     {
-    //         // HDR 강도가 들어가 있지 않은 일반 컬러(최대값이 1 이하)라면 강도는 1, 컬러는 그대로 사용합니다.
-    //         _maxEmissionIntensity = maxChannel > 0 ? maxChannel : 1f; // 만약 0이라면 기본값 1
-    //         _emissionColor = rawHdrColor;
-    //     }
-
-    //     // Debug.Log($"[LightManager] 머터리얼 분석 완료 -> 추출된 컬러: {_emissionColor}, 추출된 강도: {_maxEmissionIntensity}");
-    // }
-
-    private void UpdateEmission(bool isOn)
+    private void UpdateEmission(float currentLightIntensity)
     {
         if (_lightMaterial == null) return;
 
-        if (isOn)
+        // 밝기가 아주 미세하게라도 켜져 있는 상태라면
+        if (currentLightIntensity > 0.001f)
         {
-            // 기본 설정된 에미션 컬러와 강도를 곱해 켜진 상태 적용
-            Color finalColor = _emissionColor * _maxEmissionIntensity;
+            // 정상 최대 밝기(_maxIntensity) 대비 현재 깜빡이는 밝기의 상대 비율 계산
+            float intensityRatio = _maxIntensity > 0f ? currentLightIntensity / _maxIntensity : 0f;
+
+            // 기존 최대 강도에 비율을 곱해 연동된 색상 생성
+            Color finalColor = _emissionColor * (_maxEmissionIntensity * intensityRatio);
+
             _lightMaterial.SetColor(_emissionColorProperty, finalColor);
-            _lightMaterial.EnableKeyword("_EMISSION"); // 에미션 기능 활성화 키워드 보장
+            _lightMaterial.EnableKeyword("_EMISSION");
         }
         else
         {
-            // 검은색을 주어 빛을 완전히 끔
+            // 밝기가 완전히 0에 가깝다면 에미션 기능을 완벽히 차단 (검은색)
             _lightMaterial.SetColor(_emissionColorProperty, Color.black);
             _lightMaterial.DisableKeyword("_EMISSION");
+        }
+    }
+
+    private IEnumerator FlickerRoutine()
+    {
+        while (true)
+        {
+            // 설정된 Vector2 (X: 최소 수치, Y: 최대 수치) 사이의 무작위 값 추출
+            float randomIntensity = Random.Range(_flickerIntensityRange.x, _flickerIntensityRange.y);
+            float randomWaitTime = Random.Range(_flickerIntervalRange.x, _flickerIntervalRange.y);
+
+            // 리스트 안의 모든 실시간 조명 컴포넌트 밝기 변경
+            foreach (var light in _lightList)
+            {
+                if (light != null)
+                {
+                    light.intensity = randomIntensity;
+                }
+            }
+
+            // 조명 컴포넌트의 실제 밝기에 비례하도록 머터리얼의 에미션 발광 세기도 실시간 업데이트
+            UpdateEmission(randomIntensity);
+
+            // 임의의 시간만큼 대기 후 다음 루프 실행
+            yield return new WaitForSeconds(randomWaitTime);
         }
     }
 }

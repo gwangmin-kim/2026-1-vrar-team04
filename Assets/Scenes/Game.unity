@@ -53794,6 +53794,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever
       objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 607759999}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StopLoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OneShotPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59335,6 +59363,14 @@ PrefabInstance:
       propertyPath: m_LocomotionVignetteProviders.Array.data[1].m_LocomotionProvider
       value: 
       objectReference: {fileID: 1155289659}
+    - target: {fileID: 19421815578959099, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19421815578959099, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_Name
       value: Player
@@ -76362,7 +76398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Play
+      value: PlayLoop
       objectReference: {fileID: 0}
     - target: {fileID: 7007856156793906065, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
