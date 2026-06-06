@@ -22,6 +22,7 @@ namespace VRARTeam04.Player
         [SerializeField] private Behaviour[] _extraComponentsToDisable;
 
         private readonly List<Behaviour> _controlledComponents = new List<Behaviour>();
+        private readonly List<Behaviour> _movementComponents = new List<Behaviour>();
         private readonly Dictionary<Behaviour, bool> _originalEnabledStates = new Dictionary<Behaviour, bool>();
         private bool _isLocked;
 
@@ -48,6 +49,21 @@ namespace VRARTeam04.Player
         public void Unlock()
         {
             SetLocked(false);
+        }
+
+        /// <summary>
+        /// 이동(로코모션)과 헤드밥만 계속 잠근 채, 나머지(XR 인터랙터/포즈/입력 등)는 원래대로 되돌린다.
+        /// 엔딩 UI 처럼 "걷지는 못하되 레이로 UI 는 클릭해야" 하는 상황에서 사용한다.
+        /// </summary>
+        public void UnlockKeepingMovementLocked()
+        {
+            Unlock();
+
+            foreach (var component in _movementComponents)
+            {
+                if (component != null)
+                    component.enabled = false;
+            }
         }
 
         public void SetLocked(bool locked)
@@ -83,11 +99,12 @@ namespace VRARTeam04.Player
         public void CollectControlledComponents()
         {
             _controlledComponents.Clear();
+            _movementComponents.Clear();
 
             if (_disableLocomotion)
             {
                 foreach (var provider in GetComponentsInChildren<LocomotionProvider>(true))
-                    AddControlledComponent(provider);
+                    AddControlledComponent(provider, isMovement: true);
             }
 
             if (_disableInteractors)
@@ -117,7 +134,7 @@ namespace VRARTeam04.Player
             if (_disableHeadBob)
             {
                 foreach (var headBob in GetComponentsInChildren<VRHeadBob>(true))
-                    AddControlledComponent(headBob);
+                    AddControlledComponent(headBob, isMovement: true);
             }
 
             if (_extraComponentsToDisable == null)
@@ -138,12 +155,15 @@ namespace VRARTeam04.Player
             }
         }
 
-        private void AddControlledComponent(Behaviour component)
+        private void AddControlledComponent(Behaviour component, bool isMovement = false)
         {
             if (component == null || component == this || _controlledComponents.Contains(component))
                 return;
 
             _controlledComponents.Add(component);
+
+            if (isMovement)
+                _movementComponents.Add(component);
         }
     }
 }

@@ -32,6 +32,13 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
 
     [Header("End")]
     [SerializeField] private float _endDelay = 1.25f;
+    [Tooltip("켜면 페이드 후 바로 종료하지 않고 엔딩 UI(재시작/종료)를 띄운다.")]
+    [SerializeField] private bool _showEndingUi = true;
+    [SerializeField] private EndingUIController _endingUiController;
+    [Tooltip("엔딩 UI 를 띄울 때 흰 화면/블라스트를 부드럽게 되돌려 UI 가 드러나게 한다.")]
+    [SerializeField] private bool _fadeOutOnEndingUi = true;
+    [SerializeField] private float _fadeOutDuration = 1.5f;
+    [Tooltip("엔딩 UI 를 띄우지 않을 때(_showEndingUi=false)만 사용. 페이드 후 애플리케이션을 종료한다.")]
     [SerializeField] private bool _quitApplication = true;
 
     [Header("Audio")]
@@ -102,7 +109,34 @@ public sealed class GameplayFloorEndingTrigger : MonoBehaviour
             yield return new WaitForSeconds(_endDelay);
 
         OnBeforeEndGame?.Invoke();
-        EndGame();
+
+        if (_showEndingUi && _endingUiController != null)
+        {
+            _endingUiController.Show();
+
+            if (_fadeOutOnEndingUi)
+                yield return FadeOutBlast();
+        }
+        else
+        {
+            EndGame();
+        }
+    }
+
+    private IEnumerator FadeOutBlast()
+    {
+        float duration = Mathf.Max(0.001f, _fadeOutDuration);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = 1f - SmoothStep(Mathf.Clamp01(elapsed / duration));
+            ApplyLightBlast(t);
+            yield return null;
+        }
+
+        ApplyLightBlast(0f);
     }
 
     private IEnumerator RampLightBlast()
