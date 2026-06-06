@@ -9,9 +9,6 @@ public class StainSpawner : MonoBehaviour
     [SerializeField] private Transform _stainPoolRoot;
     [SerializeField] private List<BloodStain> _stainPool;
 
-    [Header("Spawn SFX")]
-    [SerializeField] private OneShotPlayer _spawnSfx;
-
     [Header("Raycast Setting")]
     [SerializeField] private Vector2 _spreadAngles; // 비산 각도 범위 (각각 수평, 수직 방향, +- 대칭 범위로 사용)
     [SerializeField] private float _rayDistance; // 레이 사거리
@@ -40,9 +37,6 @@ public class StainSpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (_spawnSfx == null)
-            _spawnSfx = GetComponent<OneShotPlayer>();
-
         foreach (var stain in _stainPool)
         {
             stain.gameObject.SetActive(false);
@@ -100,8 +94,7 @@ public class StainSpawner : MonoBehaviour
 
                 stain.gameObject.SetActive(true);
                 stain.MarkSpawned();
-                if (_spawnSfx != null)
-                    _spawnSfx.PlayAt(position);
+                stain.audioPoint.position = hit.point;
 
                 yield return new WaitForSeconds(_spawnInterval);
             }

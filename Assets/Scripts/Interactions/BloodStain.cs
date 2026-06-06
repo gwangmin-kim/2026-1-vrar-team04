@@ -21,6 +21,9 @@ public class BloodStain : MonoBehaviour, ICleanable
     [SerializeField] private Cleaner _cleaner = null;
     [SerializeField] private float _accumulatedDistance = 0f;
 
+    [Header("SFX")]
+    public Transform audioPoint;
+
     [Header("Events")]
     public UnityEvent OnSpawned;
 
