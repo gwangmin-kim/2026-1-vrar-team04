@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MazeFloorManager : MonoBehaviour
@@ -9,6 +10,12 @@ public class MazeFloorManager : MonoBehaviour
     [Header("On Complete")]
     [SerializeField] private GameObject _teleportTriggers; // 완료 시 플레이어 순간이동 비활성화
     [SerializeField] private Elevator[] _exitElevatorList; // 완료 시 출구 엘리베이터 활성화
+
+    [Header("SFXs")]
+    [SerializeField] private AudioSource[] _oneshotSfxList;
+    [SerializeField] private Vector2 _sfxIntervalRange;
+    private Coroutine _soundRoutine;
+    private int _soundIndex = 0;
 
     private void OnEnable()
     {
@@ -41,6 +48,39 @@ public class MazeFloorManager : MonoBehaviour
             ev.Initialize();
             ev.openTrigger.enabled = true;
             // ev.closeTrigger.enabled = true;
+        }
+
+        // 주기적 sfx 재생 해제
+        StopSoundRoutine();
+    }
+
+    public void StartSoundRoutine()
+    {
+        StopSoundRoutine();
+        _soundRoutine = StartCoroutine(SoundRoutine());
+    }
+
+    public void StopSoundRoutine()
+    {
+        if (_soundRoutine == null) return;
+        StopCoroutine(_soundRoutine);
+        _soundRoutine = null;
+    }
+
+    private IEnumerator SoundRoutine()
+    {
+        while (true)
+        {
+            float randomWaitTime = Random.Range(_sfxIntervalRange.x, _sfxIntervalRange.y);
+            yield return new WaitForSeconds(randomWaitTime);
+
+            if (_oneshotSfxList.Length == 0) continue;
+
+            // int randomIndex = Random.Range(0, _oneshotSfxList.Length - 1);
+            _soundIndex++;
+            if (_soundIndex >= _oneshotSfxList.Length) _soundIndex = 0;
+
+            _oneshotSfxList[_soundIndex].Play();
         }
     }
 }
