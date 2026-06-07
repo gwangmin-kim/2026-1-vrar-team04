@@ -237,8 +237,8 @@ MonoBehaviour:
   _deathCutsceneManager: {fileID: 0}
   _modelRoot: {fileID: 4457553589613471806}
   _baseTransform: {fileID: 0}
-  _chaseSpeed: 1
-  _runSpeed: 1.7
+  _chaseSpeed: 1.2
+  _runSpeed: 1.9
   _collider: {fileID: 3408164882185538211}
   _timeToTrigger: 1
   _isChasing: 0
