@@ -186,6 +186,7 @@ Transform:
   - {fileID: 920576422}
   - {fileID: 224521735}
   - {fileID: 1885491427}
+  - {fileID: 238964829}
   - {fileID: 1599720683}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2060,6 +2061,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 857809332563991470, guid: efd9340a476b949ff8da363868f508e9, type: 3}
   m_PrefabInstance: {fileID: 234793019}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &238964828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 238964829}
+  - component: {fileID: 238964830}
+  m_Layer: 0
+  m_Name: ReverbZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &238964829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238964828}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.6826, y: 1.2999997, z: -7.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 58015076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!167 &238964830
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238964828}
+  m_Enabled: 1
+  m_MinDistance: 5
+  m_MaxDistance: 15
+  m_ReverbPreset: 13
+  m_Room: -1000
+  m_RoomHF: -300
+  m_DecayTime: 1.49
+  m_DecayHFRatio: 0.59
+  m_Reflections: -1219
+  m_ReflectionsDelay: 0.007
+  m_Reverb: 441
+  m_ReverbDelay: 0.011
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
 --- !u!1001 &251362282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4211,11 +4268,11 @@ PrefabInstance:
       objectReference: {fileID: 764208641}
     - target: {fileID: 1005800211481526293, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_MaxRaycastDistance
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1525520296632753034, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_MaxRaycastDistance
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2896574143029950454, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_Name
@@ -8601,7 +8658,7 @@ MonoBehaviour:
           m_MethodName: PlayOneShot
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 976895b6a7320b647a85bc31644f2760, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: eb40859d1cdcf3041828a16dfd58e5cf, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -9540,7 +9597,7 @@ MonoBehaviour:
           m_MethodName: PlayOneShot
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 976895b6a7320b647a85bc31644f2760, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: eb40859d1cdcf3041828a16dfd58e5cf, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -10769,6 +10826,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1763887447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10829,7 +10898,7 @@ MonoBehaviour:
           m_MethodName: PlayOneShot
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 976895b6a7320b647a85bc31644f2760, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: eb40859d1cdcf3041828a16dfd58e5cf, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -11124,7 +11193,7 @@ MonoBehaviour:
           m_MethodName: PlayOneShot
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 976895b6a7320b647a85bc31644f2760, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: eb40859d1cdcf3041828a16dfd58e5cf, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -12417,7 +12486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bff760d81cf4a64b9f23c0e4e2c7d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyModeController
-  _initialMode: 1
+  _initialMode: 0
   _gameplaySceneName: Game
   _lobbySceneName: LobbyMap
   _menuUiRoots:
@@ -14842,7 +14911,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2538705181086186426, guid: 7d561d67b1d1a9b4b8ba0fd431070f3d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

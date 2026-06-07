@@ -51838,10 +51838,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
@@ -51849,7 +51853,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 607759999}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 5758319953857012983}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
@@ -51857,11 +51869,23 @@ PrefabInstance:
       value: StopLoop
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: TurnOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: OneShotPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: LightManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466712736826031122, guid: f8d6e09c85b70d146b690afb92e844a7, type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
