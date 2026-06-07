@@ -4202,28 +4202,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_DefaultParameters.m_EaseInTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_DefaultParameters.m_EaseOutTime
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_DefaultParameters.m_ApertureSize
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_DefaultParameters.m_VignetteColor.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
-    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_DefaultParameters.m_FeatheringEffect
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
-      propertyPath: m_DefaultParameters.m_VignetteColorBlend.a
-      value: 0.78431374
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 19421815578959098, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
       propertyPath: m_LocomotionVignetteProviders.Array.data[1].m_LocomotionProvider
