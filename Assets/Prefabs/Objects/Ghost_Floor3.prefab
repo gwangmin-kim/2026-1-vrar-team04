@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
-  _audioSource: {fileID: 0}
+  _audioSource: {fileID: 2885087615407867258}
   _clips:
   - {fileID: 8300000, guid: ea2e0aebf3ca6854aaf4c22b111ba9e2, type: 3}
   _volumeRange: {x: 0.85, y: 1}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6484f6f16eb850d4d853341058611a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneShotPlayer
-  _audioSource: {fileID: 0}
+  _audioSource: {fileID: 2885087615407867258}
   _clips:
   - {fileID: 8300000, guid: b9d9e862f5d0f524da609209d2a4c9c2, type: 3}
   _volumeRange: {x: 0.85, y: 1}

@@ -73618,7 +73618,7 @@ PrefabInstance:
       objectReference: {fileID: 1090028781}
     - target: {fileID: 8098748409457536113, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -146.655
+      value: -131.538
       objectReference: {fileID: 0}
     - target: {fileID: 8107535760080956964, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: m_Mesh
