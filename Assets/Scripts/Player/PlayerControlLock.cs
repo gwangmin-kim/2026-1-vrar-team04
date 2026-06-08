@@ -17,7 +17,12 @@ namespace VRARTeam04.Player
         [SerializeField] private bool _disableInteractors = true;
         [SerializeField] private bool _disableInteractorVisuals = true;
         [SerializeField] private bool _disableInputActionManagers = true;
+
+        [Header("Tracked Pose Driver Settings")]
         [SerializeField] private bool _disableTrackedPoseDrivers = true;
+        [Tooltip("true일 경우, 메인 카메라(HMD)에 붙은 포즈 드라이버는 수집에서 제외하여 고개 돌리기를 허용(멀미 방지)")]
+        [SerializeField] private bool _excludeMainCameraHMD = true;
+
         [SerializeField] private bool _disableHeadBob = true;
         [SerializeField] private Behaviour[] _extraComponentsToDisable;
 
@@ -51,10 +56,6 @@ namespace VRARTeam04.Player
             SetLocked(false);
         }
 
-        /// <summary>
-        /// 이동(로코모션)과 헤드밥만 계속 잠근 채, 나머지(XR 인터랙터/포즈/입력 등)는 원래대로 되돌린다.
-        /// 엔딩 UI 처럼 "걷지는 못하되 레이로 UI 는 클릭해야" 하는 상황에서 사용한다.
-        /// </summary>
         public void UnlockKeepingMovementLocked()
         {
             Unlock();
@@ -127,8 +128,19 @@ namespace VRARTeam04.Player
 
             if (_disableTrackedPoseDrivers)
             {
+                // 메인 카메라 태그를 가진 오브젝트 미리 확보
+                Camera mainCam = Camera.main;
+
                 foreach (var trackedPoseDriver in GetComponentsInChildren<TrackedPoseDriver>(true))
+                {
+                    // _excludeMainCameraHMD가 켜져 있고, 현재 검사 중인 포즈 드라이버가 메인 카메라에 붙어 있다면 수집 패스
+                    if (_excludeMainCameraHMD && mainCam != null && trackedPoseDriver.gameObject == mainCam.gameObject)
+                    {
+                        continue;
+                    }
+
                     AddControlledComponent(trackedPoseDriver);
+                }
             }
 
             if (_disableHeadBob)
