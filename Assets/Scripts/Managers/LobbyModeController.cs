@@ -45,6 +45,10 @@ public class LobbyModeController : MonoBehaviour
     // [SerializeField] private OneShotPlayer _selectSound;
     // [SerializeField] private OneShotPlayer _backSound;
 
+    [Header("Fade Effect")]
+    [SerializeField] private LobbyFadeInOut _fadeInOut;
+    [SerializeField] private float _fadeDuration = 1f;
+
     [Header("Events")]
     public UnityEvent OnEnterMenuMode;
     public UnityEvent OnEnterGameplayFloorMode;
@@ -66,6 +70,11 @@ public class LobbyModeController : MonoBehaviour
         }
 
         SetMode(targetMode);
+        if (CurrentMode == LobbyMode.MainMenu)
+        {
+            _fadeInOut.SetDark();
+            _fadeInOut.FadeIn(_fadeDuration);
+        }
     }
 
     public void ShowMenuMode()
@@ -92,11 +101,15 @@ public class LobbyModeController : MonoBehaviour
         HideQuitUi();
         OnBeforeQuit?.Invoke();
 
+        _fadeInOut.FadeOut(_fadeDuration, () =>
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+        });
+
     }
 
     // ----------------------------------------------------

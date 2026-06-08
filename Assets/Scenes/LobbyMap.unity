@@ -11302,6 +11302,8 @@ MonoBehaviour:
   _xrUiEventSystem: {fileID: 1599720682}
   _hideOnShow: []
   _lobbySceneName: LobbyMap
+  _fadeInOut: {fileID: 2012764262}
+  _fadeDuration: 1
   OnEndingUiShown:
     m_PersistentCalls:
       m_Calls: []
@@ -12057,6 +12059,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006938550}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2012764261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012764263}
+  - component: {fileID: 2012764262}
+  m_Layer: 0
+  m_Name: LobbyFadeInOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2012764262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012764261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432feb6c65d67524dbb16218bbd399a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyFadeInOut
+  _fadeRenderer: {fileID: 1813762186}
+--- !u!4 &2012764263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012764261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.27144, y: -0.24636, z: 9.80322}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015212267
 GameObject:
   m_ObjectHideFlags: 0
@@ -12553,6 +12600,8 @@ MonoBehaviour:
   _playerLayers:
     serializedVersion: 2
     m_Bits: 8
+  _fadeInOut: {fileID: 2012764262}
+  _fadeDuration: 1
   OnEnterMenuMode:
     m_PersistentCalls:
       m_Calls: []
@@ -15309,3 +15358,4 @@ SceneRoots:
   - {fileID: 1692495215}
   - {fileID: 2031274267}
   - {fileID: 1134110227}
+  - {fileID: 2012764263}

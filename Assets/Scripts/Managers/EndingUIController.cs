@@ -47,6 +47,10 @@ public sealed class EndingUIController : MonoBehaviour
     // [Header("Audio")]
     // [SerializeField] private OneShotPlayer _selectSound;
 
+    [Header("Fade Effect")]
+    [SerializeField] private LobbyFadeInOut _fadeInOut;
+    [SerializeField] private float _fadeDuration = 1f;
+
     [Header("Events")]
     public UnityEvent OnEndingUiShown;
     public UnityEvent OnBeforeRestart;
@@ -113,24 +117,28 @@ public sealed class EndingUIController : MonoBehaviour
     {
         // _selectSound?.Play();
         OnBeforeRestart?.Invoke();
-        // 1. 현재 씬에 배치되어 있는 LobbyModeController 인스턴스를 동적으로 탐색합니다.
-        LobbyModeController lobbyController = Object.FindAnyObjectByType<LobbyModeController>();
 
-        if (lobbyController != null)
+        _fadeInOut.FadeOut(_fadeDuration, () =>
         {
-            // 2. 리팩토링된 인스턴스 메서드를 통해 메인 메뉴 모드로 전환 및 심리스 로드를 수행합니다.
-            lobbyController.LoadAsMenu(_lobbySceneName);
-        }
-        else
-        {
-            // 방어 코드: 만약 현재 씬에 LobbyModeController 배치를 깜빡했거나 없는 경우를 대비한 예외 처리
-            Debug.LogWarning("[EndingUIController] 현재 씬에 LobbyModeController 인스턴스를 찾을 수 없어 심리스 기능 없이 강제 전환합니다.");
-            if (SceneLoadManager.Instance != null)
+            // 1. 현재 씬에 배치되어 있는 LobbyModeController 인스턴스를 동적으로 탐색합니다.
+            LobbyModeController lobbyController = FindAnyObjectByType<LobbyModeController>();
+
+            if (lobbyController != null)
             {
-                SceneLoadManager.Instance.NextMode = LobbyModeController.LobbyMode.MainMenu;
-                SceneLoadManager.Instance.LoadSceneSeamless(_lobbySceneName);
+                // 2. 리팩토링된 인스턴스 메서드를 통해 메인 메뉴 모드로 전환 및 심리스 로드를 수행합니다.
+                lobbyController.LoadAsMenu(_lobbySceneName);
             }
-        }
+            else
+            {
+                // 방어 코드: 만약 현재 씬에 LobbyModeController 배치를 깜빡했거나 없는 경우를 대비한 예외 처리
+                Debug.LogWarning("[EndingUIController] 현재 씬에 LobbyModeController 인스턴스를 찾을 수 없어 심리스 기능 없이 강제 전환합니다.");
+                if (SceneLoadManager.Instance != null)
+                {
+                    SceneLoadManager.Instance.NextMode = LobbyModeController.LobbyMode.MainMenu;
+                    SceneLoadManager.Instance.LoadSceneSeamless(_lobbySceneName);
+                }
+            }
+        });
     }
 
     /// <summary>
@@ -141,11 +149,14 @@ public sealed class EndingUIController : MonoBehaviour
         // _selectSound?.Play();
         OnBeforeQuit?.Invoke();
 
+        _fadeInOut.FadeOut(_fadeDuration, () =>
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+        });
     }
 
     private void PlaceInFrontOfCamera()
