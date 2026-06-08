@@ -178,7 +178,25 @@ public class GameManager : MonoBehaviour
         if (currentStage + 1 >= _stages.Length)
         {
             _stages[currentStage].SetActive(false);
-            LobbyModeController.LoadAsGameplayFloor(_lobbySceneName, elevatorOut ?? _elevatorOut.transform, player);
+            StageSceneExitTraveler traveler = FindAnyObjectByType<StageSceneExitTraveler>();
+            if (traveler != null)
+            {
+                Transform targetElevator = elevatorOut != null ? elevatorOut : _elevatorOut.transform;
+
+                traveler.QueuePlayerPose(targetElevator, player);
+                traveler.LoadLobbyAsGameplayFloor();
+            }
+            else
+            {
+                // 방어 코드: 혹시나 Game 씬에 LobbyModeController 배치를 깜빡했을 때를 대비한 전역 매니저 다이렉트 예외 처리
+                Debug.LogWarning("[GameManager] Game 씬에 LobbyModeController 인스턴스를 찾을 수 없어 심리스 기능 없이 강제 전환합니다.");
+                if (SceneLoadManager.Instance != null)
+                {
+                    SceneLoadManager.Instance.NextMode = LobbyModeController.LobbyMode.GameplayFloor;
+                    SceneLoadManager.Instance.LoadSceneSeamless(_lobbySceneName);
+                }
+            }
+
             return;
         }
 

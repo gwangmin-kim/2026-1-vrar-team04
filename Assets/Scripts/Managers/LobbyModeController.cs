@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using VRARTeam04.Player;
 
 [AddComponentMenu("Horror/Lobby Mode Controller (VR&AR Team 04)")]
@@ -11,12 +10,6 @@ public class LobbyModeController : MonoBehaviour
         MainMenu,
         GameplayFloor
     }
-
-    private static LobbyMode? _nextMode;
-    private static bool _hasQueuedGameplayFloorPose;
-    private static Vector3 _queuedGameplayFloorLocalPosition;
-    private static Quaternion _queuedGameplayFloorLocalRotation;
-    private static Quaternion _queuedGameplayFloorLocalCameraRotation;
 
     [Header("Scene Mode")]
     [SerializeField] private LobbyMode _initialMode = LobbyMode.MainMenu;
@@ -48,9 +41,9 @@ public class LobbyModeController : MonoBehaviour
     [SerializeField] private LobbyStartElevator _startElevator;
     [SerializeField] private LayerMask _playerLayers = 1 << 3;
 
-    [Header("Audio")]
-    [SerializeField] private OneShotPlayer _selectSound;
-    [SerializeField] private OneShotPlayer _backSound;
+    // [Header("Audio")]
+    // [SerializeField] private OneShotPlayer _selectSound;
+    // [SerializeField] private OneShotPlayer _backSound;
 
     [Header("Events")]
     public UnityEvent OnEnterMenuMode;
@@ -63,8 +56,16 @@ public class LobbyModeController : MonoBehaviour
 
     private void Start()
     {
-        SetMode(_nextMode ?? _initialMode);
-        _nextMode = null;
+        // 씬이 로드되었을 때 전역 매니저에 백업된 모드 데이터가 있다면 그것을 따르고, 없으면 기본 초기 모드를 탑니다.
+        LobbyMode targetMode = _initialMode;
+
+        if (SceneLoadManager.Instance != null && SceneLoadManager.Instance.NextMode.HasValue)
+        {
+            targetMode = SceneLoadManager.Instance.NextMode.Value;
+            SceneLoadManager.Instance.NextMode = null; // 데이터를 소모했으므로 비워줌
+        }
+
+        SetMode(targetMode);
     }
 
     public void ShowMenuMode()
@@ -79,7 +80,7 @@ public class LobbyModeController : MonoBehaviour
 
     public void StartGame()
     {
-        _selectSound?.Play();
+        // _selectSound?.Play();
         HideStartUi();
         OnBeforeStartGame?.Invoke();
         UnlockStartCorridor();
@@ -87,7 +88,7 @@ public class LobbyModeController : MonoBehaviour
 
     public void QuitGame()
     {
-        _selectSound?.Play();
+        // _selectSound?.Play();
         HideQuitUi();
         OnBeforeQuit?.Invoke();
 
@@ -98,6 +99,9 @@ public class LobbyModeController : MonoBehaviour
 #endif
     }
 
+    // ----------------------------------------------------
+    // 인스턴스 구조로 개선되어 인스펙터 버튼/UnityEvent에 정상 등록 가능한 로딩 함수들
+    // ----------------------------------------------------
     public void LoadLobbyAsMenu()
     {
         LoadLobby(LobbyMode.MainMenu);
@@ -108,10 +112,96 @@ public class LobbyModeController : MonoBehaviour
         LoadLobby(LobbyMode.GameplayFloor);
     }
 
-    public void PlayBackSound()
+    public void LoadGameplayScene()
     {
-        _backSound?.Play();
+        if (string.IsNullOrEmpty(_gameplaySceneName))
+        {
+            Debug.LogWarning("[LobbyModeController] Gameplay scene name is empty.", this);
+            return;
+        }
+
+        if (SceneLoadManager.Instance != null)
+        {
+            SceneLoadManager.Instance.LoadSceneSeamless(_gameplaySceneName);
+        }
     }
+
+    public void LoadGameplayScene(Collider other)
+    {
+        if (!IsPlayerCollider(other))
+            return;
+
+        LoadGameplayScene();
+    }
+
+    public void LoadAsMenuDefaultScene()
+    {
+        LoadAsMenu("LobbyMap");
+    }
+
+    public void LoadAsMenu(string sceneName)
+    {
+        if (SceneLoadManager.Instance != null)
+        {
+            SceneLoadManager.Instance.NextMode = LobbyMode.MainMenu;
+            SceneLoadManager.Instance.LoadSceneSeamless(sceneName);
+        }
+    }
+
+    public void LoadAsGameplayFloorDefaultScene()
+    {
+        LoadAsGameplayFloor("LobbyMap");
+    }
+
+    public void LoadAsGameplayFloor(string sceneName)
+    {
+        if (SceneLoadManager.Instance != null)
+        {
+            SceneLoadManager.Instance.NextMode = LobbyMode.GameplayFloor;
+            SceneLoadManager.Instance.LoadSceneSeamless(sceneName);
+        }
+    }
+
+    public void LoadAsGameplayFloorWithPose(string sceneName, Transform sourceElevator, Transform playerRoot)
+    {
+        QueueGameplayFloorPose(sourceElevator, playerRoot);
+        LoadAsGameplayFloor(sceneName);
+    }
+
+    public void QueueGameplayFloorPose(Transform sourceElevator, Transform playerRoot)
+    {
+        if (sourceElevator == null || playerRoot == null || SceneLoadManager.Instance == null)
+            return;
+
+        var slm = SceneLoadManager.Instance;
+        slm.QueuedLocalPosition = sourceElevator.InverseTransformPoint(playerRoot.position);
+        slm.QueuedLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerRoot.rotation;
+        slm.QueuedLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerRoot);
+        slm.HasQueuedPose = true;
+    }
+
+    private void LoadLobby(LobbyMode mode)
+    {
+        if (string.IsNullOrEmpty(_lobbySceneName))
+        {
+            Debug.LogWarning("[LobbyModeController] Lobby scene name is empty.", this);
+            return;
+        }
+
+        if (SceneLoadManager.Instance != null)
+        {
+            SceneLoadManager.Instance.NextMode = mode;
+            SceneLoadManager.Instance.LoadSceneSeamless(_lobbySceneName);
+        }
+    }
+
+    // ----------------------------------------------------
+    // 기능 제어용 내부 로직 (기존 연동과 완전히 동일함)
+    // ----------------------------------------------------
+    // public void PlayBackSound()
+    // {
+    //     _backSound?.Play();
+    // }
 
     public void HideStartUi()
     {
@@ -143,66 +233,6 @@ public class LobbyModeController : MonoBehaviour
             return;
 
         OpenStartElevator();
-    }
-
-    public void LoadGameplayScene()
-    {
-        if (string.IsNullOrEmpty(_gameplaySceneName))
-        {
-            Debug.LogWarning("[LobbyModeController] Gameplay scene name is empty.", this);
-            return;
-        }
-
-        SceneManager.LoadSceneAsync(_gameplaySceneName);
-    }
-
-    public void LoadGameplayScene(Collider other)
-    {
-        if (!IsPlayerCollider(other))
-            return;
-
-        LoadGameplayScene();
-    }
-
-    public static void LoadAsMenu(string sceneName = "LobbyMap")
-    {
-        _nextMode = LobbyMode.MainMenu;
-        SceneManager.LoadSceneAsync(sceneName);
-    }
-
-    public static void LoadAsGameplayFloor(string sceneName = "LobbyMap")
-    {
-        _nextMode = LobbyMode.GameplayFloor;
-        SceneManager.LoadSceneAsync(sceneName);
-    }
-
-    public static void LoadAsGameplayFloor(string sceneName, Transform sourceElevator, Transform playerRoot)
-    {
-        QueueGameplayFloorPose(sourceElevator, playerRoot);
-        LoadAsGameplayFloor(sceneName);
-    }
-
-    public static void QueueGameplayFloorPose(Transform sourceElevator, Transform playerRoot)
-    {
-        if (sourceElevator == null || playerRoot == null)
-            return;
-
-        _queuedGameplayFloorLocalPosition = sourceElevator.InverseTransformPoint(playerRoot.position);
-        _queuedGameplayFloorLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerRoot.rotation;
-        _queuedGameplayFloorLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerRoot);
-        _hasQueuedGameplayFloorPose = true;
-    }
-
-    private void LoadLobby(LobbyMode mode)
-    {
-        if (string.IsNullOrEmpty(_lobbySceneName))
-        {
-            Debug.LogWarning("[LobbyModeController] Lobby scene name is empty.", this);
-            return;
-        }
-
-        _nextMode = mode;
-        SceneManager.LoadSceneAsync(_lobbySceneName);
     }
 
     private void SetMode(LobbyMode mode)
@@ -278,13 +308,15 @@ public class LobbyModeController : MonoBehaviour
             return;
         }
 
-        if (mode == LobbyMode.GameplayFloor && _hasQueuedGameplayFloorPose)
+        // 전역 매니저에 큐잉된 포즈 정보가 있는지 검사하도록 변경
+        if (mode == LobbyMode.GameplayFloor && SceneLoadManager.Instance != null && SceneLoadManager.Instance.HasQueuedPose)
         {
+            var slm = SceneLoadManager.Instance;
             TeleportPlayerFromGameplayFloorOffset(
-                _queuedGameplayFloorLocalPosition,
-                _queuedGameplayFloorLocalRotation,
-                _queuedGameplayFloorLocalCameraRotation);
-            _hasQueuedGameplayFloorPose = false;
+                slm.QueuedLocalPosition,
+                slm.QueuedLocalRotation,
+                slm.QueuedLocalCameraRotation);
+            slm.HasQueuedPose = false; // 소모 완료 후 플래그 해제
             return;
         }
 
