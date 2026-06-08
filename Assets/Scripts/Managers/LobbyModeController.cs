@@ -12,11 +12,11 @@ public class LobbyModeController : MonoBehaviour
         GameplayFloor
     }
 
-    private static LobbyMode? s_nextMode;
-    private static bool s_hasQueuedGameplayFloorPose;
-    private static Vector3 s_queuedGameplayFloorLocalPosition;
-    private static Quaternion s_queuedGameplayFloorLocalRotation;
-    private static Quaternion s_queuedGameplayFloorLocalCameraRotation;
+    private static LobbyMode? _nextMode;
+    private static bool _hasQueuedGameplayFloorPose;
+    private static Vector3 _queuedGameplayFloorLocalPosition;
+    private static Quaternion _queuedGameplayFloorLocalRotation;
+    private static Quaternion _queuedGameplayFloorLocalCameraRotation;
 
     [Header("Scene Mode")]
     [SerializeField] private LobbyMode _initialMode = LobbyMode.MainMenu;
@@ -63,8 +63,8 @@ public class LobbyModeController : MonoBehaviour
 
     private void Start()
     {
-        SetMode(s_nextMode ?? _initialMode);
-        s_nextMode = null;
+        SetMode(_nextMode ?? _initialMode);
+        _nextMode = null;
     }
 
     public void ShowMenuMode()
@@ -166,13 +166,13 @@ public class LobbyModeController : MonoBehaviour
 
     public static void LoadAsMenu(string sceneName = "LobbyMap")
     {
-        s_nextMode = LobbyMode.MainMenu;
+        _nextMode = LobbyMode.MainMenu;
         SceneManager.LoadSceneAsync(sceneName);
     }
 
     public static void LoadAsGameplayFloor(string sceneName = "LobbyMap")
     {
-        s_nextMode = LobbyMode.GameplayFloor;
+        _nextMode = LobbyMode.GameplayFloor;
         SceneManager.LoadSceneAsync(sceneName);
     }
 
@@ -187,10 +187,10 @@ public class LobbyModeController : MonoBehaviour
         if (sourceElevator == null || playerRoot == null)
             return;
 
-        s_queuedGameplayFloorLocalPosition = sourceElevator.InverseTransformPoint(playerRoot.position);
-        s_queuedGameplayFloorLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerRoot.rotation;
-        s_queuedGameplayFloorLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerRoot);
-        s_hasQueuedGameplayFloorPose = true;
+        _queuedGameplayFloorLocalPosition = sourceElevator.InverseTransformPoint(playerRoot.position);
+        _queuedGameplayFloorLocalRotation = Quaternion.Inverse(sourceElevator.rotation) * playerRoot.rotation;
+        _queuedGameplayFloorLocalCameraRotation = GetCameraRotationRelativeTo(sourceElevator, playerRoot);
+        _hasQueuedGameplayFloorPose = true;
     }
 
     private void LoadLobby(LobbyMode mode)
@@ -201,7 +201,7 @@ public class LobbyModeController : MonoBehaviour
             return;
         }
 
-        s_nextMode = mode;
+        _nextMode = mode;
         SceneManager.LoadSceneAsync(_lobbySceneName);
     }
 
@@ -278,13 +278,13 @@ public class LobbyModeController : MonoBehaviour
             return;
         }
 
-        if (mode == LobbyMode.GameplayFloor && s_hasQueuedGameplayFloorPose)
+        if (mode == LobbyMode.GameplayFloor && _hasQueuedGameplayFloorPose)
         {
             TeleportPlayerFromGameplayFloorOffset(
-                s_queuedGameplayFloorLocalPosition,
-                s_queuedGameplayFloorLocalRotation,
-                s_queuedGameplayFloorLocalCameraRotation);
-            s_hasQueuedGameplayFloorPose = false;
+                _queuedGameplayFloorLocalPosition,
+                _queuedGameplayFloorLocalRotation,
+                _queuedGameplayFloorLocalCameraRotation);
+            _hasQueuedGameplayFloorPose = false;
             return;
         }
 
@@ -335,7 +335,7 @@ public class LobbyModeController : MonoBehaviour
     {
         if (_playerRoot == null)
         {
-            var playerLock = FindObjectOfType<PlayerControlLock>();
+            var playerLock = FindAnyObjectByType<PlayerControlLock>();
             if (playerLock != null)
                 _playerRoot = playerLock.transform;
         }
