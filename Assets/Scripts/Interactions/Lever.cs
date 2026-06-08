@@ -95,7 +95,7 @@ public class Lever : MonoBehaviour, IGrabbable
     {
         Vector3 targetDirection = _controller.transform.position - _lever.position;
 
-        _targetAngle = (Vector3.Dot(_initialForward, targetDirection) <= 0f) ? 0f :
+        _targetAngle = (Vector3.Dot(_initialForward, targetDirection) <= 0f) ? _targetAngle :
                     Vector3.Angle(_initialLookDirection, targetDirection);
     }
 

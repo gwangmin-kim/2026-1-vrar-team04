@@ -103,7 +103,7 @@ public class Door : MonoBehaviour, IGrabbable
         targetDirection.y = 0;
         targetDirection.Normalize();
 
-        _targetAngle = (Vector3.Dot(_initialForward, targetDirection) <= 0f) ? 0f :
+        _targetAngle = (Vector3.Dot(_initialForward, targetDirection) <= 0f) ? _targetAngle :
             Mathf.Min(Vector3.Angle(_initialLookDirection, targetDirection), _maxAngle);
     }
 
