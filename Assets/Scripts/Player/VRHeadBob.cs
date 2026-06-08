@@ -117,6 +117,9 @@ namespace VRARTeam04.Player
         private bool _wasMoving;
         private float _currentLeanRatio;  // -1..+1 (-=왼쪽, +=오른쪽)
 
+        // [버그 수정] 첫 실행 프레임 예외 처리를 위한 플래그
+        private bool _isFirstFrame = true;
+
         private void Awake()
         {
             if (_bobAnchor == null) _bobAnchor = transform;
@@ -126,11 +129,21 @@ namespace VRARTeam04.Player
             if (_xrOriginRoot == null && _bobAnchor.parent != null)
                 _xrOriginRoot = _bobAnchor.parent;
 
+            // 시작 위상을 살짝 랜덤하게
+            _idlePhase = Random.Range(0f, Mathf.PI * 2f);
+        }
+
+        private void OnEnable()
+        {
+            // [버그 수정] 활성화될 때마다 첫 프레임 상태로 초기화하여 순간 이동 시 소리 튀는 현상 방지
+            _isFirstFrame = true;
+            _wasMoving = false;
+
             if (_xrOriginRoot != null)
                 _lastWorldPosition = _xrOriginRoot.position;
 
-            // 시작 위상을 살짝 랜덤하게 - 같은 씬에 여러 캐릭터 있을 때 동기화 방지(미래 확장 대비)
-            _idlePhase = Random.Range(0f, Mathf.PI * 2f);
+            // // 시작 위상을 살짝 랜덤하게 - 같은 씬에 여러 캐릭터 있을 때 동기화 방지(미래 확장 대비)
+            // _idlePhase = Random.Range(0f, Mathf.PI * 2f);
         }
 
         private void OnDisable()
@@ -153,6 +166,14 @@ namespace VRARTeam04.Player
         private void LateUpdate()
         {
             if (_bobAnchor == null || _xrOriginRoot == null) return;
+
+            // [버그 수정] 첫 런타임 프레임에는 정확한 이전 위치 데이터가 없으므로 기록만 하고 연산을 스킵
+            if (_isFirstFrame)
+            {
+                _lastWorldPosition = _xrOriginRoot.position;
+                _isFirstFrame = false;
+                return;
+            }
 
             float dt = Mathf.Max(Time.deltaTime, 1e-5f);
 
@@ -250,7 +271,7 @@ namespace VRARTeam04.Player
             _bobAnchor.localPosition = _baseLocalPosition + walkOffset + idleOffset;
             _bobAnchor.localRotation = _baseLocalRotation * Quaternion.Euler(0f, 0f, idleRollDeg + strafeRollDeg);
 
-            // ─── 7. 발소리 트리거: sin 이 음→양 교차 ────────
+            // ─── 7. 발소리 트리거 ───────────────────────────
             bool reachedFootstepPhase = _previousSinValue <= 0f && walkSinVal > 0f;
             if (isMoving
                 && (startedMoving || reachedFootstepPhase)
