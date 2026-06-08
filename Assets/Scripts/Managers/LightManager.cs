@@ -57,6 +57,11 @@ public class LightManager : MonoBehaviour
 
         UpdateEmission(0f);
 
+        if (_flickerCoroutine != null)
+        {
+            StopCoroutine(_flickerCoroutine);
+            _flickerCoroutine = null;
+        }
         _flickerCoroutine = StartCoroutine(FlickerRoutine());
     }
 
