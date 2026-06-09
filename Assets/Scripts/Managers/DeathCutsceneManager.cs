@@ -88,6 +88,8 @@ public class DeathCutsceneManager : MonoBehaviour
             GameManager.Instance.FadeOut(_fadeOutDuration, () =>
             {
                 // 스테이지 재시작
+                _cameraOffset.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                _mainCamera.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                 GameManager.Instance.RestartStage();
 
                 // 화면이 다시 밝아진 뒤 조작 허용
