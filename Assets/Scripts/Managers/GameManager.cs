@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartGameFromQueuedEntranceRoutine());
         else
             StartGame();
+        // RestartStage();
     }
 
     public void StartGame()

@@ -7,6 +7,7 @@ public class DeathCutsceneManager : MonoBehaviour
     [Header("Player & Camera")]
     [SerializeField] private Transform _xrOrigin;
     [SerializeField] private Transform _cameraOffset;
+    [SerializeField] private Transform _mainCamera;
 
     [Header("Ghost Reference")]
     [SerializeField] private Transform _ghostTransform; // 그림자 유령 Transform
@@ -31,7 +32,11 @@ public class DeathCutsceneManager : MonoBehaviour
         }
         if (_cameraOffset == null)
         {
-            _cameraOffset = _xrOrigin.Find("CameraOffset");
+            _cameraOffset = _xrOrigin.Find("Camera Offset");
+        }
+        if (_mainCamera == null)
+        {
+            _mainCamera = _cameraOffset.Find("Main Camera");
         }
     }
 
@@ -59,7 +64,8 @@ public class DeathCutsceneManager : MonoBehaviour
         // 강제로 유령 쪽을 바라보게 함
         Vector3 directionToGhost = (_ghostTransform.position - _xrOrigin.position).normalized;
         directionToGhost.y = 0; // 평면상의 회전만 계산
-        Quaternion targetRotation = Quaternion.LookRotation(directionToGhost);
+        Quaternion mainCameraOffset = Quaternion.Euler(0f, -_mainCamera.localEulerAngles.y, 0f);
+        Quaternion targetRotation = Quaternion.LookRotation(directionToGhost) * mainCameraOffset;
 
         deathSequence.Append(_xrOrigin.DORotateQuaternion(targetRotation, _turnDuration).SetEase(Ease.OutBounce));
 

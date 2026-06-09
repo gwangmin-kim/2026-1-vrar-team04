@@ -68642,6 +68642,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 599145149}
     - target: {fileID: 6319667964864923379, guid: d75a81807f64fa445b97575b5230f873, type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 1798150926}
+    - target: {fileID: 6319667964864923379, guid: d75a81807f64fa445b97575b5230f873, type: 3}
       propertyPath: _cameraOffset
       value: 
       objectReference: {fileID: 1155289658}
@@ -94126,6 +94130,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797232942}
   m_Mesh: {fileID: -8235981043639529675, guid: 2765486c375924f6998035f411301a48, type: 3}
+--- !u!4 &1798150926 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4197618637532928279, guid: f9f5d79a61393b9429cb9bbe4cf4a956, type: 3}
+  m_PrefabInstance: {fileID: 1155289656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1819483752
 Mesh:
   m_ObjectHideFlags: 0
