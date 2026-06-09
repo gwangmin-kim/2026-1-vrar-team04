@@ -67,6 +67,7 @@ public class DeathCutsceneManager : MonoBehaviour
         Quaternion mainCameraOffset = Quaternion.Euler(0f, -_mainCamera.localEulerAngles.y, 0f);
         Quaternion targetRotation = Quaternion.LookRotation(directionToGhost) * mainCameraOffset;
 
+        _ghostTransform.rotation = Quaternion.LookRotation(-directionToGhost);
         deathSequence.Append(_xrOrigin.DORotateQuaternion(targetRotation, _turnDuration).SetEase(Ease.OutBounce));
 
         // 유령 공격 애니메이션 재생
