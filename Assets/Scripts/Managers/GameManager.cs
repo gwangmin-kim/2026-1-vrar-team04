@@ -100,11 +100,10 @@ public class GameManager : MonoBehaviour
             _fadeRenderer = player.Find("Fading").GetComponent<MeshRenderer>();
         }
 
-        // StartGame();
         if (_hasQueuedEntrancePose)
             StartCoroutine(StartGameFromQueuedEntranceRoutine());
         else
-            RestartStage();
+            StartGame();
     }
 
     public void StartGame()
@@ -130,6 +129,7 @@ public class GameManager : MonoBehaviour
         LoadStage(currentStage);
 
         yield return null;
+        // if (player.TryGetComponent<CharacterController>(out var characterController)) characterController.enabled = false;
 
         TeleportPlayerFromLobbyEntranceOffset(
             _queuedEntranceLocalPosition,
@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
             _queuedEntranceLocalCameraRotation);
         _hasQueuedEntrancePose = false;
         InitStage();
+
+        // if (characterController != null) characterController.enabled = true;
     }
 
     /// <summary>
