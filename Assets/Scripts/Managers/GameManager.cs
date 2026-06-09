@@ -166,8 +166,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void RestartStage()
     {
+        if (player.TryGetComponent<CharacterController>(out var characterController)) characterController.enabled = false;
         LoadStage(currentStage);
         player.SetPositionAndRotation(_baseTransform.position, _baseTransform.rotation);
+        if (characterController != null) characterController.enabled = true;
         InitStage();
     }
 
