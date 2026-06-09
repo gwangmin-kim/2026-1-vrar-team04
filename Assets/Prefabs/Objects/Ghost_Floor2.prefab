@@ -738,13 +738,25 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Scale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7392154477167179400, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392154477167179400, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392154477167179400, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8956974559732913002, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8956974559732913002, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 8956974559732913002, guid: 1bd0a69b6f9d4ef4bb8ac852c0fbbe55, type: 3}
       propertyPath: m_LocalPosition.z
