@@ -1207,6 +1207,7 @@ MonoBehaviour:
   _disableInteractorVisuals: 1
   _disableInputActionManagers: 1
   _disableTrackedPoseDrivers: 1
+  _excludeMainCameraHMD: 1
   _disableHeadBob: 1
   _extraComponentsToDisable: []
 --- !u!114 &4625338736706229679
@@ -2266,7 +2267,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 512
-  _detectDistance: 8
+  _detectDistance: 5
   _detectRadius: 0.3
   _checkInterval: 0.05
   _startsActive: 0
